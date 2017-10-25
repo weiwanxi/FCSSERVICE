@@ -1,6 +1,5 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -10,10 +9,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class AccountDao {
-    @Autowired
-    AccountMapper accountMapper;
 
     public String getPassword(String user_account){
-        return accountMapper.getPassword(user_account);
+        return null;
     }
 }

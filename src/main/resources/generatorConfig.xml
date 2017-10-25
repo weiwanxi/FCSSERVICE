@@ -13,15 +13,97 @@
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/fcsdatabase?characterEncoding=utf-8"
                         userId="root" password="123456" />
-        <javaModelGenerator targetPackage="com.fcsservice.model"
+        <javaModelGenerator targetPackage="com.fcsservice.model.pojo"
                             targetProject="src\main\java" />
-        <sqlMapGenerator targetPackage="com.fcsservice.model"
+        <sqlMapGenerator targetPackage="com.fcsservice.model.mapper"
                          targetProject="src\main\java" />
-        <javaClientGenerator targetPackage="com.fcsservice.dao"
+        <javaClientGenerator targetPackage="com.fcsservice.model.dao"
                              targetProject="src\main\java" type="XMLMAPPER" />
-        <table schema="" tableName="resume">
-            <!-- 实体类中的成员变量和表的列明一一对应 -->
-            <property name="useActualColumnNames" value="true"/>
+
+        <table tableName="fcsalbum" domainObjectName="Album"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcscloth" domainObjectName="Cloth"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcscollect" domainObjectName="Collect"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcscomment" domainObjectName="Comment"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcscomponent" domainObjectName="Component"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcscostume" domainObjectName="Costume"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsdesignwork" domainObjectName="Work"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsdictcate" domainObjectName="Dictcate"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsdictdata" domainObjectName="Dictdata"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsfabulous" domainObjectName="Fabulous"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsfollow" domainObjectName="Follow"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsinformation" domainObjectName="Information"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcspurchase" domainObjectName="Purchase"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcstype" domainObjectName="Type"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsuseraccount" domainObjectName="UserAccount"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsuserdata" domainObjectName="UserData"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        <table tableName="fcsweave" domainObjectName="Weave"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
         </table>
     </context>
 </generatorConfiguration>

@@ -2,6 +2,7 @@ package com.fcsservice.controller;
 
 import com.fcsservice.service.AccountService;
 import com.fcsservice.utils.Result;
+import com.mysql.jdbc.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -25,9 +26,13 @@ public class AccountController {
     public Result login(@RequestParam("account") String user_account,
                         @RequestParam("password") String user_password){
 
-        boolean validate = accountService.validate(user_account,user_password);
+        System.out.println("用户： "+user_account+" 请求登录");
 
-        String msg = validate?"密码正确":"密码与账号不匹配";
+        boolean validate = accountService.validate(user_account,user_password);
+        String msg = validate?"登录成功":"登录失败，密码与账号不匹配";
+
+        System.out.println("用户： "+user_account + msg);
+
 
         Result result = new Result();
         result.setCode(Result.SUCCESS);
