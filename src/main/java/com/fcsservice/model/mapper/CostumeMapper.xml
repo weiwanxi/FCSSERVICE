@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.CostumeMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Costume" >
+    <id column="costume_id" property="costumeId" jdbcType="VARCHAR" />
+    <result column="costume_name" property="costumeName" jdbcType="VARCHAR" />
+    <result column="costume_no" property="costumeNo" jdbcType="VARCHAR" />
+    <result column="costume_intro" property="costumeIntro" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="model_id" property="modelId" jdbcType="INTEGER" />
+    <result column="style_id" property="styleId" jdbcType="INTEGER" />
+    <result column="component_id" property="componentId" jdbcType="INTEGER" />
+    <result column="weave_id" property="weaveId" jdbcType="INTEGER" />
+    <result column="costume_color" property="costumeColor" jdbcType="VARCHAR" />
+    <result column="costume_age" property="costumeAge" jdbcType="VARCHAR" />
+    <result column="costume_season" property="costumeSeason" jdbcType="VARCHAR" />
+    <result column="costume_picture1" property="costumePicture1" jdbcType="VARCHAR" />
+    <result column="costume_picture2" property="costumePicture2" jdbcType="VARCHAR" />
+    <result column="costume_picture3" property="costumePicture3" jdbcType="VARCHAR" />
+    <result column="costume_picture4" property="costumePicture4" jdbcType="VARCHAR" />
+    <result column="costume_fabulous" property="costumeFabulous" jdbcType="INTEGER" />
+    <result column="costume_reltime" property="costumeReltime" jdbcType="VARCHAR" />
+    <result column="costume_status" property="costumeStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    costume_id, costume_name, costume_no, costume_intro, type_id, model_id, style_id, 
+    component_id, weave_id, costume_color, costume_age, costume_season, costume_picture1, 
+    costume_picture2, costume_picture3, costume_picture4, costume_fabulous, costume_reltime, 
+    costume_status
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcscostume
+    where costume_id = #{costumeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fcscostume
+    where costume_id = #{costumeId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Costume" >
+    insert into fcscostume (costume_id, costume_name, costume_no, 
+      costume_intro, type_id, model_id, 
+      style_id, component_id, weave_id, 
+      costume_color, costume_age, costume_season, 
+      costume_picture1, costume_picture2, costume_picture3, 
+      costume_picture4, costume_fabulous, costume_reltime, 
+      costume_status)
+    values (#{costumeId,jdbcType=VARCHAR}, #{costumeName,jdbcType=VARCHAR}, #{costumeNo,jdbcType=VARCHAR}, 
+      #{costumeIntro,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, #{modelId,jdbcType=INTEGER}, 
+      #{styleId,jdbcType=INTEGER}, #{componentId,jdbcType=INTEGER}, #{weaveId,jdbcType=INTEGER}, 
+      #{costumeColor,jdbcType=VARCHAR}, #{costumeAge,jdbcType=VARCHAR}, #{costumeSeason,jdbcType=VARCHAR}, 
+      #{costumePicture1,jdbcType=VARCHAR}, #{costumePicture2,jdbcType=VARCHAR}, #{costumePicture3,jdbcType=VARCHAR}, 
+      #{costumePicture4,jdbcType=VARCHAR}, #{costumeFabulous,jdbcType=INTEGER}, #{costumeReltime,jdbcType=VARCHAR}, 
+      #{costumeStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Costume" >
+    insert into fcscostume
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="costumeId != null" >
+        costume_id,
+      </if>
+      <if test="costumeName != null" >
+        costume_name,
+      </if>
+      <if test="costumeNo != null" >
+        costume_no,
+      </if>
+      <if test="costumeIntro != null" >
+        costume_intro,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="styleId != null" >
+        style_id,
+      </if>
+      <if test="componentId != null" >
+        component_id,
+      </if>
+      <if test="weaveId != null" >
+        weave_id,
+      </if>
+      <if test="costumeColor != null" >
+        costume_color,
+      </if>
+      <if test="costumeAge != null" >
+        costume_age,
+      </if>
+      <if test="costumeSeason != null" >
+        costume_season,
+      </if>
+      <if test="costumePicture1 != null" >
+        costume_picture1,
+      </if>
+      <if test="costumePicture2 != null" >
+        costume_picture2,
+      </if>
+      <if test="costumePicture3 != null" >
+        costume_picture3,
+      </if>
+      <if test="costumePicture4 != null" >
+        costume_picture4,
+      </if>
+      <if test="costumeFabulous != null" >
+        costume_fabulous,
+      </if>
+      <if test="costumeReltime != null" >
+        costume_reltime,
+      </if>
+      <if test="costumeStatus != null" >
+        costume_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="costumeId != null" >
+        #{costumeId,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeName != null" >
+        #{costumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeNo != null" >
+        #{costumeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeIntro != null" >
+        #{costumeIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="styleId != null" >
+        #{styleId,jdbcType=INTEGER},
+      </if>
+      <if test="componentId != null" >
+        #{componentId,jdbcType=INTEGER},
+      </if>
+      <if test="weaveId != null" >
+        #{weaveId,jdbcType=INTEGER},
+      </if>
+      <if test="costumeColor != null" >
+        #{costumeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeAge != null" >
+        #{costumeAge,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeSeason != null" >
+        #{costumeSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture1 != null" >
+        #{costumePicture1,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture2 != null" >
+        #{costumePicture2,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture3 != null" >
+        #{costumePicture3,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture4 != null" >
+        #{costumePicture4,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeFabulous != null" >
+        #{costumeFabulous,jdbcType=INTEGER},
+      </if>
+      <if test="costumeReltime != null" >
+        #{costumeReltime,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeStatus != null" >
+        #{costumeStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Costume" >
+    update fcscostume
+    <set >
+      <if test="costumeName != null" >
+        costume_name = #{costumeName,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeNo != null" >
+        costume_no = #{costumeNo,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeIntro != null" >
+        costume_intro = #{costumeIntro,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=INTEGER},
+      </if>
+      <if test="styleId != null" >
+        style_id = #{styleId,jdbcType=INTEGER},
+      </if>
+      <if test="componentId != null" >
+        component_id = #{componentId,jdbcType=INTEGER},
+      </if>
+      <if test="weaveId != null" >
+        weave_id = #{weaveId,jdbcType=INTEGER},
+      </if>
+      <if test="costumeColor != null" >
+        costume_color = #{costumeColor,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeAge != null" >
+        costume_age = #{costumeAge,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeSeason != null" >
+        costume_season = #{costumeSeason,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture1 != null" >
+        costume_picture1 = #{costumePicture1,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture2 != null" >
+        costume_picture2 = #{costumePicture2,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture3 != null" >
+        costume_picture3 = #{costumePicture3,jdbcType=VARCHAR},
+      </if>
+      <if test="costumePicture4 != null" >
+        costume_picture4 = #{costumePicture4,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeFabulous != null" >
+        costume_fabulous = #{costumeFabulous,jdbcType=INTEGER},
+      </if>
+      <if test="costumeReltime != null" >
+        costume_reltime = #{costumeReltime,jdbcType=VARCHAR},
+      </if>
+      <if test="costumeStatus != null" >
+        costume_status = #{costumeStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where costume_id = #{costumeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Costume" >
+    update fcscostume
+    set costume_name = #{costumeName,jdbcType=VARCHAR},
+      costume_no = #{costumeNo,jdbcType=VARCHAR},
+      costume_intro = #{costumeIntro,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      model_id = #{modelId,jdbcType=INTEGER},
+      style_id = #{styleId,jdbcType=INTEGER},
+      component_id = #{componentId,jdbcType=INTEGER},
+      weave_id = #{weaveId,jdbcType=INTEGER},
+      costume_color = #{costumeColor,jdbcType=VARCHAR},
+      costume_age = #{costumeAge,jdbcType=VARCHAR},
+      costume_season = #{costumeSeason,jdbcType=VARCHAR},
+      costume_picture1 = #{costumePicture1,jdbcType=VARCHAR},
+      costume_picture2 = #{costumePicture2,jdbcType=VARCHAR},
+      costume_picture3 = #{costumePicture3,jdbcType=VARCHAR},
+      costume_picture4 = #{costumePicture4,jdbcType=VARCHAR},
+      costume_fabulous = #{costumeFabulous,jdbcType=INTEGER},
+      costume_reltime = #{costumeReltime,jdbcType=VARCHAR},
+      costume_status = #{costumeStatus,jdbcType=INTEGER}
+    where costume_id = #{costumeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

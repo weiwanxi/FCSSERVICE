@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.FabulousMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Fabulous" >
+    <id column="fabulous_id" property="fabulousId" jdbcType="VARCHAR" />
+    <result column="information_id" property="informationId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fabulous_id, information_id, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcsfabulous
+    where fabulous_id = #{fabulousId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fcsfabulous
+    where fabulous_id = #{fabulousId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Fabulous" >
+    insert into fcsfabulous (fabulous_id, information_id, user_id
+      )
+    values (#{fabulousId,jdbcType=VARCHAR}, #{informationId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Fabulous" >
+    insert into fcsfabulous
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fabulousId != null" >
+        fabulous_id,
+      </if>
+      <if test="informationId != null" >
+        information_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fabulousId != null" >
+        #{fabulousId,jdbcType=VARCHAR},
+      </if>
+      <if test="informationId != null" >
+        #{informationId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Fabulous" >
+    update fcsfabulous
+    <set >
+      <if test="informationId != null" >
+        information_id = #{informationId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where fabulous_id = #{fabulousId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Fabulous" >
+    update fcsfabulous
+    set information_id = #{informationId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR}
+    where fabulous_id = #{fabulousId,jdbcType=VARCHAR}
+  </update>
+</mapper>

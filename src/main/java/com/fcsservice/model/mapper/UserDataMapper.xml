@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.UserDataMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.UserData" >
+    <id column="data_id" property="dataId" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="data_portrait" property="dataPortrait" jdbcType="VARCHAR" />
+    <result column="data_mail" property="dataMail" jdbcType="VARCHAR" />
+    <result column="data_phone" property="dataPhone" jdbcType="CHAR" />
+    <result column="designtype_id" property="designtypeId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    data_id, user_id, data_portrait, data_mail, data_phone, designtype_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcsuserdata
+    where data_id = #{dataId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fcsuserdata
+    where data_id = #{dataId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.UserData" >
+    insert into fcsuserdata (data_id, user_id, data_portrait, 
+      data_mail, data_phone, designtype_id
+      )
+    values (#{dataId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{dataPortrait,jdbcType=VARCHAR}, 
+      #{dataMail,jdbcType=VARCHAR}, #{dataPhone,jdbcType=CHAR}, #{designtypeId,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.UserData" >
+    insert into fcsuserdata
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dataId != null" >
+        data_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="dataPortrait != null" >
+        data_portrait,
+      </if>
+      <if test="dataMail != null" >
+        data_mail,
+      </if>
+      <if test="dataPhone != null" >
+        data_phone,
+      </if>
+      <if test="designtypeId != null" >
+        designtype_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dataId != null" >
+        #{dataId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPortrait != null" >
+        #{dataPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="dataMail != null" >
+        #{dataMail,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPhone != null" >
+        #{dataPhone,jdbcType=CHAR},
+      </if>
+      <if test="designtypeId != null" >
+        #{designtypeId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.UserData" >
+    update fcsuserdata
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPortrait != null" >
+        data_portrait = #{dataPortrait,jdbcType=VARCHAR},
+      </if>
+      <if test="dataMail != null" >
+        data_mail = #{dataMail,jdbcType=VARCHAR},
+      </if>
+      <if test="dataPhone != null" >
+        data_phone = #{dataPhone,jdbcType=CHAR},
+      </if>
+      <if test="designtypeId != null" >
+        designtype_id = #{designtypeId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where data_id = #{dataId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.UserData" >
+    update fcsuserdata
+    set user_id = #{userId,jdbcType=VARCHAR},
+      data_portrait = #{dataPortrait,jdbcType=VARCHAR},
+      data_mail = #{dataMail,jdbcType=VARCHAR},
+      data_phone = #{dataPhone,jdbcType=CHAR},
+      designtype_id = #{designtypeId,jdbcType=INTEGER}
+    where data_id = #{dataId,jdbcType=VARCHAR}
+  </update>
+</mapper>

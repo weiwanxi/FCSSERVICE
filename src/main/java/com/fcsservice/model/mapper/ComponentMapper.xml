@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.ComponentMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Component" >
+    <id column="component_id" property="componentId" jdbcType="INTEGER" />
+    <result column="component_number" property="componentNumber" jdbcType="INTEGER" />
+    <result column="component_supcategory" property="componentSupcategory" jdbcType="VARCHAR" />
+    <result column="component_name" property="componentName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    component_id, component_number, component_supcategory, component_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcscomponent
+    where component_id = #{componentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fcscomponent
+    where component_id = #{componentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Component" >
+    insert into fcscomponent (component_id, component_number, component_supcategory, 
+      component_name)
+    values (#{componentId,jdbcType=INTEGER}, #{componentNumber,jdbcType=INTEGER}, #{componentSupcategory,jdbcType=VARCHAR}, 
+      #{componentName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Component" >
+    insert into fcscomponent
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="componentId != null" >
+        component_id,
+      </if>
+      <if test="componentNumber != null" >
+        component_number,
+      </if>
+      <if test="componentSupcategory != null" >
+        component_supcategory,
+      </if>
+      <if test="componentName != null" >
+        component_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="componentId != null" >
+        #{componentId,jdbcType=INTEGER},
+      </if>
+      <if test="componentNumber != null" >
+        #{componentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="componentSupcategory != null" >
+        #{componentSupcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="componentName != null" >
+        #{componentName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Component" >
+    update fcscomponent
+    <set >
+      <if test="componentNumber != null" >
+        component_number = #{componentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="componentSupcategory != null" >
+        component_supcategory = #{componentSupcategory,jdbcType=VARCHAR},
+      </if>
+      <if test="componentName != null" >
+        component_name = #{componentName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where component_id = #{componentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Component" >
+    update fcscomponent
+    set component_number = #{componentNumber,jdbcType=INTEGER},
+      component_supcategory = #{componentSupcategory,jdbcType=VARCHAR},
+      component_name = #{componentName,jdbcType=VARCHAR}
+    where component_id = #{componentId,jdbcType=INTEGER}
+  </update>
+</mapper>

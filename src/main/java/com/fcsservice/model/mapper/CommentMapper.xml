@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Comment" >
+    <id column="comment_id" property="commentId" jdbcType="VARCHAR" />
+    <result column="commentary_id" property="commentaryId" jdbcType="VARCHAR" />
+    <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
+    <result column="commentator_id" property="commentatorId" jdbcType="VARCHAR" />
+    <result column="comment_fabulous" property="commentFabulous" jdbcType="INTEGER" />
+    <result column="comment_reltime" property="commentReltime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    comment_id, commentary_id, comment_content, commentator_id, comment_fabulous, comment_reltime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcscomment
+    where comment_id = #{commentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fcscomment
+    where comment_id = #{commentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Comment" >
+    insert into fcscomment (comment_id, commentary_id, comment_content, 
+      commentator_id, comment_fabulous, comment_reltime
+      )
+    values (#{commentId,jdbcType=VARCHAR}, #{commentaryId,jdbcType=VARCHAR}, #{commentContent,jdbcType=VARCHAR}, 
+      #{commentatorId,jdbcType=VARCHAR}, #{commentFabulous,jdbcType=INTEGER}, #{commentReltime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Comment" >
+    insert into fcscomment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        comment_id,
+      </if>
+      <if test="commentaryId != null" >
+        commentary_id,
+      </if>
+      <if test="commentContent != null" >
+        comment_content,
+      </if>
+      <if test="commentatorId != null" >
+        commentator_id,
+      </if>
+      <if test="commentFabulous != null" >
+        comment_fabulous,
+      </if>
+      <if test="commentReltime != null" >
+        comment_reltime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commentId != null" >
+        #{commentId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentaryId != null" >
+        #{commentaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentContent != null" >
+        #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentatorId != null" >
+        #{commentatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentFabulous != null" >
+        #{commentFabulous,jdbcType=INTEGER},
+      </if>
+      <if test="commentReltime != null" >
+        #{commentReltime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Comment" >
+    update fcscomment
+    <set >
+      <if test="commentaryId != null" >
+        commentary_id = #{commentaryId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentContent != null" >
+        comment_content = #{commentContent,jdbcType=VARCHAR},
+      </if>
+      <if test="commentatorId != null" >
+        commentator_id = #{commentatorId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentFabulous != null" >
+        comment_fabulous = #{commentFabulous,jdbcType=INTEGER},
+      </if>
+      <if test="commentReltime != null" >
+        comment_reltime = #{commentReltime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where comment_id = #{commentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Comment" >
+    update fcscomment
+    set commentary_id = #{commentaryId,jdbcType=VARCHAR},
+      comment_content = #{commentContent,jdbcType=VARCHAR},
+      commentator_id = #{commentatorId,jdbcType=VARCHAR},
+      comment_fabulous = #{commentFabulous,jdbcType=INTEGER},
+      comment_reltime = #{commentReltime,jdbcType=VARCHAR}
+    where comment_id = #{commentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

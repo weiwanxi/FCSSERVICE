@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.CollectMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Collect" >
+    <id column="collect_id" property="collectId" jdbcType="VARCHAR" />
+    <result column="collection_id" property="collectionId" jdbcType="VARCHAR" />
+    <result column="collector_id" property="collectorId" jdbcType="VARCHAR" />
+    <result column="collect_type" property="collectType" jdbcType="INTEGER" />
+    <result column="collect_time" property="collectTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    collect_id, collection_id, collector_id, collect_type, collect_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcscollect
+    where collect_id = #{collectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fcscollect
+    where collect_id = #{collectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Collect" >
+    insert into fcscollect (collect_id, collection_id, collector_id, 
+      collect_type, collect_time)
+    values (#{collectId,jdbcType=VARCHAR}, #{collectionId,jdbcType=VARCHAR}, #{collectorId,jdbcType=VARCHAR}, 
+      #{collectType,jdbcType=INTEGER}, #{collectTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Collect" >
+    insert into fcscollect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        collect_id,
+      </if>
+      <if test="collectionId != null" >
+        collection_id,
+      </if>
+      <if test="collectorId != null" >
+        collector_id,
+      </if>
+      <if test="collectType != null" >
+        collect_type,
+      </if>
+      <if test="collectTime != null" >
+        collect_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        #{collectId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectionId != null" >
+        #{collectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectorId != null" >
+        #{collectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectType != null" >
+        #{collectType,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null" >
+        #{collectTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Collect" >
+    update fcscollect
+    <set >
+      <if test="collectionId != null" >
+        collection_id = #{collectionId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectorId != null" >
+        collector_id = #{collectorId,jdbcType=VARCHAR},
+      </if>
+      <if test="collectType != null" >
+        collect_type = #{collectType,jdbcType=INTEGER},
+      </if>
+      <if test="collectTime != null" >
+        collect_time = #{collectTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where collect_id = #{collectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Collect" >
+    update fcscollect
+    set collection_id = #{collectionId,jdbcType=VARCHAR},
+      collector_id = #{collectorId,jdbcType=VARCHAR},
+      collect_type = #{collectType,jdbcType=INTEGER},
+      collect_time = #{collectTime,jdbcType=VARCHAR}
+    where collect_id = #{collectId,jdbcType=VARCHAR}
+  </update>
+</mapper>

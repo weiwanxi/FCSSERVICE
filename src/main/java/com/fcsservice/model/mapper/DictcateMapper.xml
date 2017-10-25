@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.DictcateMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Dictcate" >
+    <id column="dictionarycategory_id" property="dictionarycategoryId" jdbcType="INTEGER" />
+    <result column="dictionarycategory_number" property="dictionarycategoryNumber" jdbcType="INTEGER" />
+    <result column="dictionarycategory_name" property="dictionarycategoryName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dictionarycategory_id, dictionarycategory_number, dictionarycategory_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcsdictcate
+    where dictionarycategory_id = #{dictionarycategoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from fcsdictcate
+    where dictionarycategory_id = #{dictionarycategoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Dictcate" >
+    insert into fcsdictcate (dictionarycategory_id, dictionarycategory_number, 
+      dictionarycategory_name)
+    values (#{dictionarycategoryId,jdbcType=INTEGER}, #{dictionarycategoryNumber,jdbcType=INTEGER}, 
+      #{dictionarycategoryName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Dictcate" >
+    insert into fcsdictcate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="dictionarycategoryId != null" >
+        dictionarycategory_id,
+      </if>
+      <if test="dictionarycategoryNumber != null" >
+        dictionarycategory_number,
+      </if>
+      <if test="dictionarycategoryName != null" >
+        dictionarycategory_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="dictionarycategoryId != null" >
+        #{dictionarycategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="dictionarycategoryNumber != null" >
+        #{dictionarycategoryNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dictionarycategoryName != null" >
+        #{dictionarycategoryName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Dictcate" >
+    update fcsdictcate
+    <set >
+      <if test="dictionarycategoryNumber != null" >
+        dictionarycategory_number = #{dictionarycategoryNumber,jdbcType=INTEGER},
+      </if>
+      <if test="dictionarycategoryName != null" >
+        dictionarycategory_name = #{dictionarycategoryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dictionarycategory_id = #{dictionarycategoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Dictcate" >
+    update fcsdictcate
+    set dictionarycategory_number = #{dictionarycategoryNumber,jdbcType=INTEGER},
+      dictionarycategory_name = #{dictionarycategoryName,jdbcType=VARCHAR}
+    where dictionarycategory_id = #{dictionarycategoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

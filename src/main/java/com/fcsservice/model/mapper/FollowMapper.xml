@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.FollowMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Follow" >
+    <id column="follow_id" property="followId" jdbcType="VARCHAR" />
+    <result column="follower_id" property="followerId" jdbcType="VARCHAR" />
+    <result column="concern_id" property="concernId" jdbcType="VARCHAR" />
+    <result column="follow_time" property="followTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    follow_id, follower_id, concern_id, follow_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from fcsfollow
+    where follow_id = #{followId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from fcsfollow
+    where follow_id = #{followId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Follow" >
+    insert into fcsfollow (follow_id, follower_id, concern_id, 
+      follow_time)
+    values (#{followId,jdbcType=VARCHAR}, #{followerId,jdbcType=VARCHAR}, #{concernId,jdbcType=VARCHAR}, 
+      #{followTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Follow" >
+    insert into fcsfollow
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="followId != null" >
+        follow_id,
+      </if>
+      <if test="followerId != null" >
+        follower_id,
+      </if>
+      <if test="concernId != null" >
+        concern_id,
+      </if>
+      <if test="followTime != null" >
+        follow_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="followId != null" >
+        #{followId,jdbcType=VARCHAR},
+      </if>
+      <if test="followerId != null" >
+        #{followerId,jdbcType=VARCHAR},
+      </if>
+      <if test="concernId != null" >
+        #{concernId,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        #{followTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Follow" >
+    update fcsfollow
+    <set >
+      <if test="followerId != null" >
+        follower_id = #{followerId,jdbcType=VARCHAR},
+      </if>
+      <if test="concernId != null" >
+        concern_id = #{concernId,jdbcType=VARCHAR},
+      </if>
+      <if test="followTime != null" >
+        follow_time = #{followTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where follow_id = #{followId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Follow" >
+    update fcsfollow
+    set follower_id = #{followerId,jdbcType=VARCHAR},
+      concern_id = #{concernId,jdbcType=VARCHAR},
+      follow_time = #{followTime,jdbcType=VARCHAR}
+    where follow_id = #{followId,jdbcType=VARCHAR}
+  </update>
+</mapper>
