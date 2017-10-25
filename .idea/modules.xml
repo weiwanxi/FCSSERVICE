@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/FCSSERVICE.iml" filepath="$PROJECT_DIR$/FCSSERVICE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fcsapp.iml" filepath="$PROJECT_DIR$/fcsapp.iml" />
     </modules>
   </component>
 </project>

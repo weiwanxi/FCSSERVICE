@@ -14,7 +14,7 @@
         <!-- 扫描mapper文件 -->
         <property name="mapperLocations">
             <list>
-                <value>classpath:com/fcsservice/model/*.xml</value>
+                <value>classpath:com/fcsservice/model/mapper/*.xml</value>
             </list>
         </property>
         <!-- 指定mybatis全局配置文件 -->
@@ -23,7 +23,7 @@
 
     <!-- 定义Mapper接口扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.fcsservice.model" />
+        <property name="basePackage" value="com.fcsservice.model.dao" />
     </bean>
 
 </beans>

@@ -3,7 +3,7 @@ package com.fcsservice.utils;
 import java.io.Serializable;
 /**
  * Ajax请求Json响应结果模型.
- * @date 2012-10-16 上午9:57:59
+ * @date 2017-10-25 上午13:20:59
  */
 @SuppressWarnings("serial")
 public class Result implements Serializable {
@@ -13,35 +13,30 @@ public class Result implements Serializable {
 	 */
 	public static final int SUCCESS = 1;
 	/**
-	 * 警告
-	 */
-	public static final int WARN = 2;
-	/**
 	 * 失败
 	 */
-	public static final int ERROR = 0;
-	
-	/**
-	 * 成功消息
-	 */
-	public static final String SUCCESS_MSG = "操作成功！";
-	/**
-	 * 失败消息
-	 */
-	public static final String ERROR_MSG = "操作失败:发生未知异常！";
+	public static final int FAIL = 0;
 
 	/**
 	 * 结果状态码(可自定义结果状态码) 1:操作成功 0:操作失败
 	 */
 	private int code;
 	/**
-	 * 响应结果描述
+	 * 响应信息
 	 */
 	private String msg;
 	/**
-	 * 其它数据信息（比如跳转地址）
+	 * 响应主数据
 	 */
 	private Object obj;
+	/**
+	 * 额外响应数据1
+	 */
+	private Object obj1;
+	/**
+	 * 额外响应数据2
+	 */
+	private Object obj2;
 
 	public Result() {
 		super();
@@ -50,81 +45,62 @@ public class Result implements Serializable {
 	/**
 	 * 
 	 * @param code
-	 *            结果状态码(可自定义结果状态码或者使用内部静态变量 1:操作成功 0:操作失败 2:警告)
+	 *            结果状态码(1:操作成功 0:操作失败)
 	 * @param msg
-	 *            响应结果描述
+	 *            响应消息
 	 * @param obj
-	 *            其它数据信息（比如跳转地址）
+	 *            响应主数据
+	 * @param obj1
+	 * 			  额外响应数据1
+	 * @param obj2
+	 * 			  额外响应数据2
 	 */
-	public Result(int code, String msg, Object obj) {
+	public Result(int code, String msg, Object obj,Object obj1,Object obj2) {
 		super();
 		this.code = code;
 		this.msg = msg;
 		this.obj = obj;
+		this.obj1 = obj1;
+		this.obj2 = obj2;
 	}
 
-	/**
-	 * 默认操作成功结果.
-	 */
-	public static Result successResult() {
-		return new Result(SUCCESS, SUCCESS_MSG, null);
-	}
-
-	/**
-	 * 默认操作失败结果.
-	 */
-	public static Result errorResult() {
-		return new Result(ERROR, ERROR_MSG, null);
-	}
-
-	/**
-	 * 结果状态码(可自定义结果状态码) 1:操作成功 0:操作失败
-	 */
 	public int getCode() {
 		return code;
 	}
 
-	/**
-	 * 设置结果状态码(约定 1:操作成功 0:操作失败 2:警告)
-	 * 
-	 * @param code
-	 *            结果状态码
-	 */
 	public void setCode(int code) {
 		this.code = code;
 	}
 
-	/**
-	 * 响应结果描述
-	 */
 	public String getMsg() {
 		return msg;
 	}
 
-	/**
-	 * 设置响应结果描述
-	 * 
-	 * @param msg
-	 *            响应结果描述
-	 */
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
 
-	/**
-	 * 其它数据信息（比如跳转地址）
-	 */
 	public Object getObj() {
 		return obj;
 	}
 
-	/**
-	 * 设置其它数据信息（比如跳转地址）
-	 * 
-	 * @param obj
-	 *            其它数据信息（比如跳转地址）
-	 */
 	public void setObj(Object obj) {
 		this.obj = obj;
+	}
+
+	public Object getObj1() {
+		return obj1;
+	}
+
+	public void setObj1(Object obj1) {
+		this.obj1 = obj1;
+	}
+
+	public Object getObj2() {
+		return obj2;
+	}
+
+	public void setObj2(Object obj2) {
+		this.obj2 = obj2;
 	}
 }
