@@ -14,8 +14,12 @@ public class AccountDao {
     @Autowired
     UserAccountMapper userAccountMapper;
 
-    public UserAccount getUserAccount(String user_account){
+    public UserAccount getUserAccountByAccount(String user_account){
         return userAccountMapper.selectByUserAccount(user_account);
+    }
+
+    public UserAccount getUserAccountById(String user_id){
+        return userAccountMapper.selectByPrimaryKey(user_id);
     }
 
     public void addUserAccount(UserAccount userAccount){

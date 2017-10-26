@@ -2,6 +2,9 @@ package com.fcsservice.controller;
 
 import com.fcsservice.model.pojo.UserAccount;
 import com.fcsservice.service.AccountService;
+import com.fcsservice.service.DictdataService;
+import com.fcsservice.service.TagService;
+import com.fcsservice.service.UserDataService;
 import com.fcsservice.utils.Converter;
 import com.fcsservice.utils.Result;
 import com.mysql.jdbc.log.Log;
@@ -26,6 +29,12 @@ import java.util.UUID;
 public class AccountController {
     @Autowired
     AccountService accountService;
+    @Autowired
+    DictdataService dictdataService;
+    @Autowired
+    TagService tagService;
+    @Autowired
+    UserDataService userDataService;
 
     private static Logger logger = Logger.getLogger(AccountController.class);
 
@@ -108,7 +117,7 @@ public class AccountController {
     //注册设计师
     @RequestMapping(value="/registerDesigner",method = {RequestMethod.POST})
     @ResponseBody
-    public Result login(@RequestParam("account") String user_account,
+    public Result registerDesigner(@RequestParam("account") String user_account,
                         @RequestParam("password") String user_password,
                         @RequestParam("type") int user_type,
                         @RequestParam("tag") String tag){
@@ -116,7 +125,7 @@ public class AccountController {
 
         UserAccount userAccount = new UserAccount();
         String user_id = UUID.randomUUID().toString().replaceAll("-", "");
-        if (user_id!=null && user_account!=null && user_password!=null && user_type==2 && tag != null){
+        if (user_id!=null && user_account!=null && user_password!=null && user_type==2 && tag!=null){
             //设计师资料
             userAccount.setUserId(user_id);
             userAccount.setUserAccount(user_account);
@@ -124,16 +133,42 @@ public class AccountController {
             userAccount.setUserType(user_type);
             userAccount.setUserRegtime(new Converter().getNowTime());
             userAccount.setUserStatus(0);
+            accountService.addUserAccount(userAccount);
 
             //设计标签
-            //去除字符串最开始的；
             tag = tag.substring(1,tag.length());
-            int tagArray[] = new Converter().getIntegerArrayByString(tag,";");
+            String tagStrArray[] = tag.split(";");
+            for (int i=0;i<tagStrArray.length;i++){
+                int tagId = dictdataService.getIdByValue(tagStrArray[i]);
+                if (tagId != -1)
+                    tagService.addTag(user_id,tagId);
+            }
 
-            int tagId[] = accountService.getTagidList(tagArray);
-
+            result.setCode(Result.SUCCESS);
+            result.setMsg("注册设计师成功");
+        }else{
+            result.setCode(Result.FAIL);
+            result.setMsg("注册失败，信息不完整");
         }
 
+        return result;
+    }
+
+    //查询邮箱是否已绑定账号
+    @RequestMapping(value="/existMail",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result existMail(@RequestParam("mail") String mail){
+        Result result = new Result();
+
+        boolean exist = userDataService.existMail(mail);
+
+        if (exist){
+            result.setCode(Result.SUCCESS);
+            result.setMsg("邮箱已绑定账号");
+        }else{
+            result.setCode(Result.FAIL);
+            result.setMsg("邮箱未绑定账号");
+        }
         return result;
     }
 }

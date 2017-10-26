@@ -11,6 +11,8 @@ public interface DictdataMapper {
 
     Dictdata selectByPrimaryKey(Integer dactionarydataId);
 
+    Dictdata selectByValue(String dictionarydata_value);
+
     int updateByPrimaryKeySelective(Dictdata record);
 
     int updateByPrimaryKey(Dictdata record);

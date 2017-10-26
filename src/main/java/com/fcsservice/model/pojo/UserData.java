@@ -13,8 +13,6 @@ public class UserData implements Serializable {
 
     private String dataPhone;
 
-    private Integer designtypeId;
-
     private static final long serialVersionUID = 1L;
 
     public String getDataId() {
@@ -55,13 +53,5 @@ public class UserData implements Serializable {
 
     public void setDataPhone(String dataPhone) {
         this.dataPhone = dataPhone;
-    }
-
-    public Integer getDesigntypeId() {
-        return designtypeId;
-    }
-
-    public void setDesigntypeId(Integer designtypeId) {
-        this.designtypeId = designtypeId;
     }
 }

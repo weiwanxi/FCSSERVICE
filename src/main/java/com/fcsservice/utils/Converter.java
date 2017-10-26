@@ -13,14 +13,4 @@ public class Converter {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return simpleDateFormat.format(new Date());
     }
-
-    //将字符串转化成int数组，传入字符串与分隔符
-    public int[] getIntegerArrayByString(String str,String separator){
-        String strArray[] = str.split(separator);
-        int[] intArray = new int[strArray.length];
-        for (int i=0;i<strArray.length;i++){
-            intArray[i] = Integer.parseInt(strArray[i]);
-        }
-        return intArray;
-    }
 }

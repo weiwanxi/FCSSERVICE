@@ -20,6 +20,7 @@
         <javaClientGenerator targetPackage="com.fcsservice.model.dao"
                              targetProject="src\main\java" type="XMLMAPPER" />
 
+        <!--
         <table tableName="fcsalbum" domainObjectName="Album"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
@@ -105,5 +106,11 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
+        <table tableName="fcsusertag" domainObjectName="Tag"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false">
+        </table>
+        -->
     </context>
 </generatorConfiguration>
