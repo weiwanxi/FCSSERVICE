@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fcsservice.model.dao.CodeMapper" >
+  <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Code" >
+    <result column="mail" property="mail" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="CHAR" />
+    <result column="typee" property="typee" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mail, code,typee, time
+  </sql>
+  <select id="selectByMail" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from fcsmailcode
+    where mail = #{arg0} and typee = #{arg1}
+  </select>
+  <delete id="deleteByMail">
+    delete from fcsmailcode
+    where mail = #{arg0} and typee = #{arg1}
+  </delete>
+  <insert id="insert" parameterType="com.fcsservice.model.pojo.Code" >
+    insert into fcsmailcode (mail, code, typee,
+      time)
+    values (#{mail,jdbcType=VARCHAR}, #{code,jdbcType=CHAR}, #{type,jdbcType=INTEGER}, 
+      #{time,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Code" >
+    insert into fcsmailcode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mail != null" >
+        mail,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="typee != null" >
+        typee,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mail != null" >
+        #{mail,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=CHAR},
+      </if>
+      <if test="typee != null" >
+        #{typee,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>
