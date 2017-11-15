@@ -1,9 +1,12 @@
 package com.fcsservice.service;
 
 import com.fcsservice.dao.DictdataDao;
+import com.fcsservice.model.pojo.Dictdata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by YE on 2017/10/26 15:10.
@@ -17,6 +20,10 @@ public class DictdataService {
 
     public int getIdByValue(String value){
         return dictdataDao.getDictDataIdByValue(value);
+    }
+
+    public List<Dictdata> getByNumber(int number){
+        return dictdataDao.getByNumber(number);
     }
 
 }

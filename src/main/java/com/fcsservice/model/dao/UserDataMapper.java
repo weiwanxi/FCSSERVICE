@@ -13,6 +13,8 @@ public interface UserDataMapper {
 
     UserData selectByMail(String data_mail);
 
+    UserData selectByUserId(String userId);
+
     int updateByPrimaryKeySelective(UserData record);
 
     int updateByPrimaryKey(UserData record);

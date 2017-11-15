@@ -6,7 +6,7 @@
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="album_name" property="albumName" jdbcType="VARCHAR" />
     <result column="album_picture" property="albumPicture" jdbcType="VARCHAR" />
-    <result column="album_time" property="albumTime" jdbcType="VARCHAR" />
+    <result column="album_time" property="albumTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     album_id, user_id, album_name, album_picture, album_time
@@ -25,7 +25,7 @@
     insert into fcsalbum (album_id, user_id, album_name, 
       album_picture, album_time)
     values (#{albumId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{albumName,jdbcType=VARCHAR}, 
-      #{albumPicture,jdbcType=VARCHAR}, #{albumTime,jdbcType=VARCHAR})
+      #{albumPicture,jdbcType=VARCHAR}, #{albumTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Album" >
     insert into fcsalbum
@@ -60,7 +60,7 @@
         #{albumPicture,jdbcType=VARCHAR},
       </if>
       <if test="albumTime != null" >
-        #{albumTime,jdbcType=VARCHAR},
+        #{albumTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -77,7 +77,7 @@
         album_picture = #{albumPicture,jdbcType=VARCHAR},
       </if>
       <if test="albumTime != null" >
-        album_time = #{albumTime,jdbcType=VARCHAR},
+        album_time = #{albumTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where album_id = #{albumId,jdbcType=VARCHAR}
@@ -87,7 +87,7 @@
     set user_id = #{userId,jdbcType=VARCHAR},
       album_name = #{albumName,jdbcType=VARCHAR},
       album_picture = #{albumPicture,jdbcType=VARCHAR},
-      album_time = #{albumTime,jdbcType=VARCHAR}
+      album_time = #{albumTime,jdbcType=TIMESTAMP}
     where album_id = #{albumId,jdbcType=VARCHAR}
   </update>
 </mapper>

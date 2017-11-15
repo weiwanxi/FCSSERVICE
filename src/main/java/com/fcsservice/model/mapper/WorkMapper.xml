@@ -18,7 +18,7 @@
     <result column="work_picture4" property="workPicture4" jdbcType="VARCHAR" />
     <result column="work_picture5" property="workPicture5" jdbcType="VARCHAR" />
     <result column="work_picture6" property="workPicture6" jdbcType="VARCHAR" />
-    <result column="work_reltime" property="workReltime" jdbcType="VARCHAR" />
+    <result column="work_reltime" property="workReltime" jdbcType="TIMESTAMP" />
     <result column="worl_fabulous" property="worlFabulous" jdbcType="INTEGER" />
     <result column="work_status" property="workStatus" jdbcType="INTEGER" />
   </resultMap>
@@ -50,7 +50,7 @@
       #{fabricId,jdbcType=INTEGER}, #{modelId,jdbcType=INTEGER}, #{workColor,jdbcType=VARCHAR}, 
       #{workIntro,jdbcType=VARCHAR}, #{workPicture1,jdbcType=VARCHAR}, #{workPicture2,jdbcType=VARCHAR}, 
       #{workPicture3,jdbcType=VARCHAR}, #{workPicture4,jdbcType=VARCHAR}, #{workPicture5,jdbcType=VARCHAR}, 
-      #{workPicture6,jdbcType=VARCHAR}, #{workReltime,jdbcType=VARCHAR}, #{worlFabulous,jdbcType=INTEGER}, 
+      #{workPicture6,jdbcType=VARCHAR}, #{workReltime,jdbcType=TIMESTAMP}, #{worlFabulous,jdbcType=INTEGER}, 
       #{workStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Work" >
@@ -164,7 +164,7 @@
         #{workPicture6,jdbcType=VARCHAR},
       </if>
       <if test="workReltime != null" >
-        #{workReltime,jdbcType=VARCHAR},
+        #{workReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="worlFabulous != null" >
         #{worlFabulous,jdbcType=INTEGER},
@@ -223,7 +223,7 @@
         work_picture6 = #{workPicture6,jdbcType=VARCHAR},
       </if>
       <if test="workReltime != null" >
-        work_reltime = #{workReltime,jdbcType=VARCHAR},
+        work_reltime = #{workReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="worlFabulous != null" >
         worl_fabulous = #{worlFabulous,jdbcType=INTEGER},
@@ -251,7 +251,7 @@
       work_picture4 = #{workPicture4,jdbcType=VARCHAR},
       work_picture5 = #{workPicture5,jdbcType=VARCHAR},
       work_picture6 = #{workPicture6,jdbcType=VARCHAR},
-      work_reltime = #{workReltime,jdbcType=VARCHAR},
+      work_reltime = #{workReltime,jdbcType=TIMESTAMP},
       worl_fabulous = #{worlFabulous,jdbcType=INTEGER},
       work_status = #{workStatus,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}

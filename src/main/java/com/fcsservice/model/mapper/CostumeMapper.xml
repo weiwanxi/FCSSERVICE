@@ -19,7 +19,7 @@
     <result column="costume_picture3" property="costumePicture3" jdbcType="VARCHAR" />
     <result column="costume_picture4" property="costumePicture4" jdbcType="VARCHAR" />
     <result column="costume_fabulous" property="costumeFabulous" jdbcType="INTEGER" />
-    <result column="costume_reltime" property="costumeReltime" jdbcType="VARCHAR" />
+    <result column="costume_reltime" property="costumeReltime" jdbcType="TIMESTAMP" />
     <result column="costume_status" property="costumeStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -51,7 +51,7 @@
       #{styleId,jdbcType=INTEGER}, #{componentId,jdbcType=INTEGER}, #{weaveId,jdbcType=INTEGER}, 
       #{costumeColor,jdbcType=VARCHAR}, #{costumeAge,jdbcType=VARCHAR}, #{costumeSeason,jdbcType=VARCHAR}, 
       #{costumePicture1,jdbcType=VARCHAR}, #{costumePicture2,jdbcType=VARCHAR}, #{costumePicture3,jdbcType=VARCHAR}, 
-      #{costumePicture4,jdbcType=VARCHAR}, #{costumeFabulous,jdbcType=INTEGER}, #{costumeReltime,jdbcType=VARCHAR}, 
+      #{costumePicture4,jdbcType=VARCHAR}, #{costumeFabulous,jdbcType=INTEGER}, #{costumeReltime,jdbcType=TIMESTAMP}, 
       #{costumeStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Costume" >
@@ -168,7 +168,7 @@
         #{costumeFabulous,jdbcType=INTEGER},
       </if>
       <if test="costumeReltime != null" >
-        #{costumeReltime,jdbcType=VARCHAR},
+        #{costumeReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="costumeStatus != null" >
         #{costumeStatus,jdbcType=INTEGER},
@@ -227,7 +227,7 @@
         costume_fabulous = #{costumeFabulous,jdbcType=INTEGER},
       </if>
       <if test="costumeReltime != null" >
-        costume_reltime = #{costumeReltime,jdbcType=VARCHAR},
+        costume_reltime = #{costumeReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="costumeStatus != null" >
         costume_status = #{costumeStatus,jdbcType=INTEGER},
@@ -253,7 +253,7 @@
       costume_picture3 = #{costumePicture3,jdbcType=VARCHAR},
       costume_picture4 = #{costumePicture4,jdbcType=VARCHAR},
       costume_fabulous = #{costumeFabulous,jdbcType=INTEGER},
-      costume_reltime = #{costumeReltime,jdbcType=VARCHAR},
+      costume_reltime = #{costumeReltime,jdbcType=TIMESTAMP},
       costume_status = #{costumeStatus,jdbcType=INTEGER}
     where costume_id = #{costumeId,jdbcType=VARCHAR}
   </update>

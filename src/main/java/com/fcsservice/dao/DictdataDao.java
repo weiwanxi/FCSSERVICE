@@ -5,6 +5,8 @@ import com.fcsservice.model.pojo.Dictdata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by YE on 2017/10/26 15:11.
  */
@@ -20,5 +22,9 @@ public class DictdataDao {
             return dictdata.getDactionarydataId();
         else
             return -1;
+    }
+
+    public List<Dictdata> getByNumber(int number){
+        return dictdataMapper.selectByNumber(number);
     }
 }

@@ -5,7 +5,7 @@
     <id column="follow_id" property="followId" jdbcType="VARCHAR" />
     <result column="follower_id" property="followerId" jdbcType="VARCHAR" />
     <result column="concern_id" property="concernId" jdbcType="VARCHAR" />
-    <result column="follow_time" property="followTime" jdbcType="VARCHAR" />
+    <result column="follow_time" property="followTime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     follow_id, follower_id, concern_id, follow_time
@@ -24,7 +24,7 @@
     insert into fcsfollow (follow_id, follower_id, concern_id, 
       follow_time)
     values (#{followId,jdbcType=VARCHAR}, #{followerId,jdbcType=VARCHAR}, #{concernId,jdbcType=VARCHAR}, 
-      #{followTime,jdbcType=VARCHAR})
+      #{followTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Follow" >
     insert into fcsfollow
@@ -53,7 +53,7 @@
         #{concernId,jdbcType=VARCHAR},
       </if>
       <if test="followTime != null" >
-        #{followTime,jdbcType=VARCHAR},
+        #{followTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -67,7 +67,7 @@
         concern_id = #{concernId,jdbcType=VARCHAR},
       </if>
       <if test="followTime != null" >
-        follow_time = #{followTime,jdbcType=VARCHAR},
+        follow_time = #{followTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where follow_id = #{followId,jdbcType=VARCHAR}
@@ -76,7 +76,7 @@
     update fcsfollow
     set follower_id = #{followerId,jdbcType=VARCHAR},
       concern_id = #{concernId,jdbcType=VARCHAR},
-      follow_time = #{followTime,jdbcType=VARCHAR}
+      follow_time = #{followTime,jdbcType=TIMESTAMP}
     where follow_id = #{followId,jdbcType=VARCHAR}
   </update>
 </mapper>

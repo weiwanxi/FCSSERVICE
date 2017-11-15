@@ -7,7 +7,7 @@
     <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
     <result column="commentator_id" property="commentatorId" jdbcType="VARCHAR" />
     <result column="comment_fabulous" property="commentFabulous" jdbcType="INTEGER" />
-    <result column="comment_reltime" property="commentReltime" jdbcType="VARCHAR" />
+    <result column="comment_reltime" property="commentReltime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
     comment_id, commentary_id, comment_content, commentator_id, comment_fabulous, comment_reltime
@@ -27,7 +27,7 @@
       commentator_id, comment_fabulous, comment_reltime
       )
     values (#{commentId,jdbcType=VARCHAR}, #{commentaryId,jdbcType=VARCHAR}, #{commentContent,jdbcType=VARCHAR}, 
-      #{commentatorId,jdbcType=VARCHAR}, #{commentFabulous,jdbcType=INTEGER}, #{commentReltime,jdbcType=VARCHAR}
+      #{commentatorId,jdbcType=VARCHAR}, #{commentFabulous,jdbcType=INTEGER}, #{commentReltime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Comment" >
@@ -69,7 +69,7 @@
         #{commentFabulous,jdbcType=INTEGER},
       </if>
       <if test="commentReltime != null" >
-        #{commentReltime,jdbcType=VARCHAR},
+        #{commentReltime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -89,7 +89,7 @@
         comment_fabulous = #{commentFabulous,jdbcType=INTEGER},
       </if>
       <if test="commentReltime != null" >
-        comment_reltime = #{commentReltime,jdbcType=VARCHAR},
+        comment_reltime = #{commentReltime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where comment_id = #{commentId,jdbcType=VARCHAR}
@@ -100,7 +100,7 @@
       comment_content = #{commentContent,jdbcType=VARCHAR},
       commentator_id = #{commentatorId,jdbcType=VARCHAR},
       comment_fabulous = #{commentFabulous,jdbcType=INTEGER},
-      comment_reltime = #{commentReltime,jdbcType=VARCHAR}
+      comment_reltime = #{commentReltime,jdbcType=TIMESTAMP}
     where comment_id = #{commentId,jdbcType=VARCHAR}
   </update>
 </mapper>

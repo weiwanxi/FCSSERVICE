@@ -1,6 +1,7 @@
 package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Costume implements Serializable {
     private String costumeId;
@@ -37,7 +38,7 @@ public class Costume implements Serializable {
 
     private Integer costumeFabulous;
 
-    private String costumeReltime;
+    private Date costumeReltime;
 
     private Integer costumeStatus;
 
@@ -179,11 +180,11 @@ public class Costume implements Serializable {
         this.costumeFabulous = costumeFabulous;
     }
 
-    public String getCostumeReltime() {
+    public Date getCostumeReltime() {
         return costumeReltime;
     }
 
-    public void setCostumeReltime(String costumeReltime) {
+    public void setCostumeReltime(Date costumeReltime) {
         this.costumeReltime = costumeReltime;
     }
 

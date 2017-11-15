@@ -9,7 +9,7 @@
     <result column="purchase_request" property="purchaseRequest" jdbcType="VARCHAR" />
     <result column="purchase_name" property="purchaseName" jdbcType="VARCHAR" />
     <result column="purchase_phone" property="purchasePhone" jdbcType="VARCHAR" />
-    <result column="purchase_time" property="purchaseTime" jdbcType="VARCHAR" />
+    <result column="purchase_time" property="purchaseTime" jdbcType="TIMESTAMP" />
     <result column="purchase_status" property="purchaseStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -33,7 +33,7 @@
       )
     values (#{purchaseId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, 
       #{sellerId,jdbcType=VARCHAR}, #{purchaseRequest,jdbcType=VARCHAR}, #{purchaseName,jdbcType=VARCHAR}, 
-      #{purchasePhone,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=VARCHAR}, #{purchaseStatus,jdbcType=INTEGER}
+      #{purchasePhone,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP}, #{purchaseStatus,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Purchase" >
@@ -90,7 +90,7 @@
         #{purchasePhone,jdbcType=VARCHAR},
       </if>
       <if test="purchaseTime != null" >
-        #{purchaseTime,jdbcType=VARCHAR},
+        #{purchaseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="purchaseStatus != null" >
         #{purchaseStatus,jdbcType=INTEGER},
@@ -119,7 +119,7 @@
         purchase_phone = #{purchasePhone,jdbcType=VARCHAR},
       </if>
       <if test="purchaseTime != null" >
-        purchase_time = #{purchaseTime,jdbcType=VARCHAR},
+        purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="purchaseStatus != null" >
         purchase_status = #{purchaseStatus,jdbcType=INTEGER},
@@ -135,7 +135,7 @@
       purchase_request = #{purchaseRequest,jdbcType=VARCHAR},
       purchase_name = #{purchaseName,jdbcType=VARCHAR},
       purchase_phone = #{purchasePhone,jdbcType=VARCHAR},
-      purchase_time = #{purchaseTime,jdbcType=VARCHAR},
+      purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
       purchase_status = #{purchaseStatus,jdbcType=INTEGER}
     where purchase_id = #{purchaseId,jdbcType=VARCHAR}
   </update>

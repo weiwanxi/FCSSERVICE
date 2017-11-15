@@ -17,4 +17,16 @@ public class UserDataDao {
     public UserData getDataByMail(String mail){
         return userDataMapper.selectByMail(mail);
     }
+
+    public void addUserData(UserData userData){
+        userDataMapper.insertSelective(userData);
+    }
+
+    public UserData getUserDataByUserId(String userId){
+        return userDataMapper.selectByUserId(userId);
+    }
+
+    public void updateUserData(UserData userData){
+        userDataMapper.updateByPrimaryKeySelective(userData);
+    }
 }

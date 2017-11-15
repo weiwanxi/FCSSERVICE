@@ -1,6 +1,7 @@
 package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserAccount implements Serializable {
     private String userId;
@@ -11,7 +12,7 @@ public class UserAccount implements Serializable {
 
     private Integer userType;
 
-    private String userRegtime;
+    private Date userRegtime;
 
     private Integer userStatus;
 
@@ -49,11 +50,11 @@ public class UserAccount implements Serializable {
         this.userType = userType;
     }
 
-    public String getUserRegtime() {
+    public Date getUserRegtime() {
         return userRegtime;
     }
 
-    public void setUserRegtime(String userRegtime) {
+    public void setUserRegtime(Date userRegtime) {
         this.userRegtime = userRegtime;
     }
 

@@ -11,6 +11,12 @@
   <sql id="Base_Column_List" >
     data_id, user_id, data_portrait, data_mail, data_phone
   </sql>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fcsuserdata
+    where user_id = #{user_id,jdbcType=VARCHAR}
+  </select>
   <select id="selectByMail" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

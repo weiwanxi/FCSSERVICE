@@ -20,7 +20,7 @@
     <result column="cloth_tcx" property="clothTcx" jdbcType="VARCHAR" />
     <result column="cloth_tpx" property="clothTpx" jdbcType="VARCHAR" />
     <result column="cloth_fabulous" property="clothFabulous" jdbcType="INTEGER" />
-    <result column="cloth_reltime" property="clothReltime" jdbcType="VARCHAR" />
+    <result column="cloth_reltime" property="clothReltime" jdbcType="TIMESTAMP" />
     <result column="cloth_status" property="clothStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -52,7 +52,7 @@
       #{makeId,jdbcType=INTEGER}, #{clothPicture1,jdbcType=VARCHAR}, #{clothPicture2,jdbcType=VARCHAR}, 
       #{clothPicture3,jdbcType=VARCHAR}, #{clothPicture4,jdbcType=VARCHAR}, #{clothElastic,jdbcType=INTEGER}, 
       #{clothTcx,jdbcType=VARCHAR}, #{clothTpx,jdbcType=VARCHAR}, #{clothFabulous,jdbcType=INTEGER}, 
-      #{clothReltime,jdbcType=VARCHAR}, #{clothStatus,jdbcType=INTEGER})
+      #{clothReltime,jdbcType=TIMESTAMP}, #{clothStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Cloth" >
     insert into fcscloth
@@ -174,7 +174,7 @@
         #{clothFabulous,jdbcType=INTEGER},
       </if>
       <if test="clothReltime != null" >
-        #{clothReltime,jdbcType=VARCHAR},
+        #{clothReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="clothStatus != null" >
         #{clothStatus,jdbcType=INTEGER},
@@ -236,7 +236,7 @@
         cloth_fabulous = #{clothFabulous,jdbcType=INTEGER},
       </if>
       <if test="clothReltime != null" >
-        cloth_reltime = #{clothReltime,jdbcType=VARCHAR},
+        cloth_reltime = #{clothReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="clothStatus != null" >
         cloth_status = #{clothStatus,jdbcType=INTEGER},
@@ -263,7 +263,7 @@
       cloth_tcx = #{clothTcx,jdbcType=VARCHAR},
       cloth_tpx = #{clothTpx,jdbcType=VARCHAR},
       cloth_fabulous = #{clothFabulous,jdbcType=INTEGER},
-      cloth_reltime = #{clothReltime,jdbcType=VARCHAR},
+      cloth_reltime = #{clothReltime,jdbcType=TIMESTAMP},
       cloth_status = #{clothStatus,jdbcType=INTEGER}
     where cloth_id = #{clothId,jdbcType=VARCHAR}
   </update>

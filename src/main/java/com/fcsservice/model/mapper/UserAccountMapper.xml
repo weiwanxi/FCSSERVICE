@@ -6,7 +6,7 @@
     <result column="user_account" property="userAccount" jdbcType="VARCHAR" />
     <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
     <result column="user_type" property="userType" jdbcType="INTEGER" />
-    <result column="user_regtime" property="userRegtime" jdbcType="VARCHAR" />
+    <result column="user_regtime" property="userRegtime" jdbcType="TIMESTAMP" />
     <result column="user_status" property="userStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
@@ -33,7 +33,7 @@
       user_type, user_regtime, user_status
       )
     values (#{userId,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR}, #{userPassword,jdbcType=VARCHAR}, 
-      #{userType,jdbcType=INTEGER}, #{userRegtime,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER}
+      #{userType,jdbcType=INTEGER}, #{userRegtime,jdbcType=TIMESTAMP}, #{userStatus,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.UserAccount" >
@@ -72,7 +72,7 @@
         #{userType,jdbcType=INTEGER},
       </if>
       <if test="userRegtime != null" >
-        #{userRegtime,jdbcType=VARCHAR},
+        #{userRegtime,jdbcType=TIMESTAMP},
       </if>
       <if test="userStatus != null" >
         #{userStatus,jdbcType=INTEGER},
@@ -92,7 +92,7 @@
         user_type = #{userType,jdbcType=INTEGER},
       </if>
       <if test="userRegtime != null" >
-        user_regtime = #{userRegtime,jdbcType=VARCHAR},
+        user_regtime = #{userRegtime,jdbcType=TIMESTAMP},
       </if>
       <if test="userStatus != null" >
         user_status = #{userStatus,jdbcType=INTEGER},
@@ -105,7 +105,7 @@
     set user_account = #{userAccount,jdbcType=VARCHAR},
       user_password = #{userPassword,jdbcType=VARCHAR},
       user_type = #{userType,jdbcType=INTEGER},
-      user_regtime = #{userRegtime,jdbcType=VARCHAR},
+      user_regtime = #{userRegtime,jdbcType=TIMESTAMP},
       user_status = #{userStatus,jdbcType=INTEGER}
     where user_id = #{userId,jdbcType=VARCHAR}
   </update>

@@ -25,4 +25,8 @@ public class AccountDao {
     public void addUserAccount(UserAccount userAccount){
         userAccountMapper.insert(userAccount);
     }
+
+    public void updatePassword(UserAccount userAccount){
+        userAccountMapper.updateByPrimaryKeySelective(userAccount);
+    }
 }

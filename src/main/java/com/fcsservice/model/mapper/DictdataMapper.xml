@@ -10,6 +10,12 @@
   <sql id="Base_Column_List" >
     dactionarydata_id, dictionarycategory_number, dictionarydata_number, dictionarydata_value
   </sql>
+  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fcsdictdata
+    where dictionarycategory_number = #{dictionarycategory_number,jdbcType=INTEGER}
+  </select>
   <select id="selectByValue" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

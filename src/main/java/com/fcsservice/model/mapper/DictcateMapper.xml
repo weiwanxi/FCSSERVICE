@@ -9,6 +9,12 @@
   <sql id="Base_Column_List" >
     dictionarycategory_id, dictionarycategory_number, dictionarycategory_name
   </sql>
+  <select id="selectByValue" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fcsdictcate
+    where dictionarycategory_name = #{dictionarycategory_name,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

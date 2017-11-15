@@ -1,6 +1,7 @@
 package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Album implements Serializable {
     private String albumId;
@@ -11,7 +12,7 @@ public class Album implements Serializable {
 
     private String albumPicture;
 
-    private String albumTime;
+    private Date albumTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -47,11 +48,11 @@ public class Album implements Serializable {
         this.albumPicture = albumPicture;
     }
 
-    public String getAlbumTime() {
+    public Date getAlbumTime() {
         return albumTime;
     }
 
-    public void setAlbumTime(String albumTime) {
+    public void setAlbumTime(Date albumTime) {
         this.albumTime = albumTime;
     }
 }

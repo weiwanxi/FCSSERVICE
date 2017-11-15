@@ -1,6 +1,7 @@
 package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Work implements Serializable {
     private String workId;
@@ -35,7 +36,7 @@ public class Work implements Serializable {
 
     private String workPicture6;
 
-    private String workReltime;
+    private Date workReltime;
 
     private Integer worlFabulous;
 
@@ -171,11 +172,11 @@ public class Work implements Serializable {
         this.workPicture6 = workPicture6;
     }
 
-    public String getWorkReltime() {
+    public Date getWorkReltime() {
         return workReltime;
     }
 
-    public void setWorkReltime(String workReltime) {
+    public void setWorkReltime(Date workReltime) {
         this.workReltime = workReltime;
     }
 

@@ -1,20 +1,15 @@
 package com.fcsservice.controller;
 
 import com.fcsservice.model.pojo.UserAccount;
-import com.fcsservice.service.AccountService;
-import com.fcsservice.service.DictdataService;
-import com.fcsservice.service.TagService;
-import com.fcsservice.service.UserDataService;
-import com.fcsservice.utils.Converter;
-import com.fcsservice.utils.Result;
-import com.mysql.jdbc.log.Log;
+import com.fcsservice.service.*;
+import com.fcsservice.utils.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -35,6 +30,8 @@ public class AccountController {
     TagService tagService;
     @Autowired
     UserDataService userDataService;
+    @Autowired
+    CodeService codeService;
 
     private static Logger logger = Logger.getLogger(AccountController.class);
 
@@ -65,21 +62,18 @@ public class AccountController {
     }
 
     //查询用户名是否已注册
-    @RequestMapping(value="/existUserAccount",method = {RequestMethod.POST})
+    @RequestMapping(value="/registerConfirm",method = {RequestMethod.POST})
     @ResponseBody
-    public Result existUserAccount(@RequestParam("account") String user_account){
+    public Result registerConfirm(@RequestParam("account") String user_account){
         Result result = new Result();
 
-        boolean exist = accountService.existUserAccount(user_account);
-
-        if (exist){
-            result.setCode(Result.FAIL);
-            result.setMsg("账号已注册");
-        }else{
+        if (accountService.existUserAccount(user_account)){
             result.setCode(Result.SUCCESS);
             result.setMsg("账号未注册");
+        }else{
+            result.setCode(Result.FAIL);
+            result.setMsg("账号已注册");
         }
-
         return result;
     }
 
@@ -88,22 +82,24 @@ public class AccountController {
     @ResponseBody
     public Result registerUser(@RequestParam("account") String user_account,
                         @RequestParam("password") String user_password,
+                        @RequestParam("mail") String mail,
                         @RequestParam("type") int user_type){
         Result result = new Result();
 
         UserAccount userAccount = new UserAccount();
         String user_id = UUID.randomUUID().toString().replaceAll("-", "");
-        if (user_id!=null && user_account!=null && user_password!=null && user_type==1){
+        if (user_id!=null && user_account!=null &&
+                user_password!=null && mail!=null &&
+                user_type==2){
             userAccount.setUserId(user_id);
             userAccount.setUserAccount(user_account);
             userAccount.setUserPassword(user_password);
             userAccount.setUserType(user_type);
-            userAccount.setUserRegtime(new Converter().getNowTime());
+            userAccount.setUserRegtime(new Date());
             userAccount.setUserStatus(0);
-        }
 
-        if (user_account != null){
             accountService.addUserAccount(userAccount);
+            userDataService.addUserData(user_id,mail);
             result.setCode(Result.SUCCESS);
             result.setMsg("注册用户成功");
         }else {
@@ -119,21 +115,25 @@ public class AccountController {
     @ResponseBody
     public Result registerDesigner(@RequestParam("account") String user_account,
                         @RequestParam("password") String user_password,
+                        @RequestParam("mail") String mail,
                         @RequestParam("type") int user_type,
                         @RequestParam("tag") String tag){
         Result result = new Result();
 
         UserAccount userAccount = new UserAccount();
         String user_id = UUID.randomUUID().toString().replaceAll("-", "");
-        if (user_id!=null && user_account!=null && user_password!=null && user_type==2 && tag!=null){
+        if (user_id!=null && user_account!=null &&
+                user_password!=null && mail!=null &&
+                user_type==1 && tag!=null){
             //设计师资料
             userAccount.setUserId(user_id);
             userAccount.setUserAccount(user_account);
             userAccount.setUserPassword(user_password);
             userAccount.setUserType(user_type);
-            userAccount.setUserRegtime(new Converter().getNowTime());
+            userAccount.setUserRegtime(new Date());
             userAccount.setUserStatus(0);
             accountService.addUserAccount(userAccount);
+            userDataService.addUserData(user_id,mail);
 
             //设计标签
             tag = tag.substring(1,tag.length());
@@ -154,21 +154,53 @@ public class AccountController {
         return result;
     }
 
-    //查询邮箱是否已绑定账号
-    @RequestMapping(value="/existMail",method = {RequestMethod.POST})
+    //修改密码
+    @RequestMapping(value="/updatePassword",method = {RequestMethod.POST})
     @ResponseBody
-    public Result existMail(@RequestParam("mail") String mail){
+    public Result updatePassword(@RequestParam("userId") String userId,
+                           @RequestParam("password") String password) {
         Result result = new Result();
 
-        boolean exist = userDataService.existMail(mail);
-
-        if (exist){
+        if (accountService.getAccountById(userId) != null){
+            accountService.updatePassword(userId,password);
             result.setCode(Result.SUCCESS);
-            result.setMsg("邮箱已绑定账号");
-        }else{
+            result.setMsg("修改密码成功");
+        }else {
             result.setCode(Result.FAIL);
-            result.setMsg("邮箱未绑定账号");
+            result.setMsg("密码修改失败");
         }
+
+        return result;
+    }
+    @RequestMapping(value="/updatePasswordByOldPassword",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result updatePasswordByOldPassword(@RequestParam("userId") String userId,
+                                 @RequestParam("oldPassword") String oldPassword,
+                                 @RequestParam("newPassword") String newPassword) {
+        Result result = new Result();
+
+        UserAccount userAccount = accountService.getAccountById(userId);
+
+        if (userAccount != null){
+            if (oldPassword != null && !"".equals(oldPassword) &&
+                    newPassword != null && !"".equals(newPassword)){
+                if (oldPassword.equals(userAccount.getUserPassword())){
+                    accountService.updatePassword(userId,newPassword);
+                    result.setCode(Result.SUCCESS);
+                    result.setMsg("修改密码成功");
+                }else{
+                    result.setCode(Result.FAIL);
+                    result.setMsg("旧密码不正确");
+                }
+            }else {
+                result.setCode(Result.FAIL);
+                result.setMsg("数据错误");
+            }
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("该用户不存在");
+        }
+
         return result;
     }
 }

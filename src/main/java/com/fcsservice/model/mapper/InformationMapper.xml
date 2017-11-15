@@ -7,13 +7,41 @@
     <result column="information_author" property="informationAuthor" jdbcType="VARCHAR" />
     <result column="information_content" property="informationContent" jdbcType="VARCHAR" />
     <result column="information_fabulous" property="informationFabulous" jdbcType="INTEGER" />
-    <result column="information_reltime" property="informationReltime" jdbcType="VARCHAR" />
+    <result column="information_reltime" property="informationReltime" jdbcType="TIMESTAMP" />
     <result column="information_status" property="informationStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     information_id, information_topic, information_author, information_content, information_fabulous, 
     information_reltime, information_status
   </sql>
+  <select id="selectOldInformationList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsinformation
+    WHERE information_reltime &lt;#{information_reltime,jdbcType=VARCHAR}
+    ORDER BY information_reltime DESC
+    LIMIT 4
+  </select>
+  <select id="selectNewInformationList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsinformation
+    WHERE information_reltime &gt;#{information_reltime,jdbcType=VARCHAR}
+    ORDER BY information_reltime DESC
+  </select>
+  <select id="selectInformationList" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsinformation
+    ORDER BY information_reltime DESC
+    LIMIT 5
+  </select>
+  <select id="selectByStatus" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fcsinformation
+    where information_status = #{information_status,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -31,7 +59,7 @@
       information_status)
     values (#{informationId,jdbcType=VARCHAR}, #{informationTopic,jdbcType=VARCHAR}, 
       #{informationAuthor,jdbcType=VARCHAR}, #{informationContent,jdbcType=VARCHAR}, 
-      #{informationFabulous,jdbcType=INTEGER}, #{informationReltime,jdbcType=VARCHAR}, 
+      #{informationFabulous,jdbcType=INTEGER}, #{informationReltime,jdbcType=TIMESTAMP}, 
       #{informationStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Information" >
@@ -76,7 +104,7 @@
         #{informationFabulous,jdbcType=INTEGER},
       </if>
       <if test="informationReltime != null" >
-        #{informationReltime,jdbcType=VARCHAR},
+        #{informationReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="informationStatus != null" >
         #{informationStatus,jdbcType=INTEGER},
@@ -99,7 +127,7 @@
         information_fabulous = #{informationFabulous,jdbcType=INTEGER},
       </if>
       <if test="informationReltime != null" >
-        information_reltime = #{informationReltime,jdbcType=VARCHAR},
+        information_reltime = #{informationReltime,jdbcType=TIMESTAMP},
       </if>
       <if test="informationStatus != null" >
         information_status = #{informationStatus,jdbcType=INTEGER},
@@ -113,7 +141,7 @@
       information_author = #{informationAuthor,jdbcType=VARCHAR},
       information_content = #{informationContent,jdbcType=VARCHAR},
       information_fabulous = #{informationFabulous,jdbcType=INTEGER},
-      information_reltime = #{informationReltime,jdbcType=VARCHAR},
+      information_reltime = #{informationReltime,jdbcType=TIMESTAMP},
       information_status = #{informationStatus,jdbcType=INTEGER}
     where information_id = #{informationId,jdbcType=VARCHAR}
   </update>

@@ -2,6 +2,8 @@ package com.fcsservice.model.dao;
 
 import com.fcsservice.model.pojo.Dictdata;
 
+import java.util.List;
+
 public interface DictdataMapper {
     int deleteByPrimaryKey(Integer dactionarydataId);
 
@@ -12,6 +14,8 @@ public interface DictdataMapper {
     Dictdata selectByPrimaryKey(Integer dactionarydataId);
 
     Dictdata selectByValue(String dictionarydata_value);
+
+    List<Dictdata> selectByNumber(int dictionarycategory_number);
 
     int updateByPrimaryKeySelective(Dictdata record);
 

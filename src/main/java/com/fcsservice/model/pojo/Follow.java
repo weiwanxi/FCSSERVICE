@@ -1,6 +1,7 @@
 package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Follow implements Serializable {
     private String followId;
@@ -9,7 +10,7 @@ public class Follow implements Serializable {
 
     private String concernId;
 
-    private String followTime;
+    private Date followTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -37,11 +38,11 @@ public class Follow implements Serializable {
         this.concernId = concernId;
     }
 
-    public String getFollowTime() {
+    public Date getFollowTime() {
         return followTime;
     }
 
-    public void setFollowTime(String followTime) {
+    public void setFollowTime(Date followTime) {
         this.followTime = followTime;
     }
 }

@@ -40,14 +40,22 @@ public class AccountService {
 
     public boolean existUserAccount(String user_account){
         UserAccount userAccount = accountDao.getUserAccountByAccount(user_account);
-        return userAccount==null?false:true;
+        return userAccount==null;
     }
 
     public void addUserAccount(UserAccount userAccount){
         accountDao.addUserAccount(userAccount);
     }
 
-    public int[] getTagidList(int[] tag){
-        return null;
+    public void updatePassword(String userId,String password){
+        UserAccount userAccount = new UserAccount();
+        userAccount.setUserId(userId);
+        userAccount.setUserPassword(password);
+
+        accountDao.updatePassword(userAccount);
+    }
+
+    public UserAccount getAccountById(String userId){
+        return accountDao.getUserAccountById(userId);
     }
 }

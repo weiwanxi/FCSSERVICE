@@ -1,6 +1,7 @@
 package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Comment implements Serializable {
     private String commentId;
@@ -13,7 +14,7 @@ public class Comment implements Serializable {
 
     private Integer commentFabulous;
 
-    private String commentReltime;
+    private Date commentReltime;
 
     private static final long serialVersionUID = 1L;
 
@@ -57,11 +58,11 @@ public class Comment implements Serializable {
         this.commentFabulous = commentFabulous;
     }
 
-    public String getCommentReltime() {
+    public Date getCommentReltime() {
         return commentReltime;
     }
 
-    public void setCommentReltime(String commentReltime) {
+    public void setCommentReltime(Date commentReltime) {
         this.commentReltime = commentReltime;
     }
 }

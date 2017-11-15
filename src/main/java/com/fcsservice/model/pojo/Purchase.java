@@ -1,6 +1,7 @@
 package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Purchase implements Serializable {
     private String purchaseId;
@@ -17,7 +18,7 @@ public class Purchase implements Serializable {
 
     private String purchasePhone;
 
-    private String purchaseTime;
+    private Date purchaseTime;
 
     private Integer purchaseStatus;
 
@@ -79,11 +80,11 @@ public class Purchase implements Serializable {
         this.purchasePhone = purchasePhone;
     }
 
-    public String getPurchaseTime() {
+    public Date getPurchaseTime() {
         return purchaseTime;
     }
 
-    public void setPurchaseTime(String purchaseTime) {
+    public void setPurchaseTime(Date purchaseTime) {
         this.purchaseTime = purchaseTime;
     }
 
