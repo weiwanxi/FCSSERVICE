@@ -10,6 +10,18 @@
   <sql id="Base_Column_List" >
     follow_id, follower_id, concern_id, follow_time
   </sql>
+  <delete id="deleteByUCId">
+    delete from fcsfollow
+    where follower_id = #{arg0}
+    AND concern_id = #{arg1}
+  </delete>
+  <select id="selectFollowed" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsfollow
+    where follower_id = #{arg0}
+    AND concern_id = #{arg1}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

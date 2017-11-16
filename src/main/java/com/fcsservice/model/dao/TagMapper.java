@@ -2,6 +2,8 @@ package com.fcsservice.model.dao;
 
 import com.fcsservice.model.pojo.Tag;
 
+import java.util.List;
+
 public interface TagMapper {
     int deleteByPrimaryKey(String userId);
 
@@ -10,6 +12,8 @@ public interface TagMapper {
     int insertSelective(Tag record);
 
     Tag selectByPrimaryKey(String userId);
+
+    List<String> selectUserIdByTagId(String userId);
 
     int updateByPrimaryKeySelective(Tag record);
 

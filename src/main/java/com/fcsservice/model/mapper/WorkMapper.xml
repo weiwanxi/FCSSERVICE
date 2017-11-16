@@ -27,6 +27,27 @@
     work_color, work_intro, work_picture1, work_picture2, work_picture3, work_picture4, 
     work_picture5, work_picture6, work_reltime, worl_fabulous, work_status
   </sql>
+  <select id="selectByDesignerId" resultType="java.lang.Integer">
+    SELECT COUNT(designer_id) AS workNumber
+    FROM fcsdesignwork
+    WHERE designer_id = #{designer_id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectDesignerWorkNumberByNumber" resultType="com.fcsservice.form.DesignerForm">
+    SELECT designer_id,COUNT(designer_id) AS workNumber
+    FROM fcsdesignwork
+    GROUP BY designer_id
+    HAVING workNumber &lt;=#{number,jdbcType=INTEGER}
+    ORDER BY workNumber
+    DESC
+  </select>
+  <select id="selectDesignerWorkNumber" resultType="com.fcsservice.form.DesignerForm">
+    SELECT designer_id,COUNT(designer_id) AS workNumber
+    FROM fcsdesignwork
+    GROUP BY designer_id
+    ORDER BY workNumber
+    DESC
+    LIMIT 5
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

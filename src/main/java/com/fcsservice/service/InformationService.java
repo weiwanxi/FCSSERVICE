@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,5 +119,22 @@ public class InformationService {
         informationMap.put("time",timeArray);
 
         return informationMap;
+    }
+
+    public Map<String,String> getInformationById(String informationId){
+        Map<String,String> map = new HashMap<String, String>();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Information information = informationDao.getInformationById(informationId);
+        if (information != null){
+            map.put("informationId",information.getInformationId());
+            map.put("informationTopic",information.getInformationTopic());
+            map.put("informationAuthor",information.getInformationAuthor());
+            map.put("informationReltime",format.format(information.getInformationReltime()));
+            map.put("informationContent",information.getInformationContent());
+            map.put("informationFabulous",String.valueOf(information.getInformationFabulous()));
+            return map;
+        }else {
+            return null;
+        }
     }
 }

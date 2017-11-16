@@ -51,4 +51,8 @@ public class InformationDao {
             return null;
         }
     }
+
+    public Information getInformationById(String informationId){
+        return informationMapper.selectByPrimaryKey(informationId);
+    }
 }
