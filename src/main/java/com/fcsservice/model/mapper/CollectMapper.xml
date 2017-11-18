@@ -11,6 +11,13 @@
   <sql id="Base_Column_List" >
     collect_id, collection_id, collector_id, collect_type, collect_time
   </sql>
+  <select id="selectByIU" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcscollect
+    where collection_id = #{arg0}
+    and collector_id = #{arg1}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

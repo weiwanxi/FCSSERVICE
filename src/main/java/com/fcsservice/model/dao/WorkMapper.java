@@ -20,6 +20,8 @@ public interface WorkMapper {
 
     int selectByDesignerId(String designerId);
 
+    int selectByAlbumId(String albumId);
+
     int updateByPrimaryKeySelective(Work record);
 
     int updateByPrimaryKey(Work record);

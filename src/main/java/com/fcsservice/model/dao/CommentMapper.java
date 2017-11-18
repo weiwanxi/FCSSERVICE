@@ -11,6 +11,8 @@ public interface CommentMapper {
 
     Comment selectByPrimaryKey(String commentId);
 
+    int selectCommentNumber(String commentary_id);
+
     int updateByPrimaryKeySelective(Comment record);
 
     int updateByPrimaryKey(Comment record);

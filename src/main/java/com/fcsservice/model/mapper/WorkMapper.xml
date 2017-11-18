@@ -27,8 +27,13 @@
     work_color, work_intro, work_picture1, work_picture2, work_picture3, work_picture4, 
     work_picture5, work_picture6, work_reltime, worl_fabulous, work_status
   </sql>
+  <select id="selectByAlbumId" resultType="java.lang.Integer">
+    SELECT COUNT(work_id) AS workNumber
+    FROM fcsdesignwork
+    WHERE album_id = #{album_id,jdbcType=VARCHAR}
+  </select>
   <select id="selectByDesignerId" resultType="java.lang.Integer">
-    SELECT COUNT(designer_id) AS workNumber
+    SELECT COUNT(work_id) AS workNumber
     FROM fcsdesignwork
     WHERE designer_id = #{designer_id,jdbcType=VARCHAR}
   </select>

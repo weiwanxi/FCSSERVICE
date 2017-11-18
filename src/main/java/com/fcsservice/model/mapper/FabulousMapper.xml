@@ -9,6 +9,18 @@
   <sql id="Base_Column_List" >
     fabulous_id, information_id, user_id
   </sql>
+  <select id="selectByIU" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsfabulous
+    where information_id = #{arg0}
+    and user_id = #{arg1}
+  </select>
+  <select id="selectFabulousNumber" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select count(information_id)
+    from fcsfabulous
+    where information_id = #{information_id,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

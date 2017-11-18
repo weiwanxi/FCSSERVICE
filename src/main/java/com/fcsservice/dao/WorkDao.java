@@ -27,4 +27,8 @@ public class WorkDao {
     public int getWorkNumberByDersignerId(String designerId){
         return workMapper.selectByDesignerId(designerId);
     }
+
+    public int getWorkNumberByAlbumId(String albumId){
+        return workMapper.selectByAlbumId(albumId);
+    }
 }

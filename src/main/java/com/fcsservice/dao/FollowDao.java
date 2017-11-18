@@ -34,5 +34,11 @@ public class FollowDao {
         followMapper.insert(follow);
     }
 
+    public int getFollowNumber(String userId){
+        return followMapper.selectFollowNumber(userId);
+    }
 
+    public int getFansNumber(String userId){
+        return followMapper.selectFansNumber(userId);
+    }
 }

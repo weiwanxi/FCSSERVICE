@@ -10,6 +10,16 @@
   <sql id="Base_Column_List" >
     follow_id, follower_id, concern_id, follow_time
   </sql>
+  <select id="selectFansNumber" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(follower_id)
+    from fcsfollow
+    where concern_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectFollowNumber" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(concern_id)
+    from fcsfollow
+    where follower_id = #{userId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByUCId">
     delete from fcsfollow
     where follower_id = #{arg0}

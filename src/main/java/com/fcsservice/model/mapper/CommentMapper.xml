@@ -12,6 +12,11 @@
   <sql id="Base_Column_List" >
     comment_id, commentary_id, comment_content, commentator_id, comment_fabulous, comment_reltime
   </sql>
+  <select id="selectCommentNumber" resultType="java.lang.Integer" parameterType="java.lang.String" >
+    select count(commentary_id)
+    from fcscomment
+    where commentary_id = #{commentary_id,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

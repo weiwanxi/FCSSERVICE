@@ -4,7 +4,9 @@ import com.fcsservice.dao.*;
 import com.fcsservice.form.DesignerForm;
 import com.fcsservice.model.pojo.UserAccount;
 import com.fcsservice.model.pojo.UserData;
+import com.fcsservice.utils.AlbumUtil;
 import com.fcsservice.utils.DesignerUtil;
+import com.fcsservice.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,9 +34,9 @@ public class DesignerService {
     @Autowired
     FollowDao followDao;
     @Autowired
-    TagDao tagDao;
+    AlbumDao albumDao;
     @Autowired
-    DictdataDao dictdataDao;
+    TagDao tagDao;
 
     private Map<String,List<DesignerForm>> userMap = new HashMap<String, List<DesignerForm>>();
 
@@ -100,5 +102,49 @@ public class DesignerService {
             designerForms.add(designerForm);
         }
         return new DesignerUtil().getDesignerMap(designerForms);
+    }
+
+    public Result getDeisgner(String designerId, String userId){
+        Result result = new Result();
+
+        Map<String,String> designerInfo = new HashMap<String, String>();
+        //获取设计师用户名
+        UserAccount userAccount = accountDao.getUserAccountById(designerId);
+        if (userAccount == null){
+            result.setCode(Result.FAIL);
+            result.setMsg("该设计师不存在");
+            return result;
+        }else {
+            designerInfo.put("designerName",userAccount.getUserAccount());
+        }
+        //获取设计头像
+        UserData userData = userDataDao.getUserDataByUserId(designerId);
+        if (userData == null){
+            result.setCode(Result.FAIL);
+            result.setMsg("该设计师不存在");
+            return result;
+        }else {
+            designerInfo.put("designerPortrait",userData.getDataPortrait());
+        }
+        //获取设计师关注数量
+        designerInfo.put("designerFollow",followDao.getFollowNumber(designerId)+"");
+        //获取设计师粉丝数量
+        designerInfo.put("designerFans",followDao.getFansNumber(designerId)+"");
+        //获取是否已关注设计师
+        designerInfo.put("followType",followDao.getFollowType(userId,designerId));
+
+        //获取设计专辑
+        Map<String,String[]> albumMap = new AlbumUtil().getAlbum(albumDao.getUserAlbum(designerId));
+        String[] idArray = albumMap.get("albumId");
+        String[] numberArray = new String[idArray.length];
+        for (int i = 0; i < idArray.length; i++) {
+            numberArray[i] = workDao.getWorkNumberByAlbumId(idArray[i])+"";
+        }
+        albumMap.put("workNumber",numberArray);
+
+        result.setCode(Result.SUCCESS);
+        result.setObj(designerInfo);
+        result.setObj1(albumMap);
+        return result;
     }
 }

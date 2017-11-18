@@ -11,6 +11,10 @@ public interface FabulousMapper {
 
     Fabulous selectByPrimaryKey(String fabulousId);
 
+    Fabulous selectByIU(String informationId,String userId);
+
+    int selectFabulousNumber(String informationId);
+
     int updateByPrimaryKeySelective(Fabulous record);
 
     int updateByPrimaryKey(Fabulous record);

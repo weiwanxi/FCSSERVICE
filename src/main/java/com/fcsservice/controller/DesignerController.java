@@ -19,8 +19,6 @@ import java.util.Map;
 public class DesignerController {
     @Autowired
     DesignerService designerService;
-    @Autowired
-    DictdataService dictdataService;
 
     @RequestMapping(value = "/getDesignerList",method = RequestMethod.POST)
     @ResponseBody
@@ -64,5 +62,12 @@ public class DesignerController {
             result.setCode(Result.FAIL);
         }
         return result;
+    }
+
+    @RequestMapping(value = "/getDesigner",method = RequestMethod.POST)
+    @ResponseBody
+    public Result getDesigner(@RequestParam("designerId") String designerId,
+                              @RequestParam("userId") String userId){
+        return designerService.getDeisgner(designerId,userId);
     }
 }

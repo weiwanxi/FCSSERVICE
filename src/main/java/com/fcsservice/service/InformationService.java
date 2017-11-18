@@ -1,8 +1,13 @@
 package com.fcsservice.service;
 
+import com.fcsservice.dao.CollectDao;
+import com.fcsservice.dao.CommentDao;
+import com.fcsservice.dao.FabulousDao;
 import com.fcsservice.dao.InformationDao;
 import com.fcsservice.model.pojo.Information;
+import com.fcsservice.utils.FcsserviceUtil;
 import com.fcsservice.utils.InformationUtil;
+import com.fcsservice.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +27,12 @@ import java.util.Map;
 public class InformationService {
     @Autowired
     InformationDao informationDao;
+    @Autowired
+    FabulousDao fabulousDao;
+    @Autowired
+    CommentDao commentDao;
+    @Autowired
+    CollectDao collectDao;
 
     public Map<String,String[]> getTopInformation(){
         Map<String,String[]> topInformation = new HashMap<String, String[]>();
@@ -121,20 +132,44 @@ public class InformationService {
         return informationMap;
     }
 
-    public Map<String,String> getInformationById(String informationId){
-        Map<String,String> map = new HashMap<String, String>();
+    public Result getInformationById(String informationId,String userId){
+        Result result = new Result();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Map<String,String> map = new HashMap<String, String>();
+        Map<String,String[]> contentMap = new HashMap<String, String[]>();
+        Map<String,int[]> otherMap = new HashMap<String, int[]>();
+        int[] other = new int[4];
+
         Information information = informationDao.getInformationById(informationId);
-        if (information != null){
-            map.put("informationId",information.getInformationId());
-            map.put("informationTopic",information.getInformationTopic());
-            map.put("informationAuthor",information.getInformationAuthor());
-            map.put("informationReltime",format.format(information.getInformationReltime()));
-            map.put("informationContent",information.getInformationContent());
-            map.put("informationFabulous",String.valueOf(information.getInformationFabulous()));
-            return map;
-        }else {
-            return null;
+        if (information != null) {
+            //获取资讯标题等
+            map.put("informationId", information.getInformationId());
+            map.put("informationTopic", information.getInformationTopic());
+            map.put("informationAuthor", information.getInformationAuthor());
+            map.put("informationReltime", format.format(information.getInformationReltime()));
+            map.put("informationFabulous", String.valueOf(information.getInformationFabulous()));
+
+            //提取资讯内容
+            contentMap = new InformationUtil().parseInformation(information.getInformationContent());
+
+            //获取点赞，评论，收藏信息
+            other[0] = fabulousDao.getFabulousType(informationId,userId)?FcsserviceUtil.FCtrue:FcsserviceUtil.FCfalse;
+            other[1] = fabulousDao.getFabulous(informationId);
+            other[2] = commentDao.getCommentNumber(informationId);
+            other[3] = collectDao.getCollectType(informationId,userId)?FcsserviceUtil.FCtrue:FcsserviceUtil.FCfalse;
+            otherMap.put("other",other);
         }
+
+        if (map.size()>0 && contentMap!=null && contentMap.size()>0){
+            result.setObj(map);
+            result.setObj1(contentMap);
+            result.setObj2(otherMap);
+            result.setCode(Result.SUCCESS);
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("该资讯不存在");
+        }
+
+        return result;
     }
 }

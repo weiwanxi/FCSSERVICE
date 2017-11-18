@@ -15,6 +15,10 @@ public interface FollowMapper {
 
     Follow selectFollowed(String userId,String designerId);
 
+    int selectFollowNumber(String userId);
+
+    int selectFansNumber(String userId);
+
     int updateByPrimaryKeySelective(Follow record);
 
     int updateByPrimaryKey(Follow record);

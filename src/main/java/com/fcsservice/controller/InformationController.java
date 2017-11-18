@@ -84,16 +84,8 @@ public class InformationController {
 
     @RequestMapping(value = "/getInformation",method = RequestMethod.POST)
     @ResponseBody
-    public Result getInformation(@RequestParam("informationId") String informationId){
-        Result result = new Result();
-        Map<String,String> map = informationService.getInformationById(informationId);
-        if (map != null){
-            result.setObj(map);
-            result.setCode(Result.SUCCESS);
-        }else {
-            result.setCode(Result.FAIL);
-            result.setMsg("该资讯不存在");
-        }
-        return result;
+    public Result getInformation(@RequestParam("informationId") String informationId,
+                                 @RequestParam("userId") String userId){
+        return informationService.getInformationById(informationId,userId);
     }
 }

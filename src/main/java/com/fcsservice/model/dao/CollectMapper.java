@@ -11,6 +11,8 @@ public interface CollectMapper {
 
     Collect selectByPrimaryKey(String collectId);
 
+    Collect selectByIU(String informationId,String userId);
+
     int updateByPrimaryKeySelective(Collect record);
 
     int updateByPrimaryKey(Collect record);
