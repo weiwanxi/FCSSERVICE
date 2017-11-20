@@ -12,6 +12,8 @@
 
     <mvc:resources location="WEB-INF/image/" mapping="/image/**"/>
 
+    <mvc:resources location="WEB-INF/image1/" mapping="/image1/**"/>
+
     <!--定义Controller扫描包,用户扫描Controller并创建代理对象 -->
     <context:component-scan base-package="com.fcsservice.controller"/>
 

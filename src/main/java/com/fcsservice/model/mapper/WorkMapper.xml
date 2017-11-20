@@ -27,6 +27,24 @@
     work_color, work_intro, work_picture1, work_picture2, work_picture3, work_picture4, 
     work_picture5, work_picture6, work_reltime, worl_fabulous, work_status
   </sql>
+  <select id="selectOrderByFabulous" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcsdesignwork AS a
+    LEFT JOIN (SELECT COUNT(fabulous_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
+    ON a.work_id = b.information_id
+    ORDER BY b.number DESC
+    LIMIT #{arg0},#{arg1}
+  </select>
+  <select id="selectOrderByComment" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcsdesignwork AS a
+    LEFT JOIN (SELECT COUNT(comment_id) AS number,commentary_id FROM fcscomment GROUP BY comment_id) AS b
+    ON a.work_id = b.commentary_id
+    ORDER BY b.number DESC
+    LIMIT #{arg0},#{arg1}
+  </select>
   <select id="selectByAlbumId" resultType="java.lang.Integer">
     SELECT COUNT(work_id) AS workNumber
     FROM fcsdesignwork

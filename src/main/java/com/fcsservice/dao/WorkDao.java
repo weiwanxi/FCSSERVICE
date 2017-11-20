@@ -2,6 +2,7 @@ package com.fcsservice.dao;
 
 import com.fcsservice.form.DesignerForm;
 import com.fcsservice.model.dao.WorkMapper;
+import com.fcsservice.model.pojo.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,5 +31,13 @@ public class WorkDao {
 
     public int getWorkNumberByAlbumId(String albumId){
         return workMapper.selectByAlbumId(albumId);
+    }
+
+    public List<Work> getCostumeOrderByComment(int page, int number){
+        return workMapper.selectOrderByComment(page,number);
+    }
+
+    public List<Work> getCostumeOrderByFabulous(int page, int number){
+        return workMapper.selectOrderByFabulous(page,number);
     }
 }

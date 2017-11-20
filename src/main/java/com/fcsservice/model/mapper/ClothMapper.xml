@@ -28,6 +28,24 @@
     purpose_id, weave_id, make_id, cloth_picture1, cloth_picture2, cloth_picture3, cloth_picture4, 
     cloth_elastic, cloth_tcx, cloth_tpx, cloth_fabulous, cloth_reltime, cloth_status
   </sql>
+  <select id="selectOrderByFabulous" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcscloth AS a
+    LEFT JOIN (SELECT COUNT(fabulous_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
+    ON a.cloth_id = b.information_id
+    ORDER BY b.number DESC
+    LIMIT #{arg0},#{arg1}
+  </select>
+  <select id="selectOrderByComment" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcscloth AS a
+    LEFT JOIN (SELECT COUNT(comment_id) AS number,commentary_id FROM fcscomment GROUP BY comment_id) AS b
+    ON a.cloth_id = b.commentary_id
+    ORDER BY b.number DESC
+    LIMIT #{arg0},#{arg1}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
