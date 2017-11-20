@@ -28,6 +28,24 @@
     costume_picture2, costume_picture3, costume_picture4, costume_fabulous, costume_reltime, 
     costume_status
   </sql>
+  <select id="selectOrderByFabulous" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcscostume AS a
+    LEFT JOIN (SELECT COUNT(fabulous_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
+    ON a.costume_id = b.information_id
+    ORDER BY b.number DESC
+    LIMIT #{arg0},#{arg1}
+  </select>
+  <select id="selectOrderByComment" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcscostume AS a
+    LEFT JOIN (SELECT COUNT(comment_id) AS number,commentary_id FROM fcscomment GROUP BY comment_id) AS b
+    ON a.costume_id = b.commentary_id
+    ORDER BY b.number DESC
+    LIMIT #{arg0},#{arg1}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />

@@ -25,4 +25,8 @@ public class FcsserviceUtil {
      */
     public final static int FCtrue = 0;
     public final static int FCfalse = 1;
+    /*
+     * 用于获取页面数据控制一页数据数量
+     */
+    public final static int PageNumber = 6;
 }

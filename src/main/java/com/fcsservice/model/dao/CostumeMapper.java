@@ -2,6 +2,8 @@ package com.fcsservice.model.dao;
 
 import com.fcsservice.model.pojo.Costume;
 
+import java.util.List;
+
 public interface CostumeMapper {
     int deleteByPrimaryKey(String costumeId);
 
@@ -10,6 +12,10 @@ public interface CostumeMapper {
     int insertSelective(Costume record);
 
     Costume selectByPrimaryKey(String costumeId);
+
+    List<Costume> selectOrderByComment(int page, int number);
+
+    List<Costume> selectOrderByFabulous(int page, int number);
 
     int updateByPrimaryKeySelective(Costume record);
 
