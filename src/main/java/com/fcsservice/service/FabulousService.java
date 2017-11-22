@@ -29,8 +29,6 @@ public class FabulousService {
 
         if (accountDao.getUserAccountById(userId) == null) {
             return "该用户不存在";
-        }else if (informationDao.getInformationById(informationId) == null){
-            return "该信息不存在";
         }
 
         fabulous.setFabulousId(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -44,8 +42,6 @@ public class FabulousService {
     public String deleteFabulous(String informationId,String userId){
         if (accountDao.getUserAccountById(userId) == null) {
             return "该用户不存在";
-        }else if (informationDao.getInformationById(informationId) == null){
-            return "该信息不存在";
         }
 
         Fabulous fabulous = fabulousDao.getFabulousByIU(informationId,userId);

@@ -24,4 +24,8 @@ public class CostumeDao {
         return costumeMapper.selectOrderByFabulous(page,number);
     }
 
+    public Costume getCostumeById(String costumeId){
+        return costumeMapper.selectByPrimaryKey(costumeId);
+    }
+
 }

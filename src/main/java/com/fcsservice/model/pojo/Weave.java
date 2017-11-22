@@ -5,11 +5,11 @@ import java.io.Serializable;
 public class Weave implements Serializable {
     private Integer weaveId;
 
-    private Integer weaveNumber;
-
-    private String weaveSupcategory;
+    private Integer weaveSupcategory;
 
     private String weaveName;
+
+    private Integer weaveLevel;
 
     private static final long serialVersionUID = 1L;
 
@@ -21,19 +21,11 @@ public class Weave implements Serializable {
         this.weaveId = weaveId;
     }
 
-    public Integer getWeaveNumber() {
-        return weaveNumber;
-    }
-
-    public void setWeaveNumber(Integer weaveNumber) {
-        this.weaveNumber = weaveNumber;
-    }
-
-    public String getWeaveSupcategory() {
+    public Integer getWeaveSupcategory() {
         return weaveSupcategory;
     }
 
-    public void setWeaveSupcategory(String weaveSupcategory) {
+    public void setWeaveSupcategory(Integer weaveSupcategory) {
         this.weaveSupcategory = weaveSupcategory;
     }
 
@@ -43,5 +35,13 @@ public class Weave implements Serializable {
 
     public void setWeaveName(String weaveName) {
         this.weaveName = weaveName;
+    }
+
+    public Integer getWeaveLevel() {
+        return weaveLevel;
+    }
+
+    public void setWeaveLevel(Integer weaveLevel) {
+        this.weaveLevel = weaveLevel;
     }
 }

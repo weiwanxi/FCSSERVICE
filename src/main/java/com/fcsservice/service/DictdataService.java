@@ -22,8 +22,8 @@ public class DictdataService {
         return dictdataDao.getDictDataIdByValue(value);
     }
 
-    public List<Dictdata> getByNumber(int number){
-        return dictdataDao.getByNumber(number);
+    public List<Dictdata> getByDatecateId(int datecateId){
+        return dictdataDao.getByDatecateId(datecateId);
     }
 
 }

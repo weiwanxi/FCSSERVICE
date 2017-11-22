@@ -15,7 +15,7 @@ public interface DictdataMapper {
 
     Dictdata selectByValue(String dictionarydata_value);
 
-    List<Dictdata> selectByNumber(int dictionarycategory_number);
+    List<Dictdata> selectByDatecateId(int datecateId);
 
     int updateByPrimaryKeySelective(Dictdata record);
 

@@ -5,9 +5,7 @@ import java.io.Serializable;
 public class Dictdata implements Serializable {
     private Integer dactionarydataId;
 
-    private Integer dictionarycategoryNumber;
-
-    private Integer dictionarydataNumber;
+    private Integer dictionarycategoryId;
 
     private String dictionarydataValue;
 
@@ -21,20 +19,12 @@ public class Dictdata implements Serializable {
         this.dactionarydataId = dactionarydataId;
     }
 
-    public Integer getDictionarycategoryNumber() {
-        return dictionarycategoryNumber;
+    public Integer getDictionarycategoryId() {
+        return dictionarycategoryId;
     }
 
-    public void setDictionarycategoryNumber(Integer dictionarycategoryNumber) {
-        this.dictionarycategoryNumber = dictionarycategoryNumber;
-    }
-
-    public Integer getDictionarydataNumber() {
-        return dictionarydataNumber;
-    }
-
-    public void setDictionarydataNumber(Integer dictionarydataNumber) {
-        this.dictionarydataNumber = dictionarydataNumber;
+    public void setDictionarycategoryId(Integer dictionarycategoryId) {
+        this.dictionarycategoryId = dictionarycategoryId;
     }
 
     public String getDictionarydataValue() {

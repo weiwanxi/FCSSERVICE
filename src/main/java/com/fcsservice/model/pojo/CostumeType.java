@@ -2,14 +2,14 @@ package com.fcsservice.model.pojo;
 
 import java.io.Serializable;
 
-public class Type implements Serializable {
+public class CostumeType implements Serializable {
     private Integer typeId;
 
-    private Integer typeNumber;
-
-    private String typeSupcategpry;
+    private Integer typeSupcategpry;
 
     private String typeName;
+
+    private Integer typeLevel;
 
     private static final long serialVersionUID = 1L;
 
@@ -21,19 +21,11 @@ public class Type implements Serializable {
         this.typeId = typeId;
     }
 
-    public Integer getTypeNumber() {
-        return typeNumber;
-    }
-
-    public void setTypeNumber(Integer typeNumber) {
-        this.typeNumber = typeNumber;
-    }
-
-    public String getTypeSupcategpry() {
+    public Integer getTypeSupcategpry() {
         return typeSupcategpry;
     }
 
-    public void setTypeSupcategpry(String typeSupcategpry) {
+    public void setTypeSupcategpry(Integer typeSupcategpry) {
         this.typeSupcategpry = typeSupcategpry;
     }
 
@@ -43,5 +35,13 @@ public class Type implements Serializable {
 
     public void setTypeName(String typeName) {
         this.typeName = typeName;
+    }
+
+    public Integer getTypeLevel() {
+        return typeLevel;
+    }
+
+    public void setTypeLevel(Integer typeLevel) {
+        this.typeLevel = typeLevel;
     }
 }

@@ -86,7 +86,7 @@
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
-        <table tableName="fcstype" domainObjectName="Type"
+        <table tableName="fcscostumetype" domainObjectName="CostumeType"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">

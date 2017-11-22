@@ -5,8 +5,6 @@ import java.io.Serializable;
 public class Dictcate implements Serializable {
     private Integer dictionarycategoryId;
 
-    private Integer dictionarycategoryNumber;
-
     private String dictionarycategoryName;
 
     private static final long serialVersionUID = 1L;
@@ -17,14 +15,6 @@ public class Dictcate implements Serializable {
 
     public void setDictionarycategoryId(Integer dictionarycategoryId) {
         this.dictionarycategoryId = dictionarycategoryId;
-    }
-
-    public Integer getDictionarycategoryNumber() {
-        return dictionarycategoryNumber;
-    }
-
-    public void setDictionarycategoryNumber(Integer dictionarycategoryNumber) {
-        this.dictionarycategoryNumber = dictionarycategoryNumber;
     }
 
     public String getDictionarycategoryName() {

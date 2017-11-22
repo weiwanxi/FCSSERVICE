@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,11 +37,11 @@ public class DictDataController {
 
         Dictcate dictcate = dictcateService.getByValue(FcsserviceUtil.DESIGN_TAG);
 
-        List<Dictdata> dictdataList = dictdataService.getByNumber(dictcate.getDictionarycategoryNumber());
+        List<Dictdata> dictdataList = dictdataService.getByDatecateId(dictcate.getDictionarycategoryId());
 
         Map<String,Integer> tagList = new HashMap<String, Integer>();
         for (int i=0; i<dictdataList.size(); i++){
-            tagList.put(dictdataList.get(i).getDictionarydataValue(),dictdataList.get(i).getDictionarydataNumber());
+            tagList.put(dictdataList.get(i).getDictionarydataValue(),dictdataList.get(i).getDactionarydataId());
         }
 
         if (tagList.size() != 0){
@@ -63,7 +61,7 @@ public class DictDataController {
 
         Dictcate dictcate = dictcateService.getByValue(FcsserviceUtil.DESIGN_TAG);
 
-        List<Dictdata> dictdataList = dictdataService.getByNumber(dictcate.getDictionarycategoryNumber());
+        List<Dictdata> dictdataList = dictdataService.getByDatecateId(dictcate.getDictionarycategoryId());
 
         Map<String,String[]> tag = new HashMap<String,String[]>();
 
@@ -71,7 +69,7 @@ public class DictDataController {
         String[] valueArray = new String[dictdataList.size()];
         for (int i=0; i<dictdataList.size(); i++){
             tagArray[i] = dictdataList.get(i).getDictionarydataValue().substring(0,2);
-            valueArray[i] = dictdataList.get(i).getDictionarydataNumber().toString();
+            valueArray[i] = dictdataList.get(i).getDactionarydataId()+"";
         }
 
         if (tagArray.length != 0 && valueArray.length != 0){

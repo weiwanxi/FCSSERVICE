@@ -3,12 +3,12 @@
 <mapper namespace="com.fcsservice.model.dao.ComponentMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Component" >
     <id column="component_id" property="componentId" jdbcType="INTEGER" />
-    <result column="component_number" property="componentNumber" jdbcType="INTEGER" />
-    <result column="component_supcategory" property="componentSupcategory" jdbcType="VARCHAR" />
+    <result column="component_supcategory" property="componentSupcategory" jdbcType="INTEGER" />
     <result column="component_name" property="componentName" jdbcType="VARCHAR" />
+    <result column="component_level" property="componentLevel" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    component_id, component_number, component_supcategory, component_name
+    component_id, component_supcategory, component_name, component_level
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -21,10 +21,10 @@
     where component_id = #{componentId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fcsservice.model.pojo.Component" >
-    insert into fcscomponent (component_id, component_number, component_supcategory, 
-      component_name)
-    values (#{componentId,jdbcType=INTEGER}, #{componentNumber,jdbcType=INTEGER}, #{componentSupcategory,jdbcType=VARCHAR}, 
-      #{componentName,jdbcType=VARCHAR})
+    insert into fcscomponent (component_id, component_supcategory, 
+      component_name, component_level)
+    values (#{componentId,jdbcType=INTEGER}, #{componentSupcategory,jdbcType=INTEGER}, 
+      #{componentName,jdbcType=VARCHAR}, #{componentLevel,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Component" >
     insert into fcscomponent
@@ -32,51 +32,51 @@
       <if test="componentId != null" >
         component_id,
       </if>
-      <if test="componentNumber != null" >
-        component_number,
-      </if>
       <if test="componentSupcategory != null" >
         component_supcategory,
       </if>
       <if test="componentName != null" >
         component_name,
       </if>
+      <if test="componentLevel != null" >
+        component_level,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="componentId != null" >
         #{componentId,jdbcType=INTEGER},
       </if>
-      <if test="componentNumber != null" >
-        #{componentNumber,jdbcType=INTEGER},
-      </if>
       <if test="componentSupcategory != null" >
-        #{componentSupcategory,jdbcType=VARCHAR},
+        #{componentSupcategory,jdbcType=INTEGER},
       </if>
       <if test="componentName != null" >
         #{componentName,jdbcType=VARCHAR},
+      </if>
+      <if test="componentLevel != null" >
+        #{componentLevel,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Component" >
     update fcscomponent
     <set >
-      <if test="componentNumber != null" >
-        component_number = #{componentNumber,jdbcType=INTEGER},
-      </if>
       <if test="componentSupcategory != null" >
-        component_supcategory = #{componentSupcategory,jdbcType=VARCHAR},
+        component_supcategory = #{componentSupcategory,jdbcType=INTEGER},
       </if>
       <if test="componentName != null" >
         component_name = #{componentName,jdbcType=VARCHAR},
+      </if>
+      <if test="componentLevel != null" >
+        component_level = #{componentLevel,jdbcType=INTEGER},
       </if>
     </set>
     where component_id = #{componentId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Component" >
     update fcscomponent
-    set component_number = #{componentNumber,jdbcType=INTEGER},
-      component_supcategory = #{componentSupcategory,jdbcType=VARCHAR},
-      component_name = #{componentName,jdbcType=VARCHAR}
+    set component_supcategory = #{componentSupcategory,jdbcType=INTEGER},
+      component_name = #{componentName,jdbcType=VARCHAR},
+      component_level = #{componentLevel,jdbcType=INTEGER}
     where component_id = #{componentId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -29,8 +29,6 @@ public class CollectService {
         Collect collect = new Collect();
         if (accountDao.getUserAccountById(userId) == null) {
             return "该用户不存在";
-        }else if (informationDao.getInformationById(informationId) == null){
-            return "该信息不存在";
         }
 
         collect.setCollectId(UUID.randomUUID().toString().replaceAll("-", ""));
@@ -46,8 +44,6 @@ public class CollectService {
     public String deleteCollect(String informationId,String userId){
         if (accountDao.getUserAccountById(userId) == null) {
             return "该用户不存在";
-        }else if (informationDao.getInformationById(informationId) == null){
-            return "该信息不存在";
         }
 
         Collect collect = collectDao.getCollectByIU(informationId,userId);

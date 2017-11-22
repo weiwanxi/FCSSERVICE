@@ -67,4 +67,12 @@ public class CostumeController {
 
         return result;
     }
+
+    @RequestMapping(value = "/getCostumeById",method = RequestMethod.POST)
+    @ResponseBody
+    public Result getCostumeById(@RequestParam("costumeId") String costumeId,
+                                 @RequestParam("userId") String userId){
+
+        return costumeService.getCostumeById(userId,costumeId);
+    }
 }

@@ -29,13 +29,13 @@ public class WorkService {
     AccountDao accountDao;
 
     public Map<String,String[]> getWorkOrderByComment(int page, int number){
-        List<Work> workList = workDao.getCostumeOrderByComment(page,number);
+        List<Work> workList = workDao.getWorkOrderByComment(page,number);
 
         return getMap(workList,number);
     }
 
     public Map<String,String[]> getWorkOrderByFabulous(int page, int number){
-        List<Work> workList = workDao.getCostumeOrderByFabulous(page,number);
+        List<Work> workList = workDao.getWorkOrderByFabulous(page,number);
 
         return getMap(workList,number);
     }

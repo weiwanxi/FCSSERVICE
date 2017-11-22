@@ -16,6 +16,10 @@ public class DictdataDao {
     @Autowired
     DictdataMapper dictdataMapper;
 
+    public Dictdata getDictDataById(int id){
+        return dictdataMapper.selectByPrimaryKey(id);
+    }
+
     public int getDictDataIdByValue(String value){
         Dictdata dictdata = dictdataMapper.selectByValue(value);
         if (dictdata != null)
@@ -24,7 +28,7 @@ public class DictdataDao {
             return -1;
     }
 
-    public List<Dictdata> getByNumber(int number){
-        return dictdataMapper.selectByNumber(number);
+    public List<Dictdata> getByDatecateId(int datecateId){
+        return dictdataMapper.selectByDatecateId(datecateId);
     }
 }

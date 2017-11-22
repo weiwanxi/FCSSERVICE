@@ -67,4 +67,12 @@ public class ClothController {
 
         return result;
     }
+
+    @RequestMapping(value = "/getClothById",method = RequestMethod.POST)
+    @ResponseBody
+    public Result getCostumeById(@RequestParam("clothId") String clothId,
+                                 @RequestParam("userId") String userId){
+
+        return clothService.getClothById(userId,clothId);
+    }
 }

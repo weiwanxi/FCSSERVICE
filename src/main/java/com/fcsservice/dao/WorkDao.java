@@ -33,11 +33,11 @@ public class WorkDao {
         return workMapper.selectByAlbumId(albumId);
     }
 
-    public List<Work> getCostumeOrderByComment(int page, int number){
+    public List<Work> getWorkOrderByComment(int page, int number){
         return workMapper.selectOrderByComment(page,number);
     }
 
-    public List<Work> getCostumeOrderByFabulous(int page, int number){
+    public List<Work> getWorkOrderByFabulous(int page, int number){
         return workMapper.selectOrderByFabulous(page,number);
     }
 }

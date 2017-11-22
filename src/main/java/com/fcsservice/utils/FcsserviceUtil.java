@@ -25,6 +25,10 @@ public class FcsserviceUtil {
      */
     public final static int FCtrue = 0;
     public final static int FCfalse = 1;
+    public final static String CollectTrue = "collect";
+    public final static String CollectFalse = "uncollect";
+    public final static String FabulousTrue = "fabulous";
+    public final static String FabulousFalse = "unfabulous";
     /*
      * 用于获取页面数据控制一页数据数量
      */

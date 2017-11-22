@@ -3,12 +3,12 @@
 <mapper namespace="com.fcsservice.model.dao.WeaveMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Weave" >
     <id column="weave_id" property="weaveId" jdbcType="INTEGER" />
-    <result column="weave_number" property="weaveNumber" jdbcType="INTEGER" />
-    <result column="weave_supcategory" property="weaveSupcategory" jdbcType="VARCHAR" />
+    <result column="weave_supcategory" property="weaveSupcategory" jdbcType="INTEGER" />
     <result column="weave_name" property="weaveName" jdbcType="VARCHAR" />
+    <result column="weave_level" property="weaveLevel" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    weave_id, weave_number, weave_supcategory, weave_name
+    weave_id, weave_supcategory, weave_name, weave_level
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -21,10 +21,10 @@
     where weave_id = #{weaveId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fcsservice.model.pojo.Weave" >
-    insert into fcsweave (weave_id, weave_number, weave_supcategory, 
-      weave_name)
-    values (#{weaveId,jdbcType=INTEGER}, #{weaveNumber,jdbcType=INTEGER}, #{weaveSupcategory,jdbcType=VARCHAR}, 
-      #{weaveName,jdbcType=VARCHAR})
+    insert into fcsweave (weave_id, weave_supcategory, weave_name, 
+      weave_level)
+    values (#{weaveId,jdbcType=INTEGER}, #{weaveSupcategory,jdbcType=INTEGER}, #{weaveName,jdbcType=VARCHAR}, 
+      #{weaveLevel,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Weave" >
     insert into fcsweave
@@ -32,51 +32,51 @@
       <if test="weaveId != null" >
         weave_id,
       </if>
-      <if test="weaveNumber != null" >
-        weave_number,
-      </if>
       <if test="weaveSupcategory != null" >
         weave_supcategory,
       </if>
       <if test="weaveName != null" >
         weave_name,
       </if>
+      <if test="weaveLevel != null" >
+        weave_level,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="weaveId != null" >
         #{weaveId,jdbcType=INTEGER},
       </if>
-      <if test="weaveNumber != null" >
-        #{weaveNumber,jdbcType=INTEGER},
-      </if>
       <if test="weaveSupcategory != null" >
-        #{weaveSupcategory,jdbcType=VARCHAR},
+        #{weaveSupcategory,jdbcType=INTEGER},
       </if>
       <if test="weaveName != null" >
         #{weaveName,jdbcType=VARCHAR},
+      </if>
+      <if test="weaveLevel != null" >
+        #{weaveLevel,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Weave" >
     update fcsweave
     <set >
-      <if test="weaveNumber != null" >
-        weave_number = #{weaveNumber,jdbcType=INTEGER},
-      </if>
       <if test="weaveSupcategory != null" >
-        weave_supcategory = #{weaveSupcategory,jdbcType=VARCHAR},
+        weave_supcategory = #{weaveSupcategory,jdbcType=INTEGER},
       </if>
       <if test="weaveName != null" >
         weave_name = #{weaveName,jdbcType=VARCHAR},
+      </if>
+      <if test="weaveLevel != null" >
+        weave_level = #{weaveLevel,jdbcType=INTEGER},
       </if>
     </set>
     where weave_id = #{weaveId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Weave" >
     update fcsweave
-    set weave_number = #{weaveNumber,jdbcType=INTEGER},
-      weave_supcategory = #{weaveSupcategory,jdbcType=VARCHAR},
-      weave_name = #{weaveName,jdbcType=VARCHAR}
+    set weave_supcategory = #{weaveSupcategory,jdbcType=INTEGER},
+      weave_name = #{weaveName,jdbcType=VARCHAR},
+      weave_level = #{weaveLevel,jdbcType=INTEGER}
     where weave_id = #{weaveId,jdbcType=INTEGER}
   </update>
 </mapper>

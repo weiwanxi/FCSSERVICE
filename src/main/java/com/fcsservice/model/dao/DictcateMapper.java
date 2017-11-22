@@ -9,9 +9,9 @@ public interface DictcateMapper {
 
     int insertSelective(Dictcate record);
 
-    Dictcate selectByValue(String dictionarycategoryName);
-
     Dictcate selectByPrimaryKey(Integer dictionarycategoryId);
+
+    Dictcate selectByValue(String dictionarycategoryName);
 
     int updateByPrimaryKeySelective(Dictcate record);
 

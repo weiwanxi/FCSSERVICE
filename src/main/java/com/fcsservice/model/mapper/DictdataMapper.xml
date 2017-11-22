@@ -3,18 +3,17 @@
 <mapper namespace="com.fcsservice.model.dao.DictdataMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Dictdata" >
     <id column="dactionarydata_id" property="dactionarydataId" jdbcType="INTEGER" />
-    <result column="dictionarycategory_number" property="dictionarycategoryNumber" jdbcType="INTEGER" />
-    <result column="dictionarydata_number" property="dictionarydataNumber" jdbcType="INTEGER" />
+    <result column="dictionarycategory_id" property="dictionarycategoryId" jdbcType="INTEGER" />
     <result column="dictionarydata_value" property="dictionarydataValue" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    dactionarydata_id, dictionarycategory_number, dictionarydata_number, dictionarydata_value
+    dactionarydata_id, dictionarycategory_id, dictionarydata_value
   </sql>
-  <select id="selectByNumber" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByDatecateId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from fcsdictdata
-    where dictionarycategory_number = #{dictionarycategory_number,jdbcType=INTEGER}
+    where dictionarycategory_id = #{datecateId,jdbcType=INTEGER}
   </select>
   <select id="selectByValue" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
@@ -33,12 +32,10 @@
     where dactionarydata_id = #{dactionarydataId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.fcsservice.model.pojo.Dictdata" >
-    insert into fcsdictdata (dactionarydata_id, dictionarycategory_number, 
-      dictionarydata_number, dictionarydata_value
-      )
-    values (#{dactionarydataId,jdbcType=INTEGER}, #{dictionarycategoryNumber,jdbcType=INTEGER}, 
-      #{dictionarydataNumber,jdbcType=INTEGER}, #{dictionarydataValue,jdbcType=VARCHAR}
-      )
+    insert into fcsdictdata (dactionarydata_id, dictionarycategory_id, 
+      dictionarydata_value)
+    values (#{dactionarydataId,jdbcType=INTEGER}, #{dictionarycategoryId,jdbcType=INTEGER}, 
+      #{dictionarydataValue,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Dictdata" >
     insert into fcsdictdata
@@ -46,11 +43,8 @@
       <if test="dactionarydataId != null" >
         dactionarydata_id,
       </if>
-      <if test="dictionarycategoryNumber != null" >
-        dictionarycategory_number,
-      </if>
-      <if test="dictionarydataNumber != null" >
-        dictionarydata_number,
+      <if test="dictionarycategoryId != null" >
+        dictionarycategory_id,
       </if>
       <if test="dictionarydataValue != null" >
         dictionarydata_value,
@@ -60,11 +54,8 @@
       <if test="dactionarydataId != null" >
         #{dactionarydataId,jdbcType=INTEGER},
       </if>
-      <if test="dictionarycategoryNumber != null" >
-        #{dictionarycategoryNumber,jdbcType=INTEGER},
-      </if>
-      <if test="dictionarydataNumber != null" >
-        #{dictionarydataNumber,jdbcType=INTEGER},
+      <if test="dictionarycategoryId != null" >
+        #{dictionarycategoryId,jdbcType=INTEGER},
       </if>
       <if test="dictionarydataValue != null" >
         #{dictionarydataValue,jdbcType=VARCHAR},
@@ -74,11 +65,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.fcsservice.model.pojo.Dictdata" >
     update fcsdictdata
     <set >
-      <if test="dictionarycategoryNumber != null" >
-        dictionarycategory_number = #{dictionarycategoryNumber,jdbcType=INTEGER},
-      </if>
-      <if test="dictionarydataNumber != null" >
-        dictionarydata_number = #{dictionarydataNumber,jdbcType=INTEGER},
+      <if test="dictionarycategoryId != null" >
+        dictionarycategory_id = #{dictionarycategoryId,jdbcType=INTEGER},
       </if>
       <if test="dictionarydataValue != null" >
         dictionarydata_value = #{dictionarydataValue,jdbcType=VARCHAR},
@@ -88,8 +76,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Dictdata" >
     update fcsdictdata
-    set dictionarycategory_number = #{dictionarycategoryNumber,jdbcType=INTEGER},
-      dictionarydata_number = #{dictionarydataNumber,jdbcType=INTEGER},
+    set dictionarycategory_id = #{dictionarycategoryId,jdbcType=INTEGER},
       dictionarydata_value = #{dictionarydataValue,jdbcType=VARCHAR}
     where dactionarydata_id = #{dactionarydataId,jdbcType=INTEGER}
   </update>
