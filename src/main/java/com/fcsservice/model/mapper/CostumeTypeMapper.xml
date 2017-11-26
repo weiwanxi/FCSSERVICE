@@ -7,6 +7,18 @@
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
     <result column="type_level" property="typeLevel" jdbcType="INTEGER" />
   </resultMap>
+  <select id="selectBypId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fcscostumetype
+    where type_supcategpry = #{pId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByLevel" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fcscostumetype
+    where type_level = #{typeLevel,jdbcType=INTEGER}
+  </select>
   <sql id="Base_Column_List" >
     type_id, type_supcategpry, type_name, type_level
   </sql>

@@ -16,7 +16,7 @@ public class Work implements Serializable {
 
     private String albumId;
 
-    private Integer fabricId;
+    private Integer componentId;
 
     private Integer modelId;
 
@@ -37,8 +37,6 @@ public class Work implements Serializable {
     private String workPicture6;
 
     private Date workReltime;
-
-    private Integer worlFabulous;
 
     private Integer workStatus;
 
@@ -92,12 +90,12 @@ public class Work implements Serializable {
         this.albumId = albumId;
     }
 
-    public Integer getFabricId() {
-        return fabricId;
+    public Integer getComponentId() {
+        return componentId;
     }
 
-    public void setFabricId(Integer fabricId) {
-        this.fabricId = fabricId;
+    public void setComponentId(Integer componentId) {
+        this.componentId = componentId;
     }
 
     public Integer getModelId() {
@@ -178,14 +176,6 @@ public class Work implements Serializable {
 
     public void setWorkReltime(Date workReltime) {
         this.workReltime = workReltime;
-    }
-
-    public Integer getWorlFabulous() {
-        return worlFabulous;
-    }
-
-    public void setWorlFabulous(Integer worlFabulous) {
-        this.worlFabulous = worlFabulous;
     }
 
     public Integer getWorkStatus() {

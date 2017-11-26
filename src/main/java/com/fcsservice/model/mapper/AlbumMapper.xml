@@ -11,11 +11,19 @@
   <sql id="Base_Column_List" >
     album_id, user_id, album_name, album_picture, album_time
   </sql>
+  <select id="selectByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsalbum
+    where album_name = #{arg1}
+    AND user_id = #{arg0}
+  </select>
   <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from fcsalbum
     where user_id = #{user_id,jdbcType=VARCHAR}
+    ORDER BY album_time ASC
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 

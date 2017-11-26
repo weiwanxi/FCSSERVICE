@@ -5,6 +5,7 @@ import com.fcsservice.model.pojo.UserData;
 import com.fcsservice.service.AccountService;
 import com.fcsservice.service.CodeService;
 import com.fcsservice.service.UserDataService;
+import com.fcsservice.utils.FcsserviceUtil;
 import com.fcsservice.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -64,52 +65,18 @@ public class UserDataController {
     public Result uploadImage(@RequestParam("userId") String userId,
                               @RequestParam("image") String base64Data){
         Result result = new Result();
+        FcsserviceUtil fcsserviceUtil = new FcsserviceUtil();
 
         //保存图片路径
-        String fileFolder = this.getClass().getClassLoader().getResource("").getPath().replace("/classes/","/image/");
         try{
-            String dataPrix = "";
-            String data = "";
-
-            if(base64Data == null || "".equals(base64Data)){
-                throw new Exception("上传失败，上传图片数据为空");
-            }else{
-                String [] d = base64Data.split("base64,");
-                if(d != null && d.length == 2){
-                    dataPrix = d[0];
-                    data = d[1];
-                }else{
-                    throw new Exception("上传失败，数据不合法");
-                }
+            String fileName = fcsserviceUtil.saveImage(fcsserviceUtil.IMAGEPATH,base64Data);
+            if (fileName == null) {
+                throw new Exception("图片保存失败");
             }
-
-            String suffix = "";
-            if("data:image/jpeg;".equalsIgnoreCase(dataPrix)){//data:image/jpeg;base64,base64编码的jpeg图片数据
-                suffix = ".jpg";
-            } else if("data:image/x-icon;".equalsIgnoreCase(dataPrix)){//data:image/x-icon;base64,base64编码的icon图片数据
-                suffix = ".ico";
-            } else if("data:image/gif;".equalsIgnoreCase(dataPrix)){//data:image/gif;base64,base64编码的gif图片数据
-                suffix = ".gif";
-            } else if("data:image/png;".equalsIgnoreCase(dataPrix)){//data:image/png;base64,base64编码的png图片数据
-                suffix = ".png";
-            }else{
-                throw new Exception("上传图片格式不合法");
-            }
-            //因为BASE64Decoder的jar问题，此处使用spring框架提供的工具包
-            byte[] bs = Base64Utils.decodeFromString(data);
-
-            String fileName = UUID.randomUUID().toString().replaceAll("-", "") + suffix;
-            String path = fileFolder+fileName;
-
-            File file = new File(path);
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bs);
-            fos.close();
-
             UserData userData = userDataService.getUserDataByUserId(userId);
             String oldPortrait = userData.getDataPortrait();
             if (oldPortrait != null){
-                File deleteFile = new File(fileFolder+oldPortrait);
+                File deleteFile = new File(fcsserviceUtil.IMAGEPATH +oldPortrait);
                 if (deleteFile.isFile() && deleteFile.exists()) {
                     deleteFile.delete();
                 }
@@ -120,6 +87,7 @@ public class UserDataController {
             result.setCode(Result.SUCCESS);
             result.setMsg("上传成功");
         }catch (Exception e) {
+            e.printStackTrace();
             result.setCode(Result.FAIL);
             result.setMsg("上传失败,"+e.getMessage());
         }

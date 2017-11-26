@@ -27,8 +27,6 @@ public class AccountController {
     @Autowired
     DictdataService dictdataService;
     @Autowired
-    TagService tagService;
-    @Autowired
     UserDataService userDataService;
     @Autowired
     CodeService codeService;
@@ -86,20 +84,9 @@ public class AccountController {
                         @RequestParam("type") int user_type){
         Result result = new Result();
 
-        UserAccount userAccount = new UserAccount();
-        String user_id = UUID.randomUUID().toString().replaceAll("-", "");
-        if (user_id!=null && user_account!=null &&
-                user_password!=null && mail!=null &&
-                user_type==2){
-            userAccount.setUserId(user_id);
-            userAccount.setUserAccount(user_account);
-            userAccount.setUserPassword(user_password);
-            userAccount.setUserType(user_type);
-            userAccount.setUserRegtime(new Date());
-            userAccount.setUserStatus(0);
+        boolean register = accountService.addUserAccount(user_account,user_password,mail,user_type,"null");
 
-            accountService.addUserAccount(userAccount);
-            userDataService.addUserData(user_id,mail);
+        if (register){
             result.setCode(Result.SUCCESS);
             result.setMsg("注册用户成功");
         }else {
@@ -120,30 +107,9 @@ public class AccountController {
                         @RequestParam("tag") String tag){
         Result result = new Result();
 
-        UserAccount userAccount = new UserAccount();
-        String user_id = UUID.randomUUID().toString().replaceAll("-", "");
-        if (user_id!=null && user_account!=null &&
-                user_password!=null && mail!=null &&
-                user_type==1 && tag!=null){
-            //设计师资料
-            userAccount.setUserId(user_id);
-            userAccount.setUserAccount(user_account);
-            userAccount.setUserPassword(user_password);
-            userAccount.setUserType(user_type);
-            userAccount.setUserRegtime(new Date());
-            userAccount.setUserStatus(0);
-            accountService.addUserAccount(userAccount);
-            userDataService.addUserData(user_id,mail);
+        boolean register = accountService.addUserAccount(user_account,user_password,mail,user_type,tag);
 
-            //设计标签
-            tag = tag.substring(1,tag.length());
-            String tagStrArray[] = tag.split(";");
-            for (int i=0;i<tagStrArray.length;i++){
-                int tagId = dictdataService.getIdByValue(tagStrArray[i]);
-                if (tagId != -1)
-                    tagService.addTag(user_id,tagId);
-            }
-
+        if (register){
             result.setCode(Result.SUCCESS);
             result.setMsg("注册设计师成功");
         }else{

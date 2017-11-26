@@ -22,9 +22,11 @@ public interface WorkMapper {
 
     List<Work> selectOrderByFabulous(int page, int number);
 
+    List<Work> selectWorkListByAlbumId(String albumId);
+
     int selectByDesignerId(String designerId);
 
-    int selectByAlbumId(String albumId);
+    int selectWorkNumberByAlbumId(String albumId);
 
     int updateByPrimaryKeySelective(Work record);
 

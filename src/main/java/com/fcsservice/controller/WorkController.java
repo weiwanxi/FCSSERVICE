@@ -1,5 +1,6 @@
 package com.fcsservice.controller;
 
+import com.fcsservice.service.AlbumService;
 import com.fcsservice.service.WorkService;
 import com.fcsservice.utils.FcsserviceUtil;
 import com.fcsservice.utils.Result;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class WorkController {
     @Autowired
     WorkService workService;
+    @Autowired
+    AlbumService albumService;
 
     @RequestMapping(value = "/getWorkByComment",method = RequestMethod.POST)
     @ResponseBody
@@ -65,6 +68,59 @@ public class WorkController {
             result.setMsg("获取数据出错");
         }
 
+        return result;
+    }
+
+    @RequestMapping(value = "/getWorkById",method = RequestMethod.POST)
+    @ResponseBody
+    public Result getWorkById(@RequestParam("workId") String workId,
+                                 @RequestParam("userId") String userId){
+
+        return workService.getWorkById(userId,workId);
+    }
+
+    @RequestMapping(value = "/getWorkList",method = RequestMethod.POST)
+    @ResponseBody
+    public Result getWorkList(@RequestParam("albumId") String albumId){
+        Result result = new Result();
+
+        String albumName = albumService.getAlbum(albumId).get("albumName");
+        if (albumName != null){
+            result.setCode(Result.SUCCESS);
+            result.setObj(workService.getWorkListByAlbumId(albumId));
+            result.setObj1(albumName);
+            result.setMsg("获取作品列表成功");
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("该专辑不存在");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/addWork",method = RequestMethod.POST)
+    @ResponseBody
+    public Result addWork(@RequestParam("albumId") String albumId,
+                          @RequestParam("designerId") String designerId,
+                          @RequestParam("workName") String workName,
+                          @RequestParam("workColor") String workColor,
+                          @RequestParam("workType") String workType,
+                          @RequestParam("workComponent") String workComponent,
+                          @RequestParam("workStyle") String workStyle,
+                          @RequestParam("workModel") String workModel,
+                          @RequestParam("workIntro") String workIntro,
+                          @RequestParam("workImage") String[] workImageArray){
+        Result result = new Result();
+
+        boolean resultt = workService.addWork(albumId,designerId,workName,workColor,workType,workComponent,workStyle,workModel,workIntro,workImageArray);
+
+        if (resultt){
+            result.setCode(Result.SUCCESS);
+            result.setMsg("添加作品成功");
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("添加作品失败");
+        }
         return result;
     }
 }

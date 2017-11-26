@@ -8,7 +8,7 @@
     <result column="type_id" property="typeId" jdbcType="INTEGER" />
     <result column="style_id" property="styleId" jdbcType="INTEGER" />
     <result column="album_id" property="albumId" jdbcType="VARCHAR" />
-    <result column="fabric_id" property="fabricId" jdbcType="INTEGER" />
+    <result column="component_id" property="componentId" jdbcType="INTEGER" />
     <result column="model_id" property="modelId" jdbcType="INTEGER" />
     <result column="work_color" property="workColor" jdbcType="VARCHAR" />
     <result column="work_intro" property="workIntro" jdbcType="VARCHAR" />
@@ -19,14 +19,19 @@
     <result column="work_picture5" property="workPicture5" jdbcType="VARCHAR" />
     <result column="work_picture6" property="workPicture6" jdbcType="VARCHAR" />
     <result column="work_reltime" property="workReltime" jdbcType="TIMESTAMP" />
-    <result column="worl_fabulous" property="worlFabulous" jdbcType="INTEGER" />
     <result column="work_status" property="workStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    work_id, designer_id, work_name, type_id, style_id, album_id, fabric_id, model_id, 
+    work_id, designer_id, work_name, type_id, style_id, album_id, component_id, model_id, 
     work_color, work_intro, work_picture1, work_picture2, work_picture3, work_picture4, 
-    work_picture5, work_picture6, work_reltime, worl_fabulous, work_status
+    work_picture5, work_picture6, work_reltime, work_status
   </sql>
+  <select id="selectWorkListByAlbumId" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcsdesignwork
+    WHERE album_id = #{album_id,jdbcType=VARCHAR}
+  </select>
   <select id="selectOrderByFabulous" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
@@ -45,7 +50,7 @@
     ORDER BY b.number DESC
     LIMIT #{arg0},#{arg1}
   </select>
-  <select id="selectByAlbumId" resultType="java.lang.Integer">
+  <select id="selectWorkNumberByAlbumId" resultType="java.lang.Integer">
     SELECT COUNT(work_id) AS workNumber
     FROM fcsdesignwork
     WHERE album_id = #{album_id,jdbcType=VARCHAR}
@@ -84,17 +89,17 @@
   <insert id="insert" parameterType="com.fcsservice.model.pojo.Work" >
     insert into fcsdesignwork (work_id, designer_id, work_name, 
       type_id, style_id, album_id, 
-      fabric_id, model_id, work_color, 
+      component_id, model_id, work_color, 
       work_intro, work_picture1, work_picture2, 
       work_picture3, work_picture4, work_picture5, 
-      work_picture6, work_reltime, worl_fabulous, 
+      work_picture6, work_reltime,
       work_status)
     values (#{workId,jdbcType=VARCHAR}, #{designerId,jdbcType=VARCHAR}, #{workName,jdbcType=VARCHAR}, 
       #{typeId,jdbcType=INTEGER}, #{styleId,jdbcType=INTEGER}, #{albumId,jdbcType=VARCHAR}, 
-      #{fabricId,jdbcType=INTEGER}, #{modelId,jdbcType=INTEGER}, #{workColor,jdbcType=VARCHAR}, 
+      #{componentId,jdbcType=INTEGER}, #{modelId,jdbcType=INTEGER}, #{workColor,jdbcType=VARCHAR}, 
       #{workIntro,jdbcType=VARCHAR}, #{workPicture1,jdbcType=VARCHAR}, #{workPicture2,jdbcType=VARCHAR}, 
       #{workPicture3,jdbcType=VARCHAR}, #{workPicture4,jdbcType=VARCHAR}, #{workPicture5,jdbcType=VARCHAR}, 
-      #{workPicture6,jdbcType=VARCHAR}, #{workReltime,jdbcType=TIMESTAMP}, #{worlFabulous,jdbcType=INTEGER}, 
+      #{workPicture6,jdbcType=VARCHAR}, #{workReltime,jdbcType=TIMESTAMP},
       #{workStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Work" >
@@ -118,8 +123,8 @@
       <if test="albumId != null" >
         album_id,
       </if>
-      <if test="fabricId != null" >
-        fabric_id,
+      <if test="componentId != null" >
+        component_id,
       </if>
       <if test="modelId != null" >
         model_id,
@@ -151,9 +156,6 @@
       <if test="workReltime != null" >
         work_reltime,
       </if>
-      <if test="worlFabulous != null" >
-        worl_fabulous,
-      </if>
       <if test="workStatus != null" >
         work_status,
       </if>
@@ -177,8 +179,8 @@
       <if test="albumId != null" >
         #{albumId,jdbcType=VARCHAR},
       </if>
-      <if test="fabricId != null" >
-        #{fabricId,jdbcType=INTEGER},
+      <if test="componentId != null" >
+        #{componentId,jdbcType=INTEGER},
       </if>
       <if test="modelId != null" >
         #{modelId,jdbcType=INTEGER},
@@ -210,9 +212,6 @@
       <if test="workReltime != null" >
         #{workReltime,jdbcType=TIMESTAMP},
       </if>
-      <if test="worlFabulous != null" >
-        #{worlFabulous,jdbcType=INTEGER},
-      </if>
       <if test="workStatus != null" >
         #{workStatus,jdbcType=INTEGER},
       </if>
@@ -236,8 +235,8 @@
       <if test="albumId != null" >
         album_id = #{albumId,jdbcType=VARCHAR},
       </if>
-      <if test="fabricId != null" >
-        fabric_id = #{fabricId,jdbcType=INTEGER},
+      <if test="componentId != null" >
+        component_id = #{componentId,jdbcType=INTEGER},
       </if>
       <if test="modelId != null" >
         model_id = #{modelId,jdbcType=INTEGER},
@@ -269,9 +268,6 @@
       <if test="workReltime != null" >
         work_reltime = #{workReltime,jdbcType=TIMESTAMP},
       </if>
-      <if test="worlFabulous != null" >
-        worl_fabulous = #{worlFabulous,jdbcType=INTEGER},
-      </if>
       <if test="workStatus != null" >
         work_status = #{workStatus,jdbcType=INTEGER},
       </if>
@@ -285,7 +281,7 @@
       type_id = #{typeId,jdbcType=INTEGER},
       style_id = #{styleId,jdbcType=INTEGER},
       album_id = #{albumId,jdbcType=VARCHAR},
-      fabric_id = #{fabricId,jdbcType=INTEGER},
+      component_id = #{componentId,jdbcType=INTEGER},
       model_id = #{modelId,jdbcType=INTEGER},
       work_color = #{workColor,jdbcType=VARCHAR},
       work_intro = #{workIntro,jdbcType=VARCHAR},
@@ -296,7 +292,6 @@
       work_picture5 = #{workPicture5,jdbcType=VARCHAR},
       work_picture6 = #{workPicture6,jdbcType=VARCHAR},
       work_reltime = #{workReltime,jdbcType=TIMESTAMP},
-      worl_fabulous = #{worlFabulous,jdbcType=INTEGER},
       work_status = #{workStatus,jdbcType=INTEGER}
     where work_id = #{workId,jdbcType=VARCHAR}
   </update>

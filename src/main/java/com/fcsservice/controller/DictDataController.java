@@ -1,11 +1,14 @@
 package com.fcsservice.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.fcsservice.model.pojo.CostumeType;
 import com.fcsservice.model.pojo.Dictcate;
 import com.fcsservice.model.pojo.Dictdata;
+import com.fcsservice.service.ComponentService;
+import com.fcsservice.service.CostumeTypeService;
 import com.fcsservice.service.DictcateService;
 import com.fcsservice.service.DictdataService;
-import com.fcsservice.utils.FcsserviceUtil;
-import com.fcsservice.utils.Result;
+import com.fcsservice.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +34,10 @@ public class DictDataController {
     DictcateService dictcateService;
     @Autowired
     DictdataService dictdataService;
+    @Autowired
+    CostumeTypeService costumeTypeService;
+    @Autowired
+    ComponentService componentService;
 
     @RequestMapping(value="/getTagList",method = {RequestMethod.POST})
     @ResponseBody
@@ -81,6 +90,82 @@ public class DictDataController {
             result.setCode(Result.FAIL);
             result.setMsg("获取标签列表失败");
         }
+        return result;
+    }
+
+    @RequestMapping(value="/getCostumeType",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result getWorkType(){
+        Result result = new Result();
+
+        List<Node1> node1List = costumeTypeService.getCostumeTypeData();
+
+        if (node1List != null && node1List.size()>0){
+            Object obj = JSON.toJSON(node1List);
+            result.setCode(Result.SUCCESS);
+            result.setObj(obj);
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("获取数据失败");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value="/getComponent",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result getComponent(){
+        Result result = new Result();
+
+        List<Node2> node1List = componentService.getComponentData();
+
+        if (node1List != null && node1List.size()>0){
+            Object obj = JSON.toJSON(node1List);
+            result.setCode(Result.SUCCESS);
+            result.setObj(obj);
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("获取数据失败");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value="/getStyle",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result getWorkStyle(){
+        Result result = new Result();
+
+        List<Node3> node1List = dictdataService.getStyleData();
+
+        if (node1List != null && node1List.size()>0){
+            Object obj = JSON.toJSON(node1List);
+            result.setCode(Result.SUCCESS);
+            result.setObj(obj);
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("获取数据失败");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value="/getModel",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result getModel(){
+        Result result = new Result();
+
+        List<Node3> node1List = dictdataService.getModelData();
+
+        if (node1List != null && node1List.size()>0){
+            Object obj = JSON.toJSON(node1List);
+            result.setCode(Result.SUCCESS);
+            result.setObj(obj);
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("获取数据失败");
+        }
+
         return result;
     }
 }

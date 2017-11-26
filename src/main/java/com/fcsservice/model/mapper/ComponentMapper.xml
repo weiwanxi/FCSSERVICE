@@ -10,6 +10,18 @@
   <sql id="Base_Column_List" >
     component_id, component_supcategory, component_name, component_level
   </sql>
+  <select id="selectByLevel" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fcscomponent
+    where component_level = #{componentLevel,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from fcscomponent
+    where component_supcategory = #{pId,jdbcType=INTEGER}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

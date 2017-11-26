@@ -15,6 +15,8 @@ public interface AlbumMapper {
 
     List<Album> selectByUserId(String user_id);
 
+    Album selectByName(String userId,String albumName);
+
     int updateByPrimaryKeySelective(Album record);
 
     int updateByPrimaryKey(Album record);

@@ -42,16 +42,6 @@ public class UserDataService {
             return null;
     }
 
-    public void addUserData(String userId,String mail){
-        String data_id = UUID.randomUUID().toString().replaceAll("-", "");
-        UserData userData = new UserData();
-        userData.setDataId(data_id);
-        userData.setUserId(userId);
-        userData.setDataMail(mail);
-
-        userDataDao.addUserData(userData);
-    }
-
     public UserData getUserDataByUserId(String userId){
         return userDataDao.getUserDataByUserId(userId);
     }

@@ -2,6 +2,8 @@ package com.fcsservice.model.dao;
 
 import com.fcsservice.model.pojo.CostumeType;
 
+import java.util.List;
+
 public interface CostumeTypeMapper {
     int deleteByPrimaryKey(Integer typeId);
 
@@ -10,6 +12,10 @@ public interface CostumeTypeMapper {
     int insertSelective(CostumeType record);
 
     CostumeType selectByPrimaryKey(Integer typeId);
+
+    List<CostumeType> selectByLevel(Integer typeLevel);
+
+    List<CostumeType> selectBypId(Integer pId);
 
     int updateByPrimaryKeySelective(CostumeType record);
 

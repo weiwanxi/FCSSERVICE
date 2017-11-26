@@ -42,7 +42,7 @@ public class DesignerUtil {
     }
 
     public List<String> getRepetition(List<String> list1,
-                                              List<String> list2) {
+                                      List<String> list2) {
         List<String> result = new ArrayList<String>();
         for (String designerId : list2) {//遍历list1
             if (list1.contains(designerId)) {//如果存在这个数
@@ -53,7 +53,7 @@ public class DesignerUtil {
     }
 
     public List<DesignerForm> getDesignerNotRepetition(List<DesignerForm> list1,
-                                      List<DesignerForm> list2) {
+                                                       List<DesignerForm> list2) {
         List<DesignerForm> result = new ArrayList<DesignerForm>();
         DesignerForm form1,form2;
 

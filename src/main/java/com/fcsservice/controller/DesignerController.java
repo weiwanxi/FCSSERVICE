@@ -45,7 +45,7 @@ public class DesignerController {
     @RequestMapping(value = "/getDesignerListByTag",method = RequestMethod.POST)
     @ResponseBody
     public Result getDesignerListByTag(@RequestParam("userId") String userId,
-                                  @RequestParam("tag") String tag){
+                                       @RequestParam("tag") String tag){
         Result result = new Result();
 
         //设计标签

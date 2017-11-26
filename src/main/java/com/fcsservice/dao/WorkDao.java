@@ -17,6 +17,10 @@ public class WorkDao {
     @Autowired
     WorkMapper workMapper;
 
+    public void addWork(Work work){
+        workMapper.insertSelective(work);
+    }
+
     public List<DesignerForm> getDesignerWorkNumber(){
         return workMapper.selectDesignerWorkNumber();
     }
@@ -30,7 +34,7 @@ public class WorkDao {
     }
 
     public int getWorkNumberByAlbumId(String albumId){
-        return workMapper.selectByAlbumId(albumId);
+        return workMapper.selectWorkNumberByAlbumId(albumId);
     }
 
     public List<Work> getWorkOrderByComment(int page, int number){
@@ -39,5 +43,13 @@ public class WorkDao {
 
     public List<Work> getWorkOrderByFabulous(int page, int number){
         return workMapper.selectOrderByFabulous(page,number);
+    }
+
+    public List<Work> getWorkListByAlbumId(String albumId){
+        return workMapper.selectWorkListByAlbumId(albumId);
+    }
+
+    public Work getWorkById(String workId){
+        return workMapper.selectByPrimaryKey(workId);
     }
 }
