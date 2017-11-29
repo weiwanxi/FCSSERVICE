@@ -24,6 +24,8 @@ public interface WorkMapper {
 
     List<Work> selectWorkListByAlbumId(String albumId);
 
+    int deleteByAlbumId(String albumId);
+
     int selectByDesignerId(String designerId);
 
     int selectWorkNumberByAlbumId(String albumId);

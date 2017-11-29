@@ -10,7 +10,11 @@ public class Purchase implements Serializable {
 
     private String workId;
 
+    private String workName;
+
     private String sellerId;
+
+    private String sellerName;
 
     private String purchaseRequest;
 
@@ -18,7 +22,11 @@ public class Purchase implements Serializable {
 
     private String purchasePhone;
 
+    private String purchaseMail;
+
     private Date purchaseTime;
+
+    private Integer readStatus;
 
     private Integer purchaseStatus;
 
@@ -48,12 +56,28 @@ public class Purchase implements Serializable {
         this.workId = workId;
     }
 
+    public String getWorkName() {
+        return workName;
+    }
+
+    public void setWorkName(String workName) {
+        this.workName = workName;
+    }
+
     public String getSellerId() {
         return sellerId;
     }
 
     public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
 
     public String getPurchaseRequest() {
@@ -80,12 +104,28 @@ public class Purchase implements Serializable {
         this.purchasePhone = purchasePhone;
     }
 
+    public String getPurchaseMail() {
+        return purchaseMail;
+    }
+
+    public void setPurchaseMail(String purchaseMail) {
+        this.purchaseMail = purchaseMail;
+    }
+
     public Date getPurchaseTime() {
         return purchaseTime;
     }
 
     public void setPurchaseTime(Date purchaseTime) {
         this.purchaseTime = purchaseTime;
+    }
+
+    public Integer getReadStatus() {
+        return readStatus;
+    }
+
+    public void setReadStatus(Integer readStatus) {
+        this.readStatus = readStatus;
     }
 
     public Integer getPurchaseStatus() {

@@ -168,4 +168,37 @@ public class DictDataController {
 
         return result;
     }
+
+    @RequestMapping(value="/getWorkPickerData",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result getWorkPickerData(){
+        Result result = new Result();
+
+        List<Node1> workTypeList = costumeTypeService.getCostumeTypeData();
+        List<Node2> componentList = componentService.getComponentData();
+        List<Node3> styleList = dictdataService.getStyleData();
+        List<Node3> modelList = dictdataService.getModelData();
+
+        if (workTypeList != null && workTypeList.size()>0 &&
+                componentList != null && componentList.size()>0 &&
+                styleList != null && styleList.size()>0 &&
+                modelList != null && modelList.size()>0){
+
+            Object obj = JSON.toJSON(workTypeList);
+            Object obj1 = JSON.toJSON(componentList);
+            Object obj2 = JSON.toJSON(styleList);
+            Object obj3 = JSON.toJSON(modelList);
+
+            result.setCode(Result.SUCCESS);
+            result.setObj(obj);
+            result.setObj1(obj1);
+            result.setObj2(obj2);
+            result.setObj3(obj3);
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("获取数据失败");
+        }
+
+        return result;
+    }
 }

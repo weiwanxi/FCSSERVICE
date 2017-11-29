@@ -37,6 +37,10 @@ public class Result implements Serializable {
 	 * 额外响应数据2
 	 */
 	private Object obj2;
+	/**
+	 * 额外响应数据3
+	 */
+	private Object obj3;
 
 	public Result() {
 		super();
@@ -102,5 +106,13 @@ public class Result implements Serializable {
 
 	public void setObj2(Object obj2) {
 		this.obj2 = obj2;
+	}
+
+	public Object getObj3() {
+		return obj3;
+	}
+
+	public void setObj3(Object obj3) {
+		this.obj3 = obj3;
 	}
 }

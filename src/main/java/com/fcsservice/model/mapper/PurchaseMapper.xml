@@ -5,17 +5,79 @@
     <id column="purchase_id" property="purchaseId" jdbcType="VARCHAR" />
     <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />
     <result column="work_id" property="workId" jdbcType="VARCHAR" />
+    <result column="work_name" property="workName" jdbcType="VARCHAR" />
     <result column="seller_id" property="sellerId" jdbcType="VARCHAR" />
+    <result column="seller_name" property="sellerName" jdbcType="VARCHAR" />
     <result column="purchase_request" property="purchaseRequest" jdbcType="VARCHAR" />
     <result column="purchase_name" property="purchaseName" jdbcType="VARCHAR" />
     <result column="purchase_phone" property="purchasePhone" jdbcType="VARCHAR" />
+    <result column="purchase_mail" property="purchaseMail" jdbcType="VARCHAR" />
     <result column="purchase_time" property="purchaseTime" jdbcType="TIMESTAMP" />
+    <result column="read_status" property="readStatus" jdbcType="INTEGER" />
     <result column="purchase_status" property="purchaseStatus" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    purchase_id, buyer_id, work_id, seller_id, purchase_request, purchase_name, purchase_phone, 
-    purchase_time, purchase_status
+    purchase_id, buyer_id, work_id, work_name, seller_id, seller_name, purchase_request, 
+    purchase_name, purchase_phone, purchase_mail, purchase_time, read_status, purchase_status
   </sql>
+  <select id="selectSellerUnRead" resultType="java.lang.Integer" parameterType="java.lang.String">
+    select count(purchase_id)
+    from fcspurchase
+    where seller_id = #{sellerId,jdbcType=VARCHAR}
+    AND read_status = 0
+    AND purchase_status != 1
+  </select>
+  <update id="deleteASellerPurchase" parameterType="com.fcsservice.model.pojo.Purchase" >
+    update fcspurchase
+    <set >
+      purchase_status = 1
+    </set>
+    where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+  </update>
+  <update id="deleteABuyerPurchase" parameterType="com.fcsservice.model.pojo.Purchase" >
+    update fcspurchase
+    <set >
+      purchase_status = 0
+    </set>
+    where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectSellerSellDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcspurchase
+    where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+    AND purchase_status != 1
+  </select>
+  <select id="selectBuyerPurchaseDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcspurchase
+    where purchase_id = #{purchaseId,jdbcType=VARCHAR}
+    AND purchase_status != 0
+  </select>
+  <select id="selectUserSell" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcspurchase
+    where seller_id = #{sellerId,jdbcType=VARCHAR}
+    AND purchase_status != 1
+    ORDER BY purchase_time DESC
+  </select>
+  <select id="selectUserBuy" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcspurchase
+    where buyer_id = #{buyerId,jdbcType=VARCHAR}
+    AND purchase_status != 0
+    ORDER BY purchase_time DESC
+  </select>
+  <select id="selectByUW" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcspurchase
+    where buyer_id = #{arg0}
+    AND work_id = #{arg1}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
@@ -28,13 +90,15 @@
   </delete>
   <insert id="insert" parameterType="com.fcsservice.model.pojo.Purchase" >
     insert into fcspurchase (purchase_id, buyer_id, work_id, 
-      seller_id, purchase_request, purchase_name, 
-      purchase_phone, purchase_time, purchase_status
-      )
+      work_name, seller_id, seller_name, 
+      purchase_request, purchase_name, purchase_phone, 
+      purchase_mail, purchase_time, read_status, 
+      purchase_status)
     values (#{purchaseId,jdbcType=VARCHAR}, #{buyerId,jdbcType=VARCHAR}, #{workId,jdbcType=VARCHAR}, 
-      #{sellerId,jdbcType=VARCHAR}, #{purchaseRequest,jdbcType=VARCHAR}, #{purchaseName,jdbcType=VARCHAR}, 
-      #{purchasePhone,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP}, #{purchaseStatus,jdbcType=INTEGER}
-      )
+      #{workName,jdbcType=VARCHAR}, #{sellerId,jdbcType=VARCHAR}, #{sellerName,jdbcType=VARCHAR}, 
+      #{purchaseRequest,jdbcType=VARCHAR}, #{purchaseName,jdbcType=VARCHAR}, #{purchasePhone,jdbcType=VARCHAR}, 
+      #{purchaseMail,jdbcType=VARCHAR}, #{purchaseTime,jdbcType=TIMESTAMP}, #{readStatus,jdbcType=INTEGER}, 
+      #{purchaseStatus,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Purchase" >
     insert into fcspurchase
@@ -48,8 +112,14 @@
       <if test="workId != null" >
         work_id,
       </if>
+      <if test="workName != null" >
+        work_name,
+      </if>
       <if test="sellerId != null" >
         seller_id,
+      </if>
+      <if test="sellerName != null" >
+        seller_name,
       </if>
       <if test="purchaseRequest != null" >
         purchase_request,
@@ -60,8 +130,14 @@
       <if test="purchasePhone != null" >
         purchase_phone,
       </if>
+      <if test="purchaseMail != null" >
+        purchase_mail,
+      </if>
       <if test="purchaseTime != null" >
         purchase_time,
+      </if>
+      <if test="readStatus != null" >
+        read_status,
       </if>
       <if test="purchaseStatus != null" >
         purchase_status,
@@ -77,8 +153,14 @@
       <if test="workId != null" >
         #{workId,jdbcType=VARCHAR},
       </if>
+      <if test="workName != null" >
+        #{workName,jdbcType=VARCHAR},
+      </if>
       <if test="sellerId != null" >
         #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null" >
+        #{sellerName,jdbcType=VARCHAR},
       </if>
       <if test="purchaseRequest != null" >
         #{purchaseRequest,jdbcType=VARCHAR},
@@ -89,8 +171,14 @@
       <if test="purchasePhone != null" >
         #{purchasePhone,jdbcType=VARCHAR},
       </if>
+      <if test="purchaseMail != null" >
+        #{purchaseMail,jdbcType=VARCHAR},
+      </if>
       <if test="purchaseTime != null" >
         #{purchaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readStatus != null" >
+        #{readStatus,jdbcType=INTEGER},
       </if>
       <if test="purchaseStatus != null" >
         #{purchaseStatus,jdbcType=INTEGER},
@@ -106,8 +194,14 @@
       <if test="workId != null" >
         work_id = #{workId,jdbcType=VARCHAR},
       </if>
+      <if test="workName != null" >
+        work_name = #{workName,jdbcType=VARCHAR},
+      </if>
       <if test="sellerId != null" >
         seller_id = #{sellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sellerName != null" >
+        seller_name = #{sellerName,jdbcType=VARCHAR},
       </if>
       <if test="purchaseRequest != null" >
         purchase_request = #{purchaseRequest,jdbcType=VARCHAR},
@@ -118,8 +212,14 @@
       <if test="purchasePhone != null" >
         purchase_phone = #{purchasePhone,jdbcType=VARCHAR},
       </if>
+      <if test="purchaseMail != null" >
+        purchase_mail = #{purchaseMail,jdbcType=VARCHAR},
+      </if>
       <if test="purchaseTime != null" >
         purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="readStatus != null" >
+        read_status = #{readStatus,jdbcType=INTEGER},
       </if>
       <if test="purchaseStatus != null" >
         purchase_status = #{purchaseStatus,jdbcType=INTEGER},
@@ -131,11 +231,15 @@
     update fcspurchase
     set buyer_id = #{buyerId,jdbcType=VARCHAR},
       work_id = #{workId,jdbcType=VARCHAR},
+      work_name = #{workName,jdbcType=VARCHAR},
       seller_id = #{sellerId,jdbcType=VARCHAR},
+      seller_name = #{sellerName,jdbcType=VARCHAR},
       purchase_request = #{purchaseRequest,jdbcType=VARCHAR},
       purchase_name = #{purchaseName,jdbcType=VARCHAR},
       purchase_phone = #{purchasePhone,jdbcType=VARCHAR},
+      purchase_mail = #{purchaseMail,jdbcType=VARCHAR},
       purchase_time = #{purchaseTime,jdbcType=TIMESTAMP},
+      read_status = #{readStatus,jdbcType=INTEGER},
       purchase_status = #{purchaseStatus,jdbcType=INTEGER}
     where purchase_id = #{purchaseId,jdbcType=VARCHAR}
   </update>

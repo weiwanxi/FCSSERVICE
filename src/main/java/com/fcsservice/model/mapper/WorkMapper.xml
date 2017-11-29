@@ -26,6 +26,10 @@
     work_color, work_intro, work_picture1, work_picture2, work_picture3, work_picture4, 
     work_picture5, work_picture6, work_reltime, work_status
   </sql>
+  <delete id="deleteByAlbumId" parameterType="java.lang.String" >
+    delete from fcsdesignwork
+    where album_id = #{albumId,jdbcType=VARCHAR}
+  </delete>
   <select id="selectWorkListByAlbumId" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>

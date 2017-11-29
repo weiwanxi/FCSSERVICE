@@ -1,15 +1,14 @@
 package com.fcsservice.service;
 
 import com.fcsservice.dao.*;
-import com.fcsservice.model.pojo.Cloth;
-import com.fcsservice.model.pojo.Costume;
-import com.fcsservice.model.pojo.Work;
+import com.fcsservice.model.pojo.*;
 import com.fcsservice.utils.FcsserviceUtil;
 import com.fcsservice.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -45,6 +44,82 @@ public class WorkService {
     DictdataDao dictdataDao;
     @Autowired
     AlbumDao albumDao;
+
+    public boolean deleteWork(String workId){
+        Work work = workDao.getWorkById(workId);
+        if (work != null){
+            workDao.deleteWork(workId);
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean updateWork(String workId,String albumId,String designerId,String workName,String workColor,String workType,
+                           String workComponent,String workStyle,String workModel,String workIntro,String[] workImageArray){
+        Work work = workDao.getWorkById(workId);
+        if (work != null){
+            FcsserviceUtil fcsserviceUtil = new FcsserviceUtil();
+            String[] workImageFileName = new String[6];
+            work.setAlbumId(albumId);
+            work.setDesignerId(designerId);
+            work.setWorkName(workName);
+            work.setTypeId(Integer.parseInt(workType));
+            work.setComponentId(Integer.parseInt(workComponent));
+            work.setStyleId(Integer.parseInt(workStyle));
+            work.setModelId(Integer.parseInt(workModel));
+            work.setWorkColor(workColor);
+            work.setWorkIntro(workIntro);
+            work.setWorkReltime(new Date());
+            work.setWorkStatus(0);
+
+            //删除原有作品图片
+            File pictureFile1 = new File(fcsserviceUtil.IMAGE1PATH +work.getWorkPicture1());
+            File pictureFile2 = new File(fcsserviceUtil.IMAGE1PATH +work.getWorkPicture2());
+            File pictureFile3 = new File(fcsserviceUtil.IMAGE1PATH +work.getWorkPicture3());
+            File pictureFile4 = new File(fcsserviceUtil.IMAGE1PATH +work.getWorkPicture4());
+            File pictureFile5 = new File(fcsserviceUtil.IMAGE1PATH +work.getWorkPicture5());
+            File pictureFile6 = new File(fcsserviceUtil.IMAGE1PATH +work.getWorkPicture6());
+            if (pictureFile1.isFile() && pictureFile1.exists()) {
+                pictureFile1.delete();
+            }
+            if (pictureFile2.isFile() && pictureFile2.exists()) {
+                pictureFile2.delete();
+            }
+            if (pictureFile3.isFile() && pictureFile3.exists()) {
+                pictureFile3.delete();
+            }
+            if (pictureFile4.isFile() && pictureFile4.exists()) {
+                pictureFile4.delete();
+            }
+            if (pictureFile5.isFile() && pictureFile5.exists()) {
+                pictureFile5.delete();
+            }
+            if (pictureFile6.isFile() && pictureFile6.exists()) {
+                pictureFile6.delete();
+            }
+            //添加新的图片
+            for (int i = 0; i < workImageArray.length; i++) {
+                String fileName = fcsserviceUtil.saveImage(fcsserviceUtil.IMAGE1PATH,workImageArray[i]);
+                if (fileName == null){
+                    return false;
+                }
+                workImageFileName[i] = fileName;
+            }
+            work.setWorkPicture1(workImageFileName[0]);
+            work.setWorkPicture2(workImageFileName[1]);
+            work.setWorkPicture3(workImageFileName[2]);
+            work.setWorkPicture4(workImageFileName[3]);
+            work.setWorkPicture5(workImageFileName[4]);
+            work.setWorkPicture6(workImageFileName[5]);
+
+            workDao.updateWork(work);
+        }else {
+            return false;
+        }
+
+        return true;
+    }
 
     public boolean addWork(String albumId,String designerId,String workName,String workColor,String workType,
                            String workComponent,String workStyle,String workModel,String workIntro,String[] workImageArray){
@@ -175,6 +250,77 @@ public class WorkService {
         }
 
         return result;
+    }
+
+    public Map<String,String> getWorkToUpdate(String workId){
+        Map<String,String> map = new HashMap<String, String>();
+        Work work = workDao.getWorkById(workId);
+        if (work != null){
+            map.put("workName",work.getWorkName());
+            map.put("workColor",work.getWorkColor());
+            map.put("workIntro",work.getWorkIntro());
+
+            map.put("workPicture1",work.getWorkPicture1());
+            map.put("workPicture2",work.getWorkPicture2());
+            map.put("workPicture3",work.getWorkPicture3());
+            map.put("workPicture4",work.getWorkPicture4());
+            map.put("workPicture5",work.getWorkPicture5());
+            map.put("workPicture6",work.getWorkPicture6());
+
+            //作品分类
+            CostumeType costumeType = costumeTypeDao.getCostumeTypeById(work.getTypeId());
+            if (costumeType != null){
+                map.put("costumeTypeMal",costumeType.getTypeName());
+                map.put("costumeTypeMalValue",costumeType.getTypeId()+"");
+                costumeType = costumeTypeDao.getCostumeTypeById(costumeType.getTypeSupcategpry());
+                if (costumeType != null){
+                    map.put("costumeTypeMid",costumeType.getTypeName());
+                    costumeType = costumeTypeDao.getCostumeTypeById(costumeType.getTypeSupcategpry());
+                    if (costumeType != null){
+                        map.put("costumeTypeBig",costumeType.getTypeName());
+                    }else {
+                        return null;
+                    }
+                }else {
+                    return null;
+                }
+            }else {
+                return null;
+            }
+            //作品面料
+            Component component = componentDao.getComponentById(work.getComponentId());
+            if (component != null){
+                map.put("componentMal",component.getComponentName());
+                map.put("componentMalValue",costumeType.getTypeId()+"");
+                component = componentDao.getComponentById(component.getComponentSupcategory());
+                if (component != null){
+                    map.put("componentBig",component.getComponentName());
+                }else {
+                    return null;
+                }
+            }else {
+                return null;
+            }
+            //作品风格
+            Dictdata dictdata = dictdataDao.getDictDataById(work.getStyleId());
+            if (dictdata!=null){
+                map.put("workStyle",dictdata.getDictionarydataValue());
+                map.put("workStyleValue",dictdata.getDactionarydataId()+"");
+            }else {
+                return null;
+            }
+            //作品款式
+            dictdata = dictdataDao.getDictDataById(work.getModelId());
+            if (dictdata!=null){
+                map.put("workModel",dictdata.getDictionarydataValue());
+                map.put("workModelValue",dictdata.getDactionarydataId()+"");
+            }else {
+                return null;
+            }
+        }else {
+            return null;
+        }
+        return map;
     }
 
     private Map<String,String[]> getMap(List<Work> workList,int number){

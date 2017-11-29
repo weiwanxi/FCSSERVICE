@@ -79,6 +79,23 @@ public class WorkController {
         return workService.getWorkById(userId,workId);
     }
 
+    @RequestMapping(value = "/getWorkToUpdate",method = RequestMethod.POST)
+    @ResponseBody
+    public Result getWorkToUpdate(@RequestParam("workId") String workId){
+        Result result = new Result();
+
+        Map<String,String> map = workService.getWorkToUpdate(workId);
+        if (map != null){
+            result.setCode(Result.SUCCESS);
+            result.setObj(map);
+            result.setMsg("获取作品信息成功");
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("获取作品信息出错");
+        }
+        return result;
+    }
+
     @RequestMapping(value = "/getWorkList",method = RequestMethod.POST)
     @ResponseBody
     public Result getWorkList(@RequestParam("albumId") String albumId){
@@ -123,4 +140,49 @@ public class WorkController {
         }
         return result;
     }
+
+    @RequestMapping(value = "/deleteWork",method = RequestMethod.POST)
+    @ResponseBody
+    public Result deleteWork(@RequestParam("workId") String workId){
+        Result result = new Result();
+
+        boolean resultt = workService.deleteWork(workId);
+        if (resultt){
+            result.setCode(Result.SUCCESS);
+            result.setMsg("删除作品成功");
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("该作品不存在");
+        }
+
+        return result;
+    }
+
+    @RequestMapping(value = "/updateWork",method = RequestMethod.POST)
+    @ResponseBody
+    public Result updateWork(@RequestParam("workId") String workId,
+                          @RequestParam("albumId") String albumId,
+                          @RequestParam("designerId") String designerId,
+                          @RequestParam("workName") String workName,
+                          @RequestParam("workColor") String workColor,
+                          @RequestParam("workType") String workType,
+                          @RequestParam("workComponent") String workComponent,
+                          @RequestParam("workStyle") String workStyle,
+                          @RequestParam("workModel") String workModel,
+                          @RequestParam("workIntro") String workIntro,
+                          @RequestParam("workImage") String[] workImageArray){
+        Result result = new Result();
+
+        boolean resultt = workService.updateWork(workId,albumId,designerId,workName,workColor,workType,workComponent,workStyle,workModel,workIntro,workImageArray);
+
+        if (resultt){
+            result.setCode(Result.SUCCESS);
+            result.setMsg("更新作品信息成功");
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("更新作品信息失败");
+        }
+        return result;
+    }
+
 }

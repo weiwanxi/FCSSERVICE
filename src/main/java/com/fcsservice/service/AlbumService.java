@@ -117,6 +117,7 @@ public class AlbumService {
 
         if (album != null){
             albumDao.deleteAlbum(albumId);
+            workDao.deleteByAlbumId(albumId);
             return true;
         }else {
             return false;

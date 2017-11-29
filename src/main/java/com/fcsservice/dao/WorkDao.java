@@ -16,9 +16,16 @@ import java.util.List;
 public class WorkDao {
     @Autowired
     WorkMapper workMapper;
+    public void updateWork(Work work){
+        workMapper.updateByPrimaryKeySelective(work);
+    }
 
     public void addWork(Work work){
         workMapper.insertSelective(work);
+    }
+
+    public void deleteWork(String workId){
+        workMapper.deleteByPrimaryKey(workId);
     }
 
     public List<DesignerForm> getDesignerWorkNumber(){
@@ -47,6 +54,10 @@ public class WorkDao {
 
     public List<Work> getWorkListByAlbumId(String albumId){
         return workMapper.selectWorkListByAlbumId(albumId);
+    }
+
+    public void deleteByAlbumId(String albumId){
+        workMapper.deleteByAlbumId(albumId);
     }
 
     public Work getWorkById(String workId){

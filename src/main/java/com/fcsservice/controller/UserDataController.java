@@ -154,4 +154,29 @@ public class UserDataController {
 
         return result;
     }
+
+    @RequestMapping(value="/getUserDataToPurchase",method = {RequestMethod.POST})
+    @ResponseBody
+    public Result getUserDataToPurchase(@RequestParam("userId") String userId){
+        Result result = new Result();
+
+        UserData userData = userDataService.getUserDataByUserId(userId);
+        UserAccount userAccount = accountService.getAccountById(userId);
+        if (userData != null && userAccount != null){
+            Map<String,String> map = new HashMap<String, String>();
+            map.put("userName",userAccount.getUserAccount());
+            map.put("userPhone",userData.getDataPhone());
+            map.put("userMail",userData.getDataMail());
+
+            result.setCode(Result.SUCCESS);
+            result.setObj(map);
+            result.setMsg("获取资料成功");
+        }else {
+            result.setCode(Result.FAIL);
+            result.setMsg("该用户不存在");
+        }
+
+        return result;
+    }
+
 }
