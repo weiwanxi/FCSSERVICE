@@ -4,14 +4,34 @@
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Comment" >
     <id column="comment_id" property="commentId" jdbcType="VARCHAR" />
     <result column="commentary_id" property="commentaryId" jdbcType="VARCHAR" />
+    <result column="commenttary_type" property="commenttaryType" jdbcType="INTEGER" />
     <result column="comment_content" property="commentContent" jdbcType="VARCHAR" />
     <result column="commentator_id" property="commentatorId" jdbcType="VARCHAR" />
-    <result column="comment_fabulous" property="commentFabulous" jdbcType="INTEGER" />
     <result column="comment_reltime" property="commentReltime" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Base_Column_List" >
-    comment_id, commentary_id, comment_content, commentator_id, comment_fabulous, comment_reltime
+    comment_id, commentary_id, commenttary_type, comment_content, commentator_id, comment_reltime
   </sql>
+  <delete id="deleteAllCommentByInfoId" parameterType="java.lang.String" >
+    delete from fcscomment
+    where commentary_id = #{informationId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteAllCommentByUserId" parameterType="java.lang.String" >
+    delete from fcscomment
+    where commentator_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <select id="selectByCommentatorId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fcscomment
+    where commentator_id = #{commentatorId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByCommentaryId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from fcscomment
+    where commentary_id = #{commentaryId,jdbcType=VARCHAR}
+  </select>
   <select id="selectCommentNumber" resultType="java.lang.Integer" parameterType="java.lang.String" >
     select count(commentary_id)
     from fcscomment
@@ -28,11 +48,11 @@
     where comment_id = #{commentId,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.fcsservice.model.pojo.Comment" >
-    insert into fcscomment (comment_id, commentary_id, comment_content, 
-      commentator_id, comment_fabulous, comment_reltime
+    insert into fcscomment (comment_id, commentary_id, commenttary_type, 
+      comment_content, commentator_id, comment_reltime
       )
-    values (#{commentId,jdbcType=VARCHAR}, #{commentaryId,jdbcType=VARCHAR}, #{commentContent,jdbcType=VARCHAR}, 
-      #{commentatorId,jdbcType=VARCHAR}, #{commentFabulous,jdbcType=INTEGER}, #{commentReltime,jdbcType=TIMESTAMP}
+    values (#{commentId,jdbcType=VARCHAR}, #{commentaryId,jdbcType=VARCHAR}, #{commenttaryType,jdbcType=INTEGER}, 
+      #{commentContent,jdbcType=VARCHAR}, #{commentatorId,jdbcType=VARCHAR}, #{commentReltime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.fcsservice.model.pojo.Comment" >
@@ -44,14 +64,14 @@
       <if test="commentaryId != null" >
         commentary_id,
       </if>
+      <if test="commenttaryType != null" >
+        commenttary_type,
+      </if>
       <if test="commentContent != null" >
         comment_content,
       </if>
       <if test="commentatorId != null" >
         commentator_id,
-      </if>
-      <if test="commentFabulous != null" >
-        comment_fabulous,
       </if>
       <if test="commentReltime != null" >
         comment_reltime,
@@ -64,14 +84,14 @@
       <if test="commentaryId != null" >
         #{commentaryId,jdbcType=VARCHAR},
       </if>
+      <if test="commenttaryType != null" >
+        #{commenttaryType,jdbcType=INTEGER},
+      </if>
       <if test="commentContent != null" >
         #{commentContent,jdbcType=VARCHAR},
       </if>
       <if test="commentatorId != null" >
         #{commentatorId,jdbcType=VARCHAR},
-      </if>
-      <if test="commentFabulous != null" >
-        #{commentFabulous,jdbcType=INTEGER},
       </if>
       <if test="commentReltime != null" >
         #{commentReltime,jdbcType=TIMESTAMP},
@@ -84,14 +104,14 @@
       <if test="commentaryId != null" >
         commentary_id = #{commentaryId,jdbcType=VARCHAR},
       </if>
+      <if test="commenttaryType != null" >
+        commenttary_type = #{commenttaryType,jdbcType=INTEGER},
+      </if>
       <if test="commentContent != null" >
         comment_content = #{commentContent,jdbcType=VARCHAR},
       </if>
       <if test="commentatorId != null" >
         commentator_id = #{commentatorId,jdbcType=VARCHAR},
-      </if>
-      <if test="commentFabulous != null" >
-        comment_fabulous = #{commentFabulous,jdbcType=INTEGER},
       </if>
       <if test="commentReltime != null" >
         comment_reltime = #{commentReltime,jdbcType=TIMESTAMP},
@@ -102,9 +122,9 @@
   <update id="updateByPrimaryKey" parameterType="com.fcsservice.model.pojo.Comment" >
     update fcscomment
     set commentary_id = #{commentaryId,jdbcType=VARCHAR},
+      commenttary_type = #{commenttaryType,jdbcType=INTEGER},
       comment_content = #{commentContent,jdbcType=VARCHAR},
       commentator_id = #{commentatorId,jdbcType=VARCHAR},
-      comment_fabulous = #{commentFabulous,jdbcType=INTEGER},
       comment_reltime = #{commentReltime,jdbcType=TIMESTAMP}
     where comment_id = #{commentId,jdbcType=VARCHAR}
   </update>

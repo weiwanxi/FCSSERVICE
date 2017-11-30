@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * Created by YE on 2017/11/18 0:00.
  */
@@ -18,33 +20,52 @@ public class CollectController {
     @Autowired
     CollectService collectService;
 
-    @RequestMapping(value = "/collect",method = RequestMethod.POST)
+    @RequestMapping(value = "/collect", method = RequestMethod.POST)
     @ResponseBody
     public Result collect(@RequestParam("informationId") String informationId,
-                           @RequestParam("userId") String userId,
-                           @RequestParam("collectType") int collectType,
-                          @RequestParam("FCType") int FCType){
+                          @RequestParam("userId") String userId,
+                          @RequestParam("collectType") int collectType,
+                          @RequestParam("FCType") int FCType) {
         Result result = new Result();
         String msg;
 
-        if (FCType == FcsserviceUtil.FCfalse){
-            msg = collectService.addCollect(informationId,userId,collectType);
-            if (msg == null){
+        if (FCType == FcsserviceUtil.FCfalse) {
+            msg = collectService.addCollect(informationId, userId, collectType);
+            if (msg == null) {
                 result.setCode(Result.SUCCESS);
                 result.setMsg("收藏成功");
-            }else {
+            } else {
                 result.setCode(Result.FAIL);
                 result.setMsg(msg);
             }
-        }else {
-            msg = collectService.deleteCollect(informationId,userId);
-            if (msg == null){
+        } else {
+            msg = collectService.deleteCollect(informationId, userId);
+            if (msg == null) {
                 result.setCode(Result.SUCCESS);
                 result.setMsg("取消收藏成功");
-            }else {
+            } else {
                 result.setCode(Result.FAIL);
                 result.setMsg(msg);
             }
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "/getCollect", method = RequestMethod.POST)
+    @ResponseBody
+    public Result getCollect(@RequestParam("type") String type,
+                             @RequestParam("sort") String sort,
+                             @RequestParam("userId") String userId) {
+        Result result = new Result();
+
+        Map<String, String[]> map = collectService.getCollect(type, sort, userId);
+        if (map != null) {
+            result.setCode(Result.SUCCESS);
+            result.setObj(map);
+            result.setMsg("获取收藏列表成功");
+        } else {
+            result.setCode(Result.FAIL);
+            result.setMsg("暂无此类收藏信息");
         }
         return result;
     }

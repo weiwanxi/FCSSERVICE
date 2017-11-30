@@ -65,7 +65,7 @@ public class ClothService {
         Map<String,String[]> recommendMap = new HashMap<String, String[]>();
 
 
-        Cloth cloth = clothDao.getCostumeById(clothId);
+        Cloth cloth = clothDao.getClothById(clothId);
         if (cloth != null){
 
             String clothComponent = componentDao.getComponentById(cloth.getComponentId()).getComponentName();

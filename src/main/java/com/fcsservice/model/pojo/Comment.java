@@ -8,11 +8,11 @@ public class Comment implements Serializable {
 
     private String commentaryId;
 
+    private Integer commenttaryType;
+
     private String commentContent;
 
     private String commentatorId;
-
-    private Integer commentFabulous;
 
     private Date commentReltime;
 
@@ -34,6 +34,14 @@ public class Comment implements Serializable {
         this.commentaryId = commentaryId;
     }
 
+    public Integer getCommenttaryType() {
+        return commenttaryType;
+    }
+
+    public void setCommenttaryType(Integer commenttaryType) {
+        this.commenttaryType = commenttaryType;
+    }
+
     public String getCommentContent() {
         return commentContent;
     }
@@ -48,14 +56,6 @@ public class Comment implements Serializable {
 
     public void setCommentatorId(String commentatorId) {
         this.commentatorId = commentatorId;
-    }
-
-    public Integer getCommentFabulous() {
-        return commentFabulous;
-    }
-
-    public void setCommentFabulous(Integer commentFabulous) {
-        this.commentFabulous = commentFabulous;
     }
 
     public Date getCommentReltime() {

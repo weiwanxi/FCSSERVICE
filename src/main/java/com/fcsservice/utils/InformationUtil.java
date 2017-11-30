@@ -63,6 +63,26 @@ public class InformationUtil {
         return imageArray;
     }
 
+    public String getFirstImage(Information information){
+        String content = information.getInformationContent();
+
+        //解析获取资讯中的第一张图片
+        Document document = null;
+        try {
+            document = DocumentHelper.parseText(content);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        Element imgElement = (Element) document.getRootElement().selectSingleNode("//img");
+        String image;
+        if (imgElement.getText() == null){
+            image = "";
+        }else {
+            image= imgElement.getText();
+        }
+        return image;
+    }
+
     public String[] getInformationTime(int number, List<Information> informationList){
         String[] timeArray = new String[number];
 

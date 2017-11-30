@@ -24,7 +24,7 @@ public class ClothDao {
         return clothMapper.selectOrderByFabulous(page,number);
     }
 
-    public Cloth getCostumeById(String clothId){
+    public Cloth getClothById(String clothId){
         return clothMapper.selectByPrimaryKey(clothId);
     }
 }

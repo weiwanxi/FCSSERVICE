@@ -2,6 +2,8 @@ package com.fcsservice.model.dao;
 
 import com.fcsservice.model.pojo.Collect;
 
+import java.util.List;
+
 public interface CollectMapper {
     int deleteByPrimaryKey(String collectId);
 
@@ -12,6 +14,10 @@ public interface CollectMapper {
     Collect selectByPrimaryKey(String collectId);
 
     Collect selectByIU(String informationId,String userId);
+
+    List<Collect> selectByUTDesc(String userId,int type);
+
+    List<Collect> selectByUTAsc(String userId,int type);
 
     int updateByPrimaryKeySelective(Collect record);
 

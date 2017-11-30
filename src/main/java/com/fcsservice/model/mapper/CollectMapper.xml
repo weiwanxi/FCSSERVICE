@@ -11,6 +11,22 @@
   <sql id="Base_Column_List" >
     collect_id, collection_id, collector_id, collect_type, collect_time
   </sql>
+  <select id="selectByUTAsc" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcscollect
+    where collector_id = #{arg0}
+    and collect_type = #{arg1}
+    ORDER BY collect_time ASC
+  </select>
+  <select id="selectByUTDesc" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcscollect
+    where collector_id = #{arg0}
+    and collect_type = #{arg1}
+    ORDER BY collect_time DESC
+  </select>
   <select id="selectByIU" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
