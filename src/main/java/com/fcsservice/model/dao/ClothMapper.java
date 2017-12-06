@@ -13,9 +13,11 @@ public interface ClothMapper {
 
     Cloth selectByPrimaryKey(String clothId);
 
-    List<Cloth> selectOrderByComment(int page, int number);
+    List<Cloth> selectOrderByComment(int page, int number,int screen);
 
-    List<Cloth> selectOrderByFabulous(int page, int number);
+    List<Cloth> selectOrderByFabulous(int page, int number,int screen);
+
+    List<Cloth> selectClothBySearch(String searchText,int page,int number);
 
     int updateByPrimaryKeySelective(Cloth record);
 

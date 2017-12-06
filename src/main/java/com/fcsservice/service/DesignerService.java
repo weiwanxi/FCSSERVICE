@@ -147,4 +147,30 @@ public class DesignerService {
         result.setObj1(albumMap);
         return result;
     }
+
+    public Map<String,String[]> getDesignerBySearch(String searchText,int page,int number){
+        Map<String,String[]> map = new HashMap<String, String[]>();
+        List<UserAccount> accountList = accountDao.getAccountBySearch(searchText,page,number);
+        if (accountList != null){
+            String[] id = new String[accountList.size()];
+            String[] image = new String[accountList.size()];
+            String[] title = new String[accountList.size()];
+            String[] time = new String[accountList.size()];
+            for (int i = 0; i < accountList.size(); i++) {
+                UserAccount account = accountList.get(i);
+                id[i] = account.getUserId();
+                image[i] = userDataDao.getUserDataByUserId(account.getUserId()).getDataPortrait();
+                title[i] = account.getUserAccount();
+                time[i] = "作品数量："+workDao.getWorkNumberByDersignerId(account.getUserId());
+            }
+
+            map.put("id",id);
+            map.put("image",image);
+            map.put("title",title);
+            map.put("time",time);
+            return map;
+        }else {
+            return null;
+        }
+    }
 }

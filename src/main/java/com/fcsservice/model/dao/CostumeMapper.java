@@ -13,9 +13,11 @@ public interface CostumeMapper {
 
     Costume selectByPrimaryKey(String costumeId);
 
-    List<Costume> selectOrderByComment(int page, int number);
+    List<Costume> selectOrderByComment(int page, int number,int screen);
 
-    List<Costume> selectOrderByFabulous(int page, int number);
+    List<Costume> selectOrderByFabulous(int page, int number,int screen);
+
+    List<Costume> selectCostumeBySearch(String searchText,int page,int number);
 
     int updateByPrimaryKeySelective(Costume record);
 

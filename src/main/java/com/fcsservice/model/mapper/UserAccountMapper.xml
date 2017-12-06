@@ -12,6 +12,14 @@
   <sql id="Base_Column_List" >
     user_id, user_account, user_password, user_type, user_regtime, user_status
   </sql>
+  <select id="selectAccountBySearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsuseraccount
+    WHERE user_type = 1
+    AND user_account LIKE CONCAT(CONCAT('%', #{arg0}), '%')
+    LIMIT #{arg1},#{arg2}
+  </select>
   <select id="selectByUserAccount" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />

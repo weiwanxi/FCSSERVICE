@@ -2,6 +2,8 @@ package com.fcsservice.model.dao;
 
 import com.fcsservice.model.pojo.UserAccount;
 
+import java.util.List;
+
 public interface UserAccountMapper {
     int deleteByPrimaryKey(String userId);
 
@@ -12,6 +14,8 @@ public interface UserAccountMapper {
     UserAccount selectByPrimaryKey(String userId);
 
     UserAccount selectByUserAccount(String user_account);
+
+    List<UserAccount> selectAccountBySearch(String searchText,int page,int number);
 
     int updateByPrimaryKeySelective(UserAccount record);
 

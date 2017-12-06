@@ -46,14 +46,14 @@ public class ClothService {
     @Autowired
     AccountDao accountDao;
 
-    public Map<String,String[]> getClothOrderByComment(int page, int number){
-        List<Cloth> clothList = clothDao.getClothOrderByComment(page,number);
+    public Map<String,String[]> getClothOrderByComment(int page, int number,int screen){
+        List<Cloth> clothList = clothDao.getClothOrderByComment(page,number,screen);
 
         return getMap(clothList,number);
     }
 
-    public Map<String,String[]> getClothOrderByFabulous(int page, int number){
-        List<Cloth> clothList = clothDao.getClothOrderByFabulous(page,number);
+    public Map<String,String[]> getClothOrderByFabulous(int page, int number,int screen){
+        List<Cloth> clothList = clothDao.getClothOrderByFabulous(page,number,screen);
 
         return getMap(clothList,number);
     }
@@ -108,8 +108,8 @@ public class ClothService {
             }
 
             //推荐信息
-            List<Work> workList = workDao.getWorkOrderByFabulous(0,4);
-            List<Costume> costumeList = costumeDao.getCostumeOrderByFabulous(0,4);
+            List<Work> workList = workDao.getWorkOrderByFabulous(0,4,-1);
+            List<Costume> costumeList = costumeDao.getCostumeOrderByFabulous(0,4,-1);
             Map<String,String[]> workMap = getWorkMap(workList,4);
             Map<String,String[]> costumeMap = getCostumeMap(costumeList,4);
             if (workMap != null && costumeMap != null){
@@ -128,6 +128,34 @@ public class ClothService {
         }
 
         return result;
+    }
+
+    public Map<String,String[]> getClothBySearch(String searchText,int page,int number){
+        Map<String,String[]> map = new HashMap<String, String[]>();
+        List<Cloth> clothList = clothDao.getClothBySearch(searchText,page,number);
+        if (clothList != null){
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            String[] id = new String[clothList.size()];
+            String[] image = new String[clothList.size()];
+            String[] title = new String[clothList.size()];
+            String[] time = new String[clothList.size()];
+            for (int i = 0; i < clothList.size(); i++) {
+                Cloth cloth = clothList.get(i);
+                id[i] = cloth.getClothId();
+                image[i] = cloth.getClothPicture1();
+                title[i] = cloth.getClothName();
+                time[i] = format.format(cloth.getClothReltime());
+            }
+
+            map.put("id",id);
+            map.put("image",image);
+            map.put("title",title);
+            map.put("time",time);
+            return map;
+        }else {
+            return null;
+        }
     }
 
     private Map<String,String[]> getMap(List<Cloth> clothList,int number){

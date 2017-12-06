@@ -9,8 +9,15 @@ import java.util.Map;
 /**
  * Created by YE on 2017/11/18 19:59.
  */
+
+
 public class AlbumUtil {
 
+    /**
+     * 用于组装返回的专辑列表信息
+     * @param albumList 专辑列表
+     * @return Map
+     */
     public Map<String,String[]> getAlbum(List<Album> albumList){
         Map<String,String[]> map = new HashMap<String, String[]>();
         String[] albumId = new String[albumList.size()];

@@ -106,6 +106,7 @@ public class PurchaseService {
         map.put("time",time);
         return map;
     }
+
     public Map<String,String[]> getUserSell(String userId) {
         Map<String, String[]> map = new HashMap<String, String[]>();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -151,7 +152,6 @@ public class PurchaseService {
     public int getUnRead(String userId){
         return purchaseDao.getUserUnRead(userId);
     }
-
 
     public Map<String,String> getPurchaseDetail(String purchaseId){
         Map<String,String> map = new HashMap<String, String>();

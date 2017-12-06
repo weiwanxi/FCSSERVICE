@@ -31,6 +31,11 @@ public class UserDataController {
     CodeService codeService;
 
 
+    /**
+     * 获取“我的”页面数据
+     * @param userId 用户Id
+     * @return 用户数据|当前用户不存在
+     */
     @RequestMapping(value="/getUserPage",method = {RequestMethod.POST})
     @ResponseBody
     public Result getUserPage(@RequestParam("userId") String userId){
@@ -57,6 +62,13 @@ public class UserDataController {
         return result;
     }
 
+
+    /**
+     * 修改用户头像
+     * @param userId 用户ID
+     * @param base64Data 头像数据
+     * @return 上传成功|上传失败
+     */
     @RequestMapping(value="/uploadImage",method = {RequestMethod.POST})
     @ResponseBody
     public Result uploadImage(@RequestParam("userId") String userId,
@@ -91,6 +103,12 @@ public class UserDataController {
         return result;
     }
 
+
+    /**
+     * 获取用户资料
+     * @param userId 用户ID
+     * @return 用户资料|当前用户不存在
+     */
     @RequestMapping(value="/getUserDetail",method = {RequestMethod.POST})
     @ResponseBody
     public Result getUserDetail(@RequestParam("userId") String userId){
@@ -114,6 +132,13 @@ public class UserDataController {
         return result;
     }
 
+
+    /**
+     * 修改邮箱
+     * @param oldMail 旧邮箱
+     * @param newMail 新邮箱
+     * @return 更换成功|该邮箱未绑定账号
+     */
     @RequestMapping(value="/updateMail",method = {RequestMethod.POST})
     @ResponseBody
     public Result updateMail(@RequestParam("oldMail") String oldMail,
@@ -133,6 +158,13 @@ public class UserDataController {
         return result;
     }
 
+
+    /**
+     * 修改联系电话
+     * @param userId 用户ID
+     * @param newPhone 新的电话号码
+     * @return 更换成功|该用户不存在
+     */
     @RequestMapping(value="/updatePhone",method = {RequestMethod.POST})
     @ResponseBody
     public Result updatePhone(@RequestParam("userId") String userId,
@@ -152,6 +184,12 @@ public class UserDataController {
         return result;
     }
 
+
+    /**
+     * 获取用于购买时显示的用户资料
+     * @param userId 用户ID
+     * @return 获取资料成功|该用户不存在
+     */
     @RequestMapping(value="/getUserDataToPurchase",method = {RequestMethod.POST})
     @ResponseBody
     public Result getUserDataToPurchase(@RequestParam("userId") String userId){

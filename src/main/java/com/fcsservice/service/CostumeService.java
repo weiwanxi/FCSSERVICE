@@ -45,14 +45,14 @@ public class CostumeService {
     @Autowired
     AccountDao accountDao;
 
-    public Map<String,String[]> getCostumeOrderByComment(int page, int number){
-        List<Costume> costumeList = costumeDao.getCostumeOrderByComment(page,number);
+    public Map<String,String[]> getCostumeOrderByComment(int page, int number,int screen){
+        List<Costume> costumeList = costumeDao.getCostumeOrderByComment(page,number,screen);
 
         return getMap(costumeList,number);
     }
 
-    public Map<String,String[]> getCostumeOrderByFabulous(int page, int number){
-        List<Costume> costumeList = costumeDao.getCostumeOrderByFabulous(page,number);
+    public Map<String,String[]> getCostumeOrderByFabulous(int page, int number,int screen){
+        List<Costume> costumeList = costumeDao.getCostumeOrderByFabulous(page,number,screen);
 
         return getMap(costumeList,number);
     }
@@ -105,8 +105,8 @@ public class CostumeService {
                 inforMap.put("fabulousType",fabulousType);
             }
             //推荐信息
-            List<Work> workList = workDao.getWorkOrderByFabulous(0,4);
-            List<Cloth> clothList = clothDao.getClothOrderByFabulous(0,4);
+            List<Work> workList = workDao.getWorkOrderByFabulous(0,4,-1);
+            List<Cloth> clothList = clothDao.getClothOrderByFabulous(0,4,-1);
             Map<String,String[]> workMap = getWorkMap(workList,4);
             Map<String,String[]> clothMap = getClothMap(clothList,4);
             if (workMap != null && clothMap != null){
@@ -125,6 +125,34 @@ public class CostumeService {
         }
 
         return result;
+    }
+
+    public Map<String,String[]> getCostumeBySearch(String searchText,int page,int number){
+        Map<String,String[]> map = new HashMap<String, String[]>();
+        List<Costume> costumeList = costumeDao.getCostumeBySearch(searchText,page,number);
+        if (costumeList != null){
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            String[] id = new String[costumeList.size()];
+            String[] image = new String[costumeList.size()];
+            String[] title = new String[costumeList.size()];
+            String[] time = new String[costumeList.size()];
+            for (int i = 0; i < costumeList.size(); i++) {
+                Costume costume = costumeList.get(i);
+                id[i] = costume.getCostumeId();
+                image[i] = costume.getCostumePicture1();
+                title[i] = costume.getCostumeName();
+                time[i] = format.format(costume.getCostumeReltime());
+            }
+
+            map.put("id",id);
+            map.put("image",image);
+            map.put("title",title);
+            map.put("time",time);
+            return map;
+        }else {
+            return null;
+        }
     }
 
     private Map<String,String[]> getMap(List<Costume> costumeList,int number){

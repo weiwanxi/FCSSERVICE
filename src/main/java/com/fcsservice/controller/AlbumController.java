@@ -19,6 +19,11 @@ public class AlbumController {
     @Autowired
     AlbumService albumService;
 
+    /**
+     * 获取用户专辑列表
+     * @param userId 用户ID
+     * @return true获取专辑列表成功|false获取专辑列表失败
+     */
     @RequestMapping(value = "/getAlbumList",method = RequestMethod.POST)
     @ResponseBody
     public Result getAlbumList(@RequestParam("userId") String userId){
@@ -37,6 +42,12 @@ public class AlbumController {
         return result;
     }
 
+
+    /**
+     * 获取专辑详情
+     * @param albumId 专辑ID
+     * @return true获取专辑成功|false获取专辑失败
+     */
     @RequestMapping(value = "/getAlbum",method = RequestMethod.POST)
     @ResponseBody
     public Result getAlbum(@RequestParam("albumId") String albumId){
@@ -56,6 +67,15 @@ public class AlbumController {
         return result;
     }
 
+
+    /**
+     * 新增专辑与修改专辑
+     * @param userId 用户ID
+     * @param albumId 专辑ID
+     * @param base64Data 专辑封面
+     * @param albumName 专辑名称
+     * @return
+     */
     @RequestMapping(value = "/addAlbum",method = RequestMethod.POST)
     @ResponseBody
     public Result getAlbum(@RequestParam("userId") String userId,
@@ -93,6 +113,11 @@ public class AlbumController {
         return result;
     }
 
+    /**
+     * 删除一个专辑
+     * @param albumId 专辑ID
+     * @return true删除专辑成功|false删除失败
+     */
     @RequestMapping(value = "/deleteAlbum",method = RequestMethod.POST)
     @ResponseBody
     public Result deleteAlbum(@RequestParam("albumId") String albumId){

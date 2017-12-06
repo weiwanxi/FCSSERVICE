@@ -23,6 +23,13 @@ public class CodeController {
     @Autowired
     UserDataService userDataService;
 
+    /**
+     * 确认邮箱验证码
+     * @param mail 邮箱
+     * @param code 验证码
+     * @param type 验证码类别（注册验证、修改邮箱验证、修改密码验证）
+     * @return 验证成功|验证码错误|邮箱验证码已过期
+     */
     @RequestMapping(value="/confirmMailCode",method = {RequestMethod.POST})
     @ResponseBody
     public Result confirmMailCode(@RequestParam("mail") String mail,
@@ -48,7 +55,13 @@ public class CodeController {
         return result;
     }
 
-    //查询邮箱是否已绑定账号，并发送邮件
+
+    /**
+     * 查询邮箱是否已绑定账号，并发送邮件
+     * @param mail 邮箱
+     * @param type 验证码类别
+     * @return 已发送验证码|验证码未过期|邮箱已绑定账号|邮箱未绑定账号
+     */
     @RequestMapping(value="/sendMail",method = {RequestMethod.POST})
     @ResponseBody
     public Result sendMail(@RequestParam("mail") String mail,

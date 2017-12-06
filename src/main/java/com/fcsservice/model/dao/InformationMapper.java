@@ -21,6 +21,8 @@ public interface InformationMapper {
 
     List<Information> selectOldInformationList(String information_reltime);
 
+    List<Information> selectInformationBySearch(String searchText,int page,int number);
+
     int updateByPrimaryKeySelective(Information record);
 
     int updateByPrimaryKey(Information record);

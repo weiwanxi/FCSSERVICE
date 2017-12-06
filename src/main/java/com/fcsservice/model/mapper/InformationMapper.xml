@@ -14,6 +14,14 @@
     information_id, information_topic, information_author, information_content, information_fabulous, 
     information_reltime, information_status
   </sql>
+  <select id="selectInformationBySearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsinformation
+    WHERE information_topic LIKE CONCAT(CONCAT('%', #{arg0}), '%')
+    ORDER BY information_reltime DESC
+    LIMIT #{arg1},#{arg2}
+  </select>
   <select id="selectOldInformationList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />

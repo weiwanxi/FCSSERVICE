@@ -20,6 +20,14 @@ public class CollectController {
     @Autowired
     CollectService collectService;
 
+    /**
+     * 收藏|取消收藏 信息
+     * @param informationId 收藏信息ID
+     * @param userId 用户ID
+     * @param collectType 收藏信息类别
+     * @param FCType 收藏状态
+     * @return 收藏成功|取消收藏成功
+     */
     @RequestMapping(value = "/collect", method = RequestMethod.POST)
     @ResponseBody
     public Result collect(@RequestParam("informationId") String informationId,
@@ -51,6 +59,14 @@ public class CollectController {
         return result;
     }
 
+
+    /**
+     * 获取收藏列表
+     * @param type 收藏信息类别
+     * @param sort 排序方式
+     * @param userId 用户ID
+     * @return 获取收藏列表成功|暂无此类收藏信息
+     */
     @RequestMapping(value = "/getCollect", method = RequestMethod.POST)
     @ResponseBody
     public Result getCollect(@RequestParam("type") String type,

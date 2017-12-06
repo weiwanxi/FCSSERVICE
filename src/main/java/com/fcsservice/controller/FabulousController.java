@@ -18,6 +18,13 @@ public class FabulousController {
     @Autowired
     FabulousService fabulousService;
 
+    /**
+     * 点赞|取消点赞 信息
+     * @param informationId 信息ID
+     * @param userId 用户ID
+     * @param FCType 点赞情况
+     * @return 点赞成功|取消点赞成功
+     */
     @RequestMapping(value = "/fabulous",method = RequestMethod.POST)
     @ResponseBody
     public Result fabulous(@RequestParam("informationId") String informationId,

@@ -16,12 +16,16 @@ public class CostumeDao {
     @Autowired
     CostumeMapper costumeMapper;
 
-    public List<Costume> getCostumeOrderByComment(int page, int number){
-        return costumeMapper.selectOrderByComment(page,number);
+    public List<Costume> getCostumeOrderByComment(int page, int number,int screen){
+        return costumeMapper.selectOrderByComment(page,number,screen);
     }
 
-    public List<Costume> getCostumeOrderByFabulous(int page, int number){
-        return costumeMapper.selectOrderByFabulous(page,number);
+    public List<Costume> getCostumeOrderByFabulous(int page, int number,int screen){
+        return costumeMapper.selectOrderByFabulous(page,number,screen);
+    }
+
+    public List<Costume> getCostumeBySearch(String searchText,int page,int number){
+        return costumeMapper.selectCostumeBySearch(searchText,page,number);
     }
 
     public Costume getCostumeById(String costumeId){

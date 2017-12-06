@@ -5,6 +5,8 @@ import com.fcsservice.model.pojo.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by YE on 2017/10/18.
  */
@@ -24,6 +26,10 @@ public class AccountDao {
 
     public void addUserAccount(UserAccount userAccount){
         userAccountMapper.insert(userAccount);
+    }
+
+    public List<UserAccount> getAccountBySearch(String searchText, int page, int number){
+        return userAccountMapper.selectAccountBySearch(searchText,page,number);
     }
 
     public void updatePassword(UserAccount userAccount){

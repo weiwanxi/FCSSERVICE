@@ -1,6 +1,5 @@
 package com.fcsservice.utils;
 
-import com.fcsservice.controller.AlbumController;
 import org.springframework.util.Base64Utils;
 
 import java.io.File;
@@ -65,6 +64,12 @@ public class FcsserviceUtil {
      */
     public final String IMAGE1PATH = this.getClass().getClassLoader().getResource("").getPath().replace("/classes/","/image1/");
 
+    /**
+     * 保存图片
+     * @param savePath 保存路径
+     * @param base64Data 保存数据
+     * @return 文件名|null
+     */
     public String saveImage(String savePath,String base64Data){
         String fileName;
 

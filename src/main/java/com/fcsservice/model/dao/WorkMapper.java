@@ -18,11 +18,13 @@ public interface WorkMapper {
 
     List<DesignerForm> selectDesignerWorkNumberByNumber(int number);
 
-    List<Work> selectOrderByComment(int page, int number);
+    List<Work> selectOrderByComment(int page, int number,int screen);
 
-    List<Work> selectOrderByFabulous(int page, int number);
+    List<Work> selectOrderByFabulous(int page, int number,int screen);
 
     List<Work> selectWorkListByAlbumId(String albumId);
+
+    List<Work> selectWorkBySearch(String searchText,int page,int number);
 
     int deleteByAlbumId(String albumId);
 

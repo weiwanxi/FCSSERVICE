@@ -2,6 +2,8 @@ package com.fcsservice.model.dao;
 
 import com.fcsservice.model.pojo.Follow;
 
+import java.util.List;
+
 public interface FollowMapper {
     int deleteByPrimaryKey(String followId);
 
@@ -14,6 +16,10 @@ public interface FollowMapper {
     Follow selectByPrimaryKey(String followId);
 
     Follow selectFollowed(String userId,String designerId);
+
+    List<Follow> selectUserFollow(String userId);
+
+    List<Follow> selectUserFans(String userId);
 
     int selectFollowNumber(String userId);
 

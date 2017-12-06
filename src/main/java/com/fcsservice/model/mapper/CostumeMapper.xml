@@ -28,12 +28,23 @@
     costume_picture2, costume_picture3, costume_picture4, costume_fabulous, costume_reltime, 
     costume_status
   </sql>
+  <select id="selectCostumeBySearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcscostume
+    WHERE costume_name LIKE CONCAT(CONCAT('%', #{arg0}), '%')
+    ORDER BY costume_reltime DESC
+    LIMIT #{arg1},#{arg2}
+  </select>
   <select id="selectOrderByFabulous" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM fcscostume AS a
     LEFT JOIN (SELECT COUNT(fabulous_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
     ON a.costume_id = b.information_id
+    <if test="arg2 != -1" >
+      WHERE type_id = #{arg2}
+    </if>
     ORDER BY b.number DESC
     LIMIT #{arg0},#{arg1}
   </select>
@@ -43,6 +54,9 @@
     FROM fcscostume AS a
     LEFT JOIN (SELECT COUNT(comment_id) AS number,commentary_id FROM fcscomment GROUP BY comment_id) AS b
     ON a.costume_id = b.commentary_id
+    <if test="arg2 != -1" >
+      WHERE type_id = #{arg2}
+    </if>
     ORDER BY b.number DESC
     LIMIT #{arg0},#{arg1}
   </select>

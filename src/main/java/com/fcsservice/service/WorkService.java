@@ -146,6 +146,9 @@ public class WorkService {
             }
             workImageFileName[i] = fileName;
         }
+        for (int i = workImageArray.length; i < 6; i++) {
+            workImageFileName[i] = "";
+        }
         work.setWorkPicture1(workImageFileName[0]);
         work.setWorkPicture2(workImageFileName[1]);
         work.setWorkPicture3(workImageFileName[2]);
@@ -157,14 +160,14 @@ public class WorkService {
         return true;
     }
 
-    public Map<String,String[]> getWorkOrderByComment(int page, int number){
-        List<Work> workList = workDao.getWorkOrderByComment(page,number);
+    public Map<String,String[]> getWorkOrderByComment(int page, int number,int screen){
+        List<Work> workList = workDao.getWorkOrderByComment(page,number,screen);
 
         return getMap(workList,number);
     }
 
-    public Map<String,String[]> getWorkOrderByFabulous(int page, int number){
-        List<Work> workList = workDao.getWorkOrderByFabulous(page,number);
+    public Map<String,String[]> getWorkOrderByFabulous(int page, int number,int screen){
+        List<Work> workList = workDao.getWorkOrderByFabulous(page,number,screen);
 
         return getMap(workList,number);
     }
@@ -229,8 +232,8 @@ public class WorkService {
             }
 
             //推荐信息
-            List<Cloth> clothList = clothDao.getClothOrderByFabulous(0,4);
-            List<Costume> costumeList = costumeDao.getCostumeOrderByFabulous(0,4);
+            List<Cloth> clothList = clothDao.getClothOrderByFabulous(0,4,-1);
+            List<Costume> costumeList = costumeDao.getCostumeOrderByFabulous(0,4,-1);
             Map<String,String[]> clothMap = getClothMap(clothList,4);
             Map<String,String[]> costumeMap = getCostumeMap(costumeList,4);
             if (clothMap != null && costumeMap != null){
@@ -242,7 +245,7 @@ public class WorkService {
             result.setObj(carouselMap);
             result.setObj1(inforMap);
             result.setObj2(recommendMap);
-            result.setMsg("成功数据");
+            result.setMsg("成功获取数据");
 
         }else {
             result.setCode(Result.FAIL);
@@ -291,7 +294,7 @@ public class WorkService {
             Component component = componentDao.getComponentById(work.getComponentId());
             if (component != null){
                 map.put("componentMal",component.getComponentName());
-                map.put("componentMalValue",costumeType.getTypeId()+"");
+                map.put("componentMalValue",component.getComponentId()+"");
                 component = componentDao.getComponentById(component.getComponentSupcategory());
                 if (component != null){
                     map.put("componentBig",component.getComponentName());
@@ -321,6 +324,34 @@ public class WorkService {
             return null;
         }
         return map;
+    }
+
+    public Map<String,String[]> getWorkBySearch(String searchText,int page,int number){
+        Map<String,String[]> map = new HashMap<String, String[]>();
+        List<Work> workList = workDao.getWorkBySearch(searchText,page,number);
+        if (workList != null){
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            String[] id = new String[workList.size()];
+            String[] image = new String[workList.size()];
+            String[] title = new String[workList.size()];
+            String[] time = new String[workList.size()];
+            for (int i = 0; i < workList.size(); i++) {
+                Work work = workList.get(i);
+                id[i] = work.getWorkId();
+                image[i] = work.getWorkPicture1();
+                title[i] = work.getWorkName();
+                time[i] = format.format(work.getWorkReltime());
+            }
+
+            map.put("id",id);
+            map.put("image",image);
+            map.put("title",title);
+            map.put("time",time);
+            return map;
+        }else {
+            return null;
+        }
     }
 
     private Map<String,String[]> getMap(List<Work> workList,int number){

@@ -11,6 +11,11 @@ import java.util.Map;
  * Created by YE on 2017/11/15 11:00.
  */
 public class DesignerUtil {
+    /**
+     * 用于组装返回设计师列表数据
+     * @param designerForms 设计师列表
+     * @return Map
+     */
     public Map<String,String[]> getDesignerMap(List<DesignerForm> designerForms){
         if (designerForms == null || designerForms.size() == 0)
             return null;
@@ -41,6 +46,12 @@ public class DesignerUtil {
         return map;
     }
 
+    /**
+     * List取重复的值
+     * @param list1 list1
+     * @param list2 list2
+     * @return list1
+     */
     public List<String> getRepetition(List<String> list1,
                                       List<String> list2) {
         List<String> result = new ArrayList<String>();
@@ -52,6 +63,12 @@ public class DesignerUtil {
         return result;
     }
 
+    /**
+     * List取非重复的值
+     * @param list1 list1
+     * @param list2 list2
+     * @return list1
+     */
     public List<DesignerForm> getDesignerNotRepetition(List<DesignerForm> list1,
                                                        List<DesignerForm> list2) {
         List<DesignerForm> result = new ArrayList<DesignerForm>();

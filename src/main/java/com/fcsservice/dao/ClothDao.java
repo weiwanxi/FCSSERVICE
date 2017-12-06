@@ -16,12 +16,16 @@ public class ClothDao {
     @Autowired
     ClothMapper clothMapper;
 
-    public List<Cloth> getClothOrderByComment(int page, int number){
-        return clothMapper.selectOrderByComment(page,number);
+    public List<Cloth> getClothOrderByComment(int page, int number,int screen){
+        return clothMapper.selectOrderByComment(page,number,screen);
     }
 
-    public List<Cloth> getClothOrderByFabulous(int page, int number){
-        return clothMapper.selectOrderByFabulous(page,number);
+    public List<Cloth> getClothOrderByFabulous(int page, int number,int screen){
+        return clothMapper.selectOrderByFabulous(page,number,screen);
+    }
+
+    public List<Cloth> getClothBySearch(String searchText,int page,int number){
+        return clothMapper.selectClothBySearch(searchText,page,number);
     }
 
     public Cloth getClothById(String clothId){

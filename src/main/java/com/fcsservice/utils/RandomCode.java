@@ -7,6 +7,10 @@ import java.util.Random;
  */
 public class RandomCode {
 
+    /**
+     * 获取随机四个数字
+     * @return String
+     */
     public static String getCode(){
         String str="0123456789";
         StringBuilder sb=new StringBuilder(4);
@@ -17,9 +21,4 @@ public class RandomCode {
         }
         return sb.toString();
     }
-
-    public static void main(String[] args) {
-        System.out.println(RandomCode.getCode());
-    }
-
 }

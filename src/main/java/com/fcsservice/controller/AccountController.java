@@ -9,9 +9,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.UUID;
-
 /**
  * Created by YE on 2017/10/15.
  */
@@ -33,7 +30,12 @@ public class AccountController {
 
     private static Logger logger = Logger.getLogger(AccountController.class);
 
-    //登录
+    /**
+     * 登录功能
+     * @param user_account 登录账号
+     * @param user_password 登录密码
+     * @return user_id登录成功|null登录失败
+     */
     @RequestMapping(value="/login",method = {RequestMethod.POST})
     @ResponseBody
     public Result login(@RequestParam("account") String user_account,
@@ -59,7 +61,12 @@ public class AccountController {
         return result;
     }
 
-    //查询用户名是否已注册
+
+    /**
+     * 查询用户名是否已注册
+     * @param user_account 查询账号
+     * @return true账号未注册|false账号已注册
+     */
     @RequestMapping(value="/registerConfirm",method = {RequestMethod.POST})
     @ResponseBody
     public Result registerConfirm(@RequestParam("account") String user_account){
@@ -75,7 +82,15 @@ public class AccountController {
         return result;
     }
 
-    //注册普通用户
+
+    /**
+     * 注册普通用户
+     * @param user_account 注册账号
+     * @param user_password 注册密码
+     * @param mail 注册邮箱
+     * @param user_type 注册类别
+     * @return true注册用户成功|false注册用户失败
+     */
     @RequestMapping(value="/registerUser",method = {RequestMethod.POST})
     @ResponseBody
     public Result registerUser(@RequestParam("account") String user_account,
@@ -97,7 +112,16 @@ public class AccountController {
         return result;
     }
 
-    //注册设计师
+
+    /**
+     * 注册设计师
+     * @param user_account 注册账号
+     * @param user_password 注册密码
+     * @param mail 注册邮箱
+     * @param user_type 注册类别
+     * @param tag 设计师标签
+     * @return true注册设计师成功|false注册失败
+     */
     @RequestMapping(value="/registerDesigner",method = {RequestMethod.POST})
     @ResponseBody
     public Result registerDesigner(@RequestParam("account") String user_account,
@@ -120,7 +144,13 @@ public class AccountController {
         return result;
     }
 
-    //修改密码
+
+    /**
+     * 修改密码，通过邮箱验证后
+     * @param userId 用户ID
+     * @param password 用户新密码
+     * @return true修改密码成功|false密码修改失败
+     */
     @RequestMapping(value="/updatePassword",method = {RequestMethod.POST})
     @ResponseBody
     public Result updatePassword(@RequestParam("userId") String userId,
@@ -138,6 +168,15 @@ public class AccountController {
 
         return result;
     }
+
+
+    /**
+     * 修改密码，通过旧密码验证
+     * @param userId 用户ID
+     * @param oldPassword 用户新密码
+     * @param newPassword 用户新密码
+     * @return true修改密码成功|false密码修改失败
+     */
     @RequestMapping(value="/updatePasswordByOldPassword",method = {RequestMethod.POST})
     @ResponseBody
     public Result updatePasswordByOldPassword(@RequestParam("userId") String userId,

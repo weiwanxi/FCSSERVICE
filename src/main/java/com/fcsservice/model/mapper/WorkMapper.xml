@@ -26,6 +26,14 @@
     work_color, work_intro, work_picture1, work_picture2, work_picture3, work_picture4, 
     work_picture5, work_picture6, work_reltime, work_status
   </sql>
+  <select id="selectWorkBySearch" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from fcsdesignwork
+    WHERE work_name LIKE CONCAT(CONCAT('%', #{arg0}), '%')
+    ORDER BY work_reltime DESC
+    LIMIT #{arg1},#{arg2}
+  </select>
   <delete id="deleteByAlbumId" parameterType="java.lang.String" >
     delete from fcsdesignwork
     where album_id = #{albumId,jdbcType=VARCHAR}
@@ -42,6 +50,9 @@
     FROM fcsdesignwork AS a
     LEFT JOIN (SELECT COUNT(fabulous_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
     ON a.work_id = b.information_id
+    <if test="arg2 != -1" >
+      WHERE type_id = #{arg2}
+    </if>
     ORDER BY b.number DESC
     LIMIT #{arg0},#{arg1}
   </select>
@@ -51,6 +62,9 @@
     FROM fcsdesignwork AS a
     LEFT JOIN (SELECT COUNT(comment_id) AS number,commentary_id FROM fcscomment GROUP BY comment_id) AS b
     ON a.work_id = b.commentary_id
+    <if test="arg2 != -1" >
+      WHERE type_id = #{arg2}
+    </if>
     ORDER BY b.number DESC
     LIMIT #{arg0},#{arg1}
   </select>

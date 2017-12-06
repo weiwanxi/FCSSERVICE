@@ -33,8 +33,7 @@ public class InformationDao {
         if (information != null){
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String time = format.format(information.getInformationReltime());
-            List<Information> informationList = informationMapper.selectNewInformationList(time);
-            return informationList;
+            return informationMapper.selectNewInformationList(time);
         }else{
             return null;
         }
@@ -45,8 +44,7 @@ public class InformationDao {
         if (information != null){
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String time = format.format(information.getInformationReltime());
-            List<Information> informationList = informationMapper.selectOldInformationList(time);
-            return informationList;
+            return informationMapper.selectOldInformationList(time);
         }else{
             return null;
         }
@@ -55,4 +53,9 @@ public class InformationDao {
     public Information getInformationById(String informationId){
         return informationMapper.selectByPrimaryKey(informationId);
     }
+
+    public List<Information> getInformationBySearch(String searchText,int page,int number){
+        return informationMapper.selectInformationBySearch(searchText,page,number);
+    }
+
 }

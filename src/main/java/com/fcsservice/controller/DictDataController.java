@@ -39,6 +39,10 @@ public class DictDataController {
     @Autowired
     ComponentService componentService;
 
+    /**
+     * 获取设计标签列表
+     * @return tagList|获取标签列表失败
+     */
     @RequestMapping(value="/getTagList",method = {RequestMethod.POST})
     @ResponseBody
     public Result getTagList() {
@@ -63,6 +67,11 @@ public class DictDataController {
         return result;
     }
 
+
+    /**
+     * 获取筛选设计的标签列表
+     * @return 标签列表|获取标签列表失败
+     */
     @RequestMapping(value="/getSelectTagList",method = {RequestMethod.POST})
     @ResponseBody
     public Result getSelectTagList() {
@@ -93,12 +102,17 @@ public class DictDataController {
         return result;
     }
 
-    @RequestMapping(value="/getCostumeType",method = {RequestMethod.POST})
+
+    /**
+     * 获取用于筛选的服装类别
+     * @return node1List|获取数据失败
+     */
+    @RequestMapping(value="/getScreenCostumeType",method = {RequestMethod.POST})
     @ResponseBody
-    public Result getWorkType(){
+    public Result getScreenCostumeType(){
         Result result = new Result();
 
-        List<Node1> node1List = costumeTypeService.getCostumeTypeData();
+        List<Node1> node1List = costumeTypeService.getScreenCostumeTypeData();
 
         if (node1List != null && node1List.size()>0){
             Object obj = JSON.toJSON(node1List);
@@ -112,12 +126,17 @@ public class DictDataController {
         return result;
     }
 
-    @RequestMapping(value="/getComponent",method = {RequestMethod.POST})
+
+    /**
+     * 获取用于筛选的面料列表
+     * @return node1List|获取数据失败
+     */
+    @RequestMapping(value="/getScreenComponent",method = {RequestMethod.POST})
     @ResponseBody
-    public Result getComponent(){
+    public Result getScreenComponent(){
         Result result = new Result();
 
-        List<Node2> node1List = componentService.getComponentData();
+        List<Node2> node1List = componentService.getScreenComponentData();
 
         if (node1List != null && node1List.size()>0){
             Object obj = JSON.toJSON(node1List);
@@ -131,6 +150,11 @@ public class DictDataController {
         return result;
     }
 
+
+    /**
+     * 获取用于筛选的风格列表
+     * @return node1List|获取数据失败
+     */
     @RequestMapping(value="/getStyle",method = {RequestMethod.POST})
     @ResponseBody
     public Result getWorkStyle(){
@@ -150,6 +174,11 @@ public class DictDataController {
         return result;
     }
 
+
+    /**
+     * 获取用于筛选的款式列表
+     * @return node1List|获取数据失败
+     */
     @RequestMapping(value="/getModel",method = {RequestMethod.POST})
     @ResponseBody
     public Result getModel(){
@@ -169,6 +198,11 @@ public class DictDataController {
         return result;
     }
 
+
+    /**
+     * 获取用于新增作品时的选择列表
+     * @return
+     */
     @RequestMapping(value="/getWorkPickerData",method = {RequestMethod.POST})
     @ResponseBody
     public Result getWorkPickerData(){

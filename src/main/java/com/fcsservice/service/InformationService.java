@@ -172,4 +172,32 @@ public class InformationService {
 
         return result;
     }
+
+    public Map<String,String[]> getInformationBySearch(String searchText,int page,int number){
+        Map<String,String[]> map = new HashMap<String, String[]>();
+        List<Information> informationList = informationDao.getInformationBySearch(searchText,page,number);
+        if (informationList != null){
+            DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            String[] id = new String[informationList.size()];
+            String[] image = new String[informationList.size()];
+            String[] title = new String[informationList.size()];
+            String[] time = new String[informationList.size()];
+            for (int i = 0; i < informationList.size(); i++) {
+                Information information = informationList.get(i);
+                id[i] = information.getInformationId();
+                image[i] = new InformationUtil().getFirstImage(information);
+                title[i] = information.getInformationTopic();
+                time[i] = format.format(information.getInformationReltime());
+            }
+
+            map.put("id",id);
+            map.put("image",image);
+            map.put("title",title);
+            map.put("time",time);
+            return map;
+        }else {
+            return null;
+        }
+    }
 }

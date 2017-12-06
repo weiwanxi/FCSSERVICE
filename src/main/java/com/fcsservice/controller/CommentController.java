@@ -19,6 +19,12 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    /**
+     * 获取评论列表
+     * @param informationId 信息ID
+     * @param userId 用户ID
+     * @return 获取评论列表成功|暂无无评论
+     */
     @RequestMapping(value = "/getCommentList", method = RequestMethod.POST)
     @ResponseBody
     public Result getCommentList(@RequestParam("informationId") String informationId,
@@ -39,6 +45,14 @@ public class CommentController {
         return result;
     }
 
+    /**
+     * 发布评论
+     * @param userId 评论者ID
+     * @param comment 评论内容
+     * @param informationId 评论信息ID
+     * @param informationType 信息所属类别
+     * @return 评论成功
+     */
     @RequestMapping(value = "/publishComment", method = RequestMethod.POST)
     @ResponseBody
     public Result publishComment(@RequestParam("userId") String userId,
@@ -55,6 +69,12 @@ public class CommentController {
         return result;
     }
 
+
+    /**
+     * 获取评论数量
+     * @param informationId 信息ID
+     * @return 获取评论数量成功
+     */
     @RequestMapping(value = "/getCommentNumber", method = RequestMethod.POST)
     @ResponseBody
     public Result getCommentNumber(@RequestParam("informationId") String informationId){
@@ -69,6 +89,12 @@ public class CommentController {
         return result;
     }
 
+
+    /**
+     * 获取用户评论列表
+     * @param userId 用户ID
+     * @return 获取评论列表成功|暂无无评论
+     */
     @RequestMapping(value = "/getUserCommentList", method = RequestMethod.POST)
     @ResponseBody
     public Result getUserCommentList(@RequestParam("userId") String userId){
@@ -88,6 +114,12 @@ public class CommentController {
         return result;
     }
 
+
+    /**
+     * 删除一条评论
+     * @param commentId 评论ID
+     * @return 删除评论成功|该评论不存在
+     */
     @RequestMapping(value = "/deleteComment", method = RequestMethod.POST)
     @ResponseBody
     public Result deleteComment(@RequestParam("commentId") String commentId){
@@ -106,6 +138,12 @@ public class CommentController {
         return result;
     }
 
+
+    /**
+     * 删除用户所有评论
+     * @param userId 用户ID
+     * @return 删除评论成功
+     */
     @RequestMapping(value = "/deleteAllComment", method = RequestMethod.POST)
     @ResponseBody
     public Result deleteAllComment(@RequestParam("userId") String userId){
