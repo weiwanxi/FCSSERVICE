@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fcsservice.model.dao.ComponentMapper" >
+<mapper namespace="com.fcsservice.model.dto.ComponentMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Component" >
     <id column="component_id" property="componentId" jdbcType="INTEGER" />
     <result column="component_supcategory" property="componentSupcategory" jdbcType="INTEGER" />

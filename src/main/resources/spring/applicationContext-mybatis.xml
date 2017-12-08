@@ -23,7 +23,7 @@
 
     <!-- 定义Mapper接口扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.fcsservice.model.dao" />
+        <property name="basePackage" value="com.fcsservice.model.dto" />
     </bean>
 
 </beans>

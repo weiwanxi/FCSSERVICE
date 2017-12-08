@@ -1,12 +1,11 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.InformationMapper;
+import com.fcsservice.model.dto.InformationMapper;
 import com.fcsservice.model.pojo.Information;
 import com.fcsservice.utils.FcsserviceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fcsservice.model.dao.PurchaseMapper" >
+<mapper namespace="com.fcsservice.model.dto.PurchaseMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Purchase" >
     <id column="purchase_id" property="purchaseId" jdbcType="VARCHAR" />
     <result column="buyer_id" property="buyerId" jdbcType="VARCHAR" />

@@ -1,10 +1,7 @@
 package com.fcsservice.service;
 
 import com.fcsservice.dao.*;
-import com.fcsservice.model.pojo.Album;
-import com.fcsservice.model.pojo.Tag;
-import com.fcsservice.model.pojo.UserAccount;
-import com.fcsservice.model.pojo.UserData;
+import com.fcsservice.model.pojo.*;
 import com.fcsservice.utils.FcsserviceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -81,11 +78,11 @@ public class AccountService {
                 tag = tag.substring(1,tag.length());
                 String tagStrArray[] = tag.split(";");
                 for (int i=0;i<tagStrArray.length;i++){
-                    int tagId = dictdataDao.getDictDataIdByValue(tagStrArray[i]);
-                    if (tagId != -1){
+                    Dictdata dictdata = dictdataDao.getDictDataById(Integer.parseInt(tagStrArray[i]));
+                    if (dictdata != null){
                         Tag tagg = new Tag();
                         tagg.setUserId(userId);
-                        tagg.setTagId(tagId);
+                        tagg.setTagId(dictdata.getDactionarydataId());
                         tagDao.addTag(tagg);
                     }
                 }

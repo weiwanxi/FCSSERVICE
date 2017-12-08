@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fcsservice.model.dao.CostumeMapper" >
+<mapper namespace="com.fcsservice.model.dto.CostumeMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Costume" >
     <id column="costume_id" property="costumeId" jdbcType="VARCHAR" />
     <result column="costume_name" property="costumeName" jdbcType="VARCHAR" />

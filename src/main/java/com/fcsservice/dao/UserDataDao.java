@@ -1,6 +1,6 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.UserDataMapper;
+import com.fcsservice.model.dto.UserDataMapper;
 import com.fcsservice.model.pojo.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

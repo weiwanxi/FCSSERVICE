@@ -1,6 +1,6 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.FabulousMapper;
+import com.fcsservice.model.dto.FabulousMapper;
 import com.fcsservice.model.pojo.Fabulous;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

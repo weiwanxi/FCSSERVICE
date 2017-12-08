@@ -1,6 +1,6 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.PurchaseMapper;
+import com.fcsservice.model.dto.PurchaseMapper;
 import com.fcsservice.model.pojo.Purchase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

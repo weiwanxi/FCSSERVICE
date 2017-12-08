@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fcsservice.model.dao.InformationMapper" >
+<mapper namespace="com.fcsservice.model.dto.InformationMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Information" >
     <id column="information_id" property="informationId" jdbcType="VARCHAR" />
     <result column="information_topic" property="informationTopic" jdbcType="VARCHAR" />

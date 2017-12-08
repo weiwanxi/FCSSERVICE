@@ -62,35 +62,4 @@ public class DesignerUtil {
         }
         return result;
     }
-
-    /**
-     * List取非重复的值
-     * @param list1 list1
-     * @param list2 list2
-     * @return list1
-     */
-    public List<DesignerForm> getDesignerNotRepetition(List<DesignerForm> list1,
-                                                       List<DesignerForm> list2) {
-        List<DesignerForm> result = new ArrayList<DesignerForm>();
-        DesignerForm form1,form2;
-
-        if (list1 == null){
-            return list2;
-        }
-
-        for (int i = 0; i < list2.size(); i++) {
-            form2 = list2.get(i);
-            boolean eq = false;
-            for (int j = 0; j < list1.size(); j++) {
-                form1 = list1.get(j);
-                if (form1.getDesignerId().equals(form2.getDesignerId())){
-                    eq = true;
-                    break;
-                }
-            }
-            if (!eq)
-                result.add(form2);
-        }
-        return result;
-    }
 }

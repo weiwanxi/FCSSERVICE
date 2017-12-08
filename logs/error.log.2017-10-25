@@ -1,4 +1,4 @@
-2017-10-25 13:51:58  [ RMI TCP Connection(3)-127.0.0.1:2642 ] - [ ERROR ]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\spring\applicationContext-mybatis.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+2017-10-25 13:51:58  [ RMI TCP Connection(3)-127.0.0.1:2642 ] - [ ERROR ]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\spring\applicationContext-mybatis.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1628)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
@@ -57,18 +57,18 @@
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
-Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:523)
 	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:380)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
 	... 57 more
-Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
 	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:521)
 	... 60 more
-Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:872)
 	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:844)
 	at org.apache.ibatis.session.Configuration.addResultMap(Configuration.java:626)
@@ -79,7 +79,7 @@ Caused by: java.lang.IllegalArgumentException: Result Maps collection already co
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElements(XMLMapperBuilder.java:244)
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:116)
 	... 62 more
-2017-10-25 13:52:19  [ RMI TCP Connection(3)-127.0.0.1:2104 ] - [ ERROR ]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\spring\applicationContext-mybatis.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+2017-10-25 13:52:19  [ RMI TCP Connection(3)-127.0.0.1:2104 ] - [ ERROR ]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\spring\applicationContext-mybatis.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1628)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
@@ -138,18 +138,18 @@ Caused by: java.lang.IllegalArgumentException: Result Maps collection already co
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
-Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:523)
 	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:380)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
 	... 57 more
-Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
 	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:521)
 	... 60 more
-Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:872)
 	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:844)
 	at org.apache.ibatis.session.Configuration.addResultMap(Configuration.java:626)
@@ -160,7 +160,7 @@ Caused by: java.lang.IllegalArgumentException: Result Maps collection already co
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.resultMapElements(XMLMapperBuilder.java:244)
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:116)
 	... 62 more
-2017-10-25 13:56:11  [ RMI TCP Connection(5)-127.0.0.1:2074 ] - [ ERROR ]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\spring\applicationContext-mybatis.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+2017-10-25 13:56:11  [ RMI TCP Connection(5)-127.0.0.1:2074 ] - [ ERROR ]org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'sqlSessionFactory' defined in file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\spring\applicationContext-mybatis.xml]: Invocation of init method failed; nested exception is org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1628)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:555)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:483)
@@ -219,18 +219,18 @@ Caused by: java.lang.IllegalArgumentException: Result Maps collection already co
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
 	at java.lang.Thread.run(Thread.java:745)
-Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: org.springframework.core.NestedIOException: Failed to parse mapping resource: 'file [D:\apache-tomcat-8.5.14\webapps\ROOT\WEB-INF\classes\com\fcsservice\model\mapper\AlbumMapper.xml]'; nested exception is org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:523)
 	at org.mybatis.spring.SqlSessionFactoryBean.afterPropertiesSet(SqlSessionFactoryBean.java:380)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1687)
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1624)
 	... 57 more
-Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: org.apache.ibatis.builder.BuilderException: Error parsing Mapper XML. Cause: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.configurationElement(XMLMapperBuilder.java:120)
 	at org.apache.ibatis.builder.xml.XMLMapperBuilder.parse(XMLMapperBuilder.java:92)
 	at org.mybatis.spring.SqlSessionFactoryBean.buildSqlSessionFactory(SqlSessionFactoryBean.java:521)
 	... 60 more
-Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dao.AlbumMapper.BaseResultMap
+Caused by: java.lang.IllegalArgumentException: Result Maps collection already contains value for com.fcsservice.model.dto.AlbumMapper.BaseResultMap
 	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:872)
 	at org.apache.ibatis.session.Configuration$StrictMap.put(Configuration.java:844)
 	at org.apache.ibatis.session.Configuration.addResultMap(Configuration.java:626)

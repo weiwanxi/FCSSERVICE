@@ -1,6 +1,6 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.TagMapper;
+import com.fcsservice.model.dto.TagMapper;
 import com.fcsservice.model.pojo.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

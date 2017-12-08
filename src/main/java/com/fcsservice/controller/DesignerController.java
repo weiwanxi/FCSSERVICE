@@ -24,26 +24,22 @@ public class DesignerController {
     /**
      * 获取设计师列表
      * @param userId 用户ID
-     * @param lastDesignerId 最后设计师ID
+     * @param page 页数
      * @return 已无更多设计师信息|暂无设计师信息
      */
     @RequestMapping(value = "/getDesignerList",method = RequestMethod.POST)
     @ResponseBody
     public Result getDesignerList(@RequestParam("userId") String userId,
-                                  @RequestParam("lastDesignerId") String lastDesignerId){
+                                  @RequestParam("page") int page){
         Result result = new Result();
 
-        Map<String,String[]> map = designerService.getDesignerList(userId,lastDesignerId);
+        Map<String,String[]> map = designerService.getDesignerList(userId,page* FcsserviceUtil.PageNumber, FcsserviceUtil.PageNumber);
 
         if (map != null){
             result.setCode(Result.SUCCESS);
             result.setObj(map);
         }else {
-            if (lastDesignerId != null && !"null".equals(lastDesignerId)) {
-                result.setMsg("已无更多设计师信息");
-            }else{
-                result.setMsg("暂无设计师信息");
-            }
+            result.setMsg("暂无设计师信息");
             result.setCode(Result.FAIL);
         }
         return result;

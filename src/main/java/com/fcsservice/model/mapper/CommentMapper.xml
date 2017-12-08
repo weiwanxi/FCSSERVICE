@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fcsservice.model.dao.CommentMapper" >
+<mapper namespace="com.fcsservice.model.dto.CommentMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Comment" >
     <id column="comment_id" property="commentId" jdbcType="VARCHAR" />
     <result column="commentary_id" property="commentaryId" jdbcType="VARCHAR" />
@@ -25,12 +25,14 @@
     <include refid="Base_Column_List" />
     from fcscomment
     where commentator_id = #{commentatorId,jdbcType=VARCHAR}
+    ORDER BY comment_reltime DESC
   </select>
   <select id="selectByCommentaryId" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select
     <include refid="Base_Column_List" />
     from fcscomment
     where commentary_id = #{commentaryId,jdbcType=VARCHAR}
+    ORDER BY comment_reltime ASC
   </select>
   <select id="selectCommentNumber" resultType="java.lang.Integer" parameterType="java.lang.String" >
     select count(commentary_id)

@@ -1,6 +1,6 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.CollectMapper;
+import com.fcsservice.model.dto.CollectMapper;
 import com.fcsservice.model.pojo.Collect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

@@ -17,7 +17,7 @@
                             targetProject="src\main\java" />
         <sqlMapGenerator targetPackage="com.fcsservice.model.mapper"
                          targetProject="src\main\java" />
-        <javaClientGenerator targetPackage="com.fcsservice.model.dao"
+        <javaClientGenerator targetPackage="com.fcsservice.model.dto"
                              targetProject="src\main\java" type="XMLMAPPER" />
 
         <!--

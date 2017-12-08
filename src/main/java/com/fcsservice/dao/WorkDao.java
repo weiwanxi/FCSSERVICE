@@ -1,7 +1,7 @@
 package com.fcsservice.dao;
 
 import com.fcsservice.form.DesignerForm;
-import com.fcsservice.model.dao.WorkMapper;
+import com.fcsservice.model.dto.WorkMapper;
 import com.fcsservice.model.pojo.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

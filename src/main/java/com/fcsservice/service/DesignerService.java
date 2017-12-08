@@ -24,8 +24,6 @@ import java.util.Map;
 @Transactional
 public class DesignerService {
     @Autowired
-    DesignerDao designerDao;
-    @Autowired
     WorkDao workDao;
     @Autowired
     UserDataDao userDataDao;
@@ -38,45 +36,27 @@ public class DesignerService {
     @Autowired
     TagDao tagDao;
 
-    private Map<String,List<DesignerForm>> userMap = new HashMap<String, List<DesignerForm>>();
+    public Map<String,String[]> getDesignerList(String userId,int page,int number){
+        List<DesignerForm> designerFormList = new ArrayList<DesignerForm>();
+        List<UserAccount> accountList = accountDao.getAccountOrderWorkNumber(page,number);
 
-    public Map<String,String[]> getDesignerList(String userId,String lastDesignerId){
-        List<DesignerForm> designerFormList;
-        List<DesignerForm> designerForms;
-        if (lastDesignerId == null || "null".equals(lastDesignerId)) {
-            userMap.remove(userId);
-            designerFormList = null;
-            designerForms = workDao.getDesignerWorkNumber();
-        }else {
-            int minNumber = workDao.getWorkNumberByDersignerId(lastDesignerId);
-            designerFormList = userMap.get(userId);
-            designerForms = workDao.getDesignerWorkNumberByNumber(minNumber);
-        }
+        for (int i = 0; i < accountList.size(); i++) {
+            UserAccount userAccount = accountList.get(i);
 
-        for (int i = 0; i < designerForms.size(); i++) {
-            DesignerForm designerForm = designerForms.get(i);
-
-            UserData userData = userDataDao.getUserDataByUserId(designerForm.getDesignerId());
-            UserAccount account = accountDao.getUserAccountById(designerForm.getDesignerId());
-            String follow = followDao.getFollowType(userId, designerForm.getDesignerId());
-            if (userData != null && account != null) {
+            UserData userData = userDataDao.getUserDataByUserId(userAccount.getUserId());
+            String follow = followDao.getFollowType(userId, userAccount.getUserId());
+            if (userData != null) {
+                DesignerForm designerForm = new DesignerForm();
                 designerForm.setDesignerPortrait(userData.getDataPortrait());
-                designerForm.setDesignerName(account.getUserAccount());
+                designerForm.setDesignerName(userAccount.getUserAccount());
+                designerForm.setDesignerId(userAccount.getUserId());
+                designerForm.setWorkNumber(workDao.getWorkNumberByDersignerId(userAccount.getUserId()));
                 designerForm.setFollow(follow);
-            } else {
-                return null;
+                designerFormList.add(designerForm);
             }
         }
 
-        designerForms = new DesignerUtil().getDesignerNotRepetition(designerFormList,designerForms);
-
-        if (designerFormList == null)
-            designerFormList = new ArrayList<DesignerForm>();
-
-        designerFormList.addAll(designerForms);
-        userMap.put(userId,designerFormList);
-
-        return new DesignerUtil().getDesignerMap(designerForms);
+        return new DesignerUtil().getDesignerMap(designerFormList);
     }
 
     public Map<String,String[]> getDesignerListByTag(String userId,String[] tagArray){

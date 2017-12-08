@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fcsservice.model.dao.DictdataMapper" >
+<mapper namespace="com.fcsservice.model.dto.DictdataMapper" >
   <resultMap id="BaseResultMap" type="com.fcsservice.model.pojo.Dictdata" >
     <id column="dactionarydata_id" property="dactionarydataId" jdbcType="INTEGER" />
     <result column="dictionarycategory_id" property="dictionarycategoryId" jdbcType="INTEGER" />

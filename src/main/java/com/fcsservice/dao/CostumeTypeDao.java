@@ -1,6 +1,6 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.CostumeTypeMapper;
+import com.fcsservice.model.dto.CostumeTypeMapper;
 import com.fcsservice.model.pojo.CostumeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

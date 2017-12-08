@@ -1,6 +1,6 @@
 package com.fcsservice.dao;
 
-import com.fcsservice.model.dao.UserAccountMapper;
+import com.fcsservice.model.dto.UserAccountMapper;
 import com.fcsservice.model.pojo.UserAccount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,6 +30,10 @@ public class AccountDao {
 
     public List<UserAccount> getAccountBySearch(String searchText, int page, int number){
         return userAccountMapper.selectAccountBySearch(searchText,page,number);
+    }
+
+    public List<UserAccount> getAccountOrderWorkNumber(int page,int number){
+        return userAccountMapper.selectAllDesigner(page,number);
     }
 
     public void updatePassword(UserAccount userAccount){
