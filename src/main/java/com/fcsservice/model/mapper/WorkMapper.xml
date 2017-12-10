@@ -44,11 +44,23 @@
     FROM fcsdesignwork
     WHERE album_id = #{album_id,jdbcType=VARCHAR}
   </select>
+  <select id="selectWorkListByComponent" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM fcsdesignwork AS a
+    LEFT JOIN (SELECT COUNT(information_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
+    ON a.work_id = b.information_id
+    <if test="arg2 != -1" >
+      WHERE component_id = #{arg2}
+    </if>
+    ORDER BY b.number DESC
+    LIMIT #{arg0},#{arg1}
+  </select>
   <select id="selectOrderByFabulous" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List"/>
     FROM fcsdesignwork AS a
-    LEFT JOIN (SELECT COUNT(fabulous_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
+    LEFT JOIN (SELECT COUNT(information_id) AS number,information_id FROM fcsfabulous GROUP BY information_id) AS b
     ON a.work_id = b.information_id
     <if test="arg2 != -1" >
       WHERE type_id = #{arg2}
@@ -60,7 +72,7 @@
     SELECT
     <include refid="Base_Column_List"/>
     FROM fcsdesignwork AS a
-    LEFT JOIN (SELECT COUNT(comment_id) AS number,commentary_id FROM fcscomment GROUP BY comment_id) AS b
+    LEFT JOIN (SELECT COUNT(commentary_id) AS number,commentary_id FROM fcscomment GROUP BY commentary_id) AS b
     ON a.work_id = b.commentary_id
     <if test="arg2 != -1" >
       WHERE type_id = #{arg2}

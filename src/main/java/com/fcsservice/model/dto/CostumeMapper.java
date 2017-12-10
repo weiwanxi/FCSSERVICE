@@ -17,6 +17,8 @@ public interface CostumeMapper {
 
     List<Costume> selectOrderByFabulous(int page, int number,int screen);
 
+    List<Costume> selectCostumeListByComponent(int page, int number,int component);
+
     List<Costume> selectCostumeBySearch(String searchText,int page,int number);
 
     int updateByPrimaryKeySelective(Costume record);

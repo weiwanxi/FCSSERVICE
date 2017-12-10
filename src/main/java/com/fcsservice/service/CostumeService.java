@@ -105,8 +105,13 @@ public class CostumeService {
                 inforMap.put("fabulousType",fabulousType);
             }
             //推荐信息
-            List<Work> workList = workDao.getWorkOrderByFabulous(0,4,-1);
-            List<Cloth> clothList = clothDao.getClothOrderByFabulous(0,4,-1);
+            List<Work> workList = workDao.getWorkOrderByFabulous(0,4,costume.getTypeId());
+            if (workList.size() < 4)
+                workList.addAll(workDao.getWorkOrderByFabulous(0,4-workList.size(),-1));
+            List<Cloth> clothList = clothDao.getClothOrderByFabulous(0,4,costume.getComponentId());
+            if (clothList.size() < 4){
+                clothList.addAll(clothDao.getClothOrderByFabulous(0,4-clothList.size(),-1));
+            }
             Map<String,String[]> workMap = getWorkMap(workList,4);
             Map<String,String[]> clothMap = getClothMap(clothList,4);
             if (workMap != null && clothMap != null){

@@ -28,6 +28,10 @@ public class CostumeDao {
         return costumeMapper.selectCostumeBySearch(searchText,page,number);
     }
 
+    public List<Costume> getCostumeByComponent(int page,int number,int component){
+        return costumeMapper.selectOrderByComment(page,number,component);
+    }
+
     public Costume getCostumeById(String costumeId){
         return costumeMapper.selectByPrimaryKey(costumeId);
     }

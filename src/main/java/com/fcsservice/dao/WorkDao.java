@@ -48,8 +48,12 @@ public class WorkDao {
         return workMapper.selectOrderByComment(page,number,screen);
     }
 
-    public List<Work> getWorkOrderByFabulous(int page, int number,int screen){
-        return workMapper.selectOrderByFabulous(page,number,screen);
+    public List<Work> getWorkOrderByFabulous(int page, int number,int screen) {
+        return workMapper.selectOrderByFabulous(page, number, screen);
+    }
+
+    public List<Work> getWorkByComponent(int page,int number,int component){
+        return workMapper.selectWorkListByComponent(page,number,component);
     }
 
     public List<Work> getWorkListByAlbumId(String albumId){

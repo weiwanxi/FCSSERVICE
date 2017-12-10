@@ -22,6 +22,8 @@ public interface WorkMapper {
 
     List<Work> selectOrderByFabulous(int page, int number,int screen);
 
+    List<Work> selectWorkListByComponent(int page, int number,int component);
+
     List<Work> selectWorkListByAlbumId(String albumId);
 
     List<Work> selectWorkBySearch(String searchText,int page,int number);

@@ -108,8 +108,12 @@ public class ClothService {
             }
 
             //推荐信息
-            List<Work> workList = workDao.getWorkOrderByFabulous(0,4,-1);
-            List<Costume> costumeList = costumeDao.getCostumeOrderByFabulous(0,4,-1);
+            List<Work> workList = workDao.getWorkByComponent(0,4,cloth.getComponentId());
+            if (workList.size() < 4)
+                workList.addAll(workDao.getWorkOrderByFabulous(0,4-workList.size(),-1));
+            List<Costume> costumeList = costumeDao.getCostumeOrderByComment(0,4,cloth.getComponentId());
+            if (costumeList.size() < 4)
+                costumeList.addAll(costumeDao.getCostumeOrderByFabulous(0,4-costumeList.size(),-1));
             Map<String,String[]> workMap = getWorkMap(workList,4);
             Map<String,String[]> costumeMap = getCostumeMap(costumeList,4);
             if (workMap != null && costumeMap != null){
